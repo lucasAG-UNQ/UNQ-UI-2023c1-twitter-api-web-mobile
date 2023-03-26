@@ -1,10 +1,20 @@
+# Grupo 05
+
+Integrantes
+| Nombre               | e-mail                   | Usuario Git |
+|----------------------|--------------------------|-------------|
+| Álvarez Garcia Lucas | lucasss162@gmail.com     | lucasag-unq |
+| Malsam Leandro       | leandro.malsam@gmail.com | leatex      |
+| Maugeri Gabriel      | g.r.maugeri@gmail.com    | gmauge      |
+
+
 # Enunciado
 
-https://github.com/unq-ui/material/tree/master/TPs/2023s1
+<https://github.com/unq-ui/material/tree/master/TPs/2023s1>
 
 # Modelo
 
-https://github.com/unq-ui/twitter-model
+<https://github.com/unq-ui/twitter-model>
 
 ## Tener en cuenta
 
