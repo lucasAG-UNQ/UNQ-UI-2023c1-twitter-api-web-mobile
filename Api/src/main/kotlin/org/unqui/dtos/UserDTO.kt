@@ -5,7 +5,7 @@ class UserDTO (var id: String,
                var email: String,
                var image: String,
                var backgroundImage: String,
-               var followers: MutableList<FollowDTO>,
-               var following: MutableList<FollowDTO>,
-               var tweets: MutableList<TweetDTO>){
+               var followers: MutableList<SimpleUserDTO>,
+               var following: MutableList<SimpleUserDTO>,
+               var tweets: MutableList<SimpleTweetDTO>){
 }

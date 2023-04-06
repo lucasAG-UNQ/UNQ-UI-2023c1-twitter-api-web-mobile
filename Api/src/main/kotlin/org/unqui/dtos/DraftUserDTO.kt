@@ -1,6 +1,6 @@
 package org.unqui.dtos
 
-class RegistroDTO ( val username: String,
+class DraftUserDTO (val username: String,
                     val email: String,
                     val password: String,
                     val image: String,

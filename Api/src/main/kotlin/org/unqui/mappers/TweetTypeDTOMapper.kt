@@ -1,10 +1,10 @@
 package org.unqui.mappers
 
 import org.unq.TweetType
-import org.unqui.dtos.TweetTypeDTO
+import org.unqui.dtos.TwitterTypeDTO
 
 class TweetTypeDTOMapper{
-    fun toTwitTypeDTO(tweetType: TweetType): TweetTypeDTO{
+    fun toTwitTypeDTO(tweetType: TweetType): TwitterTypeDTO{
         var tipo = ""
         if (tweetType.isNormalTweet())
             tipo = "NormalTweet"
@@ -13,6 +13,6 @@ class TweetTypeDTOMapper{
         else
             tipo = "ReplayTweet"
 
-        return TweetTypeDTO(tipo, if (tweetType.image.isNullOrEmpty()) "" else tweetType.image!!)
+        return TwitterTypeDTO(tipo, if (tweetType.image.isNullOrEmpty()) "" else tweetType.image!!)
     }
 }
