@@ -37,8 +37,6 @@ class TwitterApi(private val port: Int) {
     }
 
     private fun registerUserRoutes(app: Javalin) {
-        //val salida = UserController(twitterSystem).getUser(twitterSystem.users.first().id)
-
         app.routes {
             path("user") {
                 get(userController::getUser, TwitterApiRole.USER)
