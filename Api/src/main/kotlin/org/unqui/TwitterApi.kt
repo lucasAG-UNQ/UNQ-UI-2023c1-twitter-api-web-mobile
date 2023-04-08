@@ -23,17 +23,17 @@ class TwitterApi(private val port: Int) {
             config.http.defaultContentType = "application/json"
             config.accessManager(TokenAccessManager(jwtController, twitterSystem))
         }
-        app.start(port)
         app.get("/", { ctx -> ctx.result("Twitter API") } , TwitterApiRole.ANYONE)
         registerAuthRoutes(app)
         registerUserRoutes(app)
         registerTweetRoutes(app)
+        app.start(port)
         return app
     }
 
     private fun registerAuthRoutes(app: Javalin) {
-        app.post("login", userController::login, TwitterApiRole.ANYONE)
-        app.post("register", userController::register, TwitterApiRole.ANYONE)
+        app.post("/login", userController::login, TwitterApiRole.ANYONE)
+        app.post("/register", userController::register, TwitterApiRole.ANYONE)
     }
 
     private fun registerUserRoutes(app: Javalin) {
