@@ -2,11 +2,13 @@ package org.unqui.controlers
 
 import io.javalin.http.BadRequestResponse
 import io.javalin.http.Context
+import org.unq.TweetException
 import org.unq.TwitterSystem
 import org.unq.User
 import org.unq.UserException
 import org.unqui.dtos.TweetsResultDTO
 import org.unqui.dtos.UserLoginDTO
+import org.unqui.mappers.TweetMapper
 import org.unqui.mappers.UserMapper
 
 
