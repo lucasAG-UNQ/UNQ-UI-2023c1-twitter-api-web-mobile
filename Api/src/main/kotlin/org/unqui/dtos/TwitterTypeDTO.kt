@@ -1,5 +1,5 @@
 package org.unqui.dtos
 
-class TwitterTypeDTO(var tweet: String,
+class TwitterTypeDTO(var tweet: SimpleTweetDTO?,
                      var image: String?) {
 }

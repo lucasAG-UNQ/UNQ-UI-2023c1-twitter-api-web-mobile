@@ -7,7 +7,7 @@ import org.unqui.dtos.SimpleTweetDTO
 class TweetMapper(var twitterSystem: TwitterSystem) {
     fun listTweetToListSimpleTweetDTO(tweets: MutableList<Tweet>) : MutableList<SimpleTweetDTO>{
         return tweets.map { e -> SimpleTweetDTO(e.id,
-                                          TweetTypeDTOMapper().toTwitTypeDTO(e.type),
+                                          TweetTypeDTOMapper(twitterSystem).toTwitTypeDTO(e.type),
                                           UserMapper(twitterSystem).userToSimpleUserDTO(e.user),
                                           e.content,
                                           e.date.toString(),
@@ -15,4 +15,15 @@ class TweetMapper(var twitterSystem: TwitterSystem) {
                                           e.reTweets.size,
                                           UserMapper(twitterSystem).listUserToListSimpleUserDTO(e.likes) ) }.toMutableList()
     }
+    fun tweetToSimpleTweetDTO(tweet: Tweet) : SimpleTweetDTO{
+        return SimpleTweetDTO(tweet.id,
+            TweetTypeDTOMapper(twitterSystem).toTwitTypeDTO(tweet.type),
+            UserMapper(twitterSystem).userToSimpleUserDTO(tweet.user),
+            tweet.content,
+            tweet.date.toString(),
+            tweet.replies.size,
+            tweet.reTweets.size,
+            UserMapper(twitterSystem).listUserToListSimpleUserDTO(tweet.likes) )
+    }
+
 }
