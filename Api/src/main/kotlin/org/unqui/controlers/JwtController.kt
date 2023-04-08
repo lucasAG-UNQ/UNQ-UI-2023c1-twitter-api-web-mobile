@@ -43,7 +43,7 @@ class UserTokenGenerator() : JWTGenerator<User> {
 
 class TokenAccessManager(private val jwtController: JwtController, private val twitterSystem: TwitterSystem): AccessManager {
 
-    override fun manage(handler: Handler, ctx: Context, roles: MutableList<RouteRole>) {
+    override fun manage(handler: Handler, ctx: Context, roles: Set<RouteRole>) {
         val authToken = ctx.header("Authorization")
         when {
             roles.contains(TwitterApiRole.ANYONE) -> handler.handle(ctx)

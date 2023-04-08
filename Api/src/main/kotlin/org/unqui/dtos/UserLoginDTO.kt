@@ -1,5 +1,3 @@
 package org.unqui.dtos
 
-class UserLoginDTO(var username: String,
-                   var password: String) {
-}
+data class UserLoginDTO(val username: String? = null, val password: String? = null)

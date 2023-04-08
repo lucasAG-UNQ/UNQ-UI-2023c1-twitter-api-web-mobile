@@ -14,7 +14,7 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
     private val mapper: UserMapper = UserMapper(twitterSystem)
 
     fun login(ctx: Context) {
-        val userDTO: UserLoginDTO = ctx.bodyValidator<UserLoginDTO>().get()
+        val userDTO: UserLoginDTO = ctx.bodyValidator<UserLoginDTO>(UserLoginDTO::class.java).get()
 
         try {
             val twitterUser: User = findUserToLogin(userDTO)
