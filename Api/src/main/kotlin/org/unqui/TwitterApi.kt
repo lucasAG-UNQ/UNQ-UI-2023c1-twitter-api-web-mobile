@@ -2,7 +2,10 @@ package org.unqui
 
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
+import io.javalin.security.RouteRole
 import org.unq.initTwitterSystem
+import org.unqui.controlers.JwtController
+import org.unqui.controlers.TokenAccessManager
 import org.unqui.controlers.TweetController
 import org.unqui.controlers.UserController
 
@@ -11,15 +14,17 @@ fun main() { TwitterApi(7070).start() }
 class TwitterApi(private val port: Int) {
 
     private val twitterSystem = initTwitterSystem()
-    private val userController: UserController = UserController(twitterSystem)
+    private val jwtController = JwtController()
+    private val userController: UserController = UserController(twitterSystem, jwtController)
     private val tweetController: TweetController = TweetController(twitterSystem)
 
     fun start(): Javalin {
         val app = Javalin.create { config ->
             config.http.defaultContentType = "application/json"
+            config.accessManager(TokenAccessManager(jwtController, twitterSystem))
         }
         app.start(port)
-        app.get("/") { ctx -> ctx.result("Twitter API") }
+        app.get("/", { ctx -> ctx.result("Twitter API") } , TwitterApiRole.ANYONE)
         registerAuthRoutes(app)
         registerUserRoutes(app)
         registerTweetRoutes(app)
@@ -27,8 +32,8 @@ class TwitterApi(private val port: Int) {
     }
 
     private fun registerAuthRoutes(app: Javalin) {
-        app.post("login", userController::login)
-        app.post("register", userController::register)
+        app.post("login", userController::login, TwitterApiRole.ANYONE)
+        app.post("register", userController::register, TwitterApiRole.ANYONE)
     }
 
     private fun registerUserRoutes(app: Javalin) {
@@ -36,12 +41,12 @@ class TwitterApi(private val port: Int) {
 
         app.routes {
             path("user") {
-                get(userController::getUser)
-                path("followingTweets") { get(userController::getFollowingTweets) }
-                path("usersToFollow") { get(userController::getUsersToFollow) }
-                path(":id") {
-                    get(userController::getUser)
-                    path("follow") { put(userController::followUser) }
+                get(userController::getUser, TwitterApiRole.USER)
+                path("followingTweets") { get(userController::getFollowingTweets, TwitterApiRole.USER) }
+                path("usersToFollow") { get(userController::getUsersToFollow, TwitterApiRole.USER) }
+                path("{id}") {
+                    get(userController::getUser, TwitterApiRole.USER)
+                    path("follow") { put(userController::followUser, TwitterApiRole.USER) }
                 }
             }
         }
@@ -50,19 +55,23 @@ class TwitterApi(private val port: Int) {
     private fun registerTweetRoutes(app: Javalin) {
         //val salida = TweeterController(twitterSystem).getTrendingTopicks()
         //val salida = TweeterController(twitterSystem).getTweetsWithText("dancer")
-        app.get("search", tweetController::searchTweet)
-        app.get("trendingTopics", tweetController::getTrendingTopicks)
+        app.get("search", tweetController::searchTweet, TwitterApiRole.USER)
+        app.get("trendingTopics", tweetController::getTrendingTopicks, TwitterApiRole.USER)
         app.routes {
             path("tweet") {
-                post(tweetController::postTweet)
-                path(":id") {
-                    get(tweetController::getTweet)
-                    path("like") { put(tweetController::addLike) }
-                    path("retweet") { post(tweetController::retweet) }
-                    path("replay") { post(tweetController::replay) }
+                post(tweetController::postTweet, TwitterApiRole.USER)
+                path("{id}") {
+                    get(tweetController::getTweet, TwitterApiRole.USER)
+                    path("like") { put(tweetController::addLike, TwitterApiRole.USER) }
+                    path("retweet") { post(tweetController::retweet, TwitterApiRole.USER) }
+                    path("replay") { post(tweetController::replay, TwitterApiRole.USER) }
                 }
             }
         }
 
     }
+}
+
+enum class TwitterApiRole: RouteRole {
+    ANYONE, USER
 }
