@@ -53,8 +53,6 @@ class TwitterApi(private val port: Int) {
     }
 
     private fun registerTweetRoutes(app: Javalin) {
-        //val salida = TweeterController(twitterSystem).getTrendingTopicks()
-        //val salida = TweeterController(twitterSystem).getTweetsWithText("dancer")
         app.get("search", tweetController::searchTweet, TwitterApiRole.USER)
         app.get("trendingTopics", tweetController::getTrendingTopicks, TwitterApiRole.USER)
         app.routes {
