@@ -67,5 +67,7 @@
     <orderEntry type="library" name="Maven: org.ow2.asm:asm-tree:9.4" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.websocket:websocket-jetty-api:11.0.14" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:2.0.6" level="project" />
+    <orderEntry type="library" name="Maven: com.github.kmehrunes:javalin-jwt:0.7.0" level="project" />
+    <orderEntry type="library" name="Maven: com.auth0:java-jwt:4.0.0" level="project" />
   </component>
 </module>
