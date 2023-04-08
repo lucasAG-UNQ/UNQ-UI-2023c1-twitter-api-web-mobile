@@ -2,15 +2,11 @@ package org.unqui.controlers
 
 import io.javalin.http.BadRequestResponse
 import io.javalin.http.Context
-import io.javalin.http.UnauthorizedResponse
-import org.unq.TweetException
 import org.unq.TwitterSystem
 import org.unq.User
 import org.unq.UserException
 import org.unqui.dtos.TweetsResultDTO
 import org.unqui.dtos.UserLoginDTO
-import org.unqui.dtos.UsersResultDTO
-import org.unqui.mappers.TweetMapper
 import org.unqui.mappers.UserMapper
 
 
@@ -40,18 +36,13 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
 
     fun getUser(ctx: Context) {
         try {
-            val token = ctx.header("Authorization")
-            val id = JwtController().validate(token as String)
-            val user: User = twitterSystem.getUser(id)
-            val userDTO =  UserMapper(twitterSystem).userToUserDTO(user)
+            val twitterUser: User = twitterSystem.getUser(ctx.pathParam("id"))
+            val userDTO =  UserMapper(twitterSystem).userToUserDTO(twitterUser)
             ctx.status(200)
             ctx.json(userDTO)
         }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
-        }
-        catch (e: TweetException){
-            throw BadRequestResponse("No se encontró el Usuario")
+        catch (e: UserException){
+            throw BadRequestResponse("Invalid user ID")
         }
     }
 

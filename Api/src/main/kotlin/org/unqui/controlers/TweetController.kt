@@ -11,52 +11,37 @@ import org.unqui.mappers.TweetMapper
 class TweetController(var twitterSystem: TwitterSystem) {
 
     fun searchTweet(ctx: Context) {
-        try {
-            val token = ctx.header("Authorization")
-            JwtController().validate(token as String)
-            val results = twitterSystem.search( ctx.queryParam("text") as String)
-            val tweetsFound =  TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
-            ctx.status(200)
-            ctx.json(tweetsFound)
-        }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
-        }
+        val results = twitterSystem.search( ctx.queryParam("text") as String)
+        val tweetsFound =  TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
+        ctx.status(200)
+        ctx.json(tweetsFound)
     }
+
     fun getTrendingTopicks(ctx: Context) {
-         try {
-             val token = ctx.header("Authorization")
-             JwtController().validate(token as String)
-             val results = twitterSystem.getTrendingTopics()
-             val tweetsFound = TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
-             ctx.status(200)
-             ctx.json(tweetsFound)
-        }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
-        }
+         val results = twitterSystem.getTrendingTopics()
+         val tweetsFound = TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
+         ctx.status(200)
+         ctx.json(tweetsFound)
     }
 
     fun postTweet(ctx: Context) { ctx.result("TODO") }
+
     fun getTweet(ctx: Context) {
         try {
-            val token = ctx.header("Authorization")
-            JwtController().validate(token as String)
-            val tweet = twitterSystem.getTweet( ctx.pathParam("id") as String)
+            val tweet = twitterSystem.getTweet(ctx.pathParam("id"))
             val tweetDTO =  TweetMapper(twitterSystem).tweetToTweetDTO(tweet)
             ctx.status(200)
             ctx.json(tweetDTO)
         }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
-        }
         catch (e: TweetException){
-            throw BadRequestResponse("No se encontró e Tweet")
+            throw BadRequestResponse("No se encontró el Tweet")
         }
     }
 
     fun addLike(ctx: Context) { ctx.result("TODO") }
+
     fun retweet(ctx: Context) { ctx.result("TODO") }
+
     fun replay(ctx: Context) { ctx.result("TODO") }
 
 }
