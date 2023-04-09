@@ -53,15 +53,17 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
     }
 
     fun getUser(ctx: Context) {
+        val user = ctx.attribute<User>("user")
+        ctx.json(mapper.userToUserDTO(user!!))
+    }
+
+    fun getUserByID(ctx: Context){
         try {
-            val id = ctx.attribute<User>("user")!!.id
+            val id = ctx.pathParam("id")
             val user: User = twitterSystem.getUser(id)
             val userDTO =  UserMapper(twitterSystem).userToUserDTO(user)
             ctx.status(200)
             ctx.json(userDTO)
-        }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
         }
         catch (e: UserException){
             throw BadRequestResponse("No se encontró el Usuario")
