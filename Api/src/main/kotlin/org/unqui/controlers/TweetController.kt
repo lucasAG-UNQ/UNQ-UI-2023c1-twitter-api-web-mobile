@@ -4,10 +4,7 @@ import io.javalin.http.BadRequestResponse
 import io.javalin.http.Context
 import io.javalin.http.UnauthorizedResponse
 import org.unq.*
-import org.unqui.dtos.AddReTweetDTO
-import org.unqui.dtos.AddReplyTweetDTO
-import org.unqui.dtos.TweetsResultDTO
-import org.unqui.dtos.UserLoginDTO
+import org.unqui.dtos.*
 import org.unqui.mappers.TweetMapper
 import java.time.LocalDateTime.*
 
@@ -37,7 +34,22 @@ class TweetController(var twitterSystem: TwitterSystem) {
         }
     }
 
-    fun postTweet(ctx: Context) { ctx.result("TODO") }
+    fun postTweet(ctx: Context) {
+        try {
+            val addTweetDTO: AddTweetDTO = ctx.bodyValidator<AddTweetDTO>(AddTweetDTO::class.java).get()
+            val idUser = ctx.attribute<User>("user")!!.id
+            val draftTweet = DraftTweet(idUser, addTweetDTO.content!!, addTweetDTO.image, now())
+            val tweet = twitterSystem.addNewTweet(draftTweet)
+            ctx.status(200)
+            ctx.json(TweetMapper(twitterSystem).tweetToTweetDTO(tweet))
+        }
+        catch (e: NotFoundToken){
+            throw UnauthorizedResponse("Token not found")
+        }
+        catch (e: UserException){
+            throw BadRequestResponse("No se encontró e Usuario")
+        }
+    }
     fun getTweet(ctx: Context) {
         try {
             val tweet = twitterSystem.getTweet( ctx.pathParam("id") as String)
