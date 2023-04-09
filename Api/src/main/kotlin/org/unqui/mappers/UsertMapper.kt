@@ -22,11 +22,11 @@ class UserMapper(var tweeterSystem: TwitterSystem) {
     }
 
     fun registroToDraftUser(registroDTO : DraftUserDTO) : DraftUser {
-        return  DraftUser(registroDTO.username,
-            registroDTO.email,
-            registroDTO.password,
-            registroDTO.image,
-            registroDTO.backgroundImage)
+        return  DraftUser(registroDTO.username!!,
+            registroDTO.email!!,
+            registroDTO.password!!,
+            registroDTO.image!!,
+            registroDTO.backgroundImage!!)
     }
     fun userToSimpleUserDTO(user: User): SimpleUserDTO{
         return SimpleUserDTO(user.id, user.username)
