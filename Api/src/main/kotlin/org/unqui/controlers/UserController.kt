@@ -36,22 +36,17 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
 
     fun register(ctx: Context) {
         val draftUserDTO= ctx.bodyValidator<DraftUserDTO>(DraftUserDTO::class.java)
-
             .check({ !it.username.isNullOrBlank() },"Username cannot be empty")
+            .check({ it.email!!.matches(Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")) },"Provide a valid email")
             .check({ !it.password.isNullOrBlank() },"Password cannot be empty").get()
 
         val user: User
         try {
-            findUserToRegister(draftUserDTO.username!!)
             user= twitterSystem.addNewUser(mapper.registroToDraftUser(draftUserDTO))
         }catch (e:UserException){
             throw BadRequestResponse(e.message!!)
         }
         ctx.json(mapper.userToUserDTO(user))
-    }
-
-    private fun findUserToRegister(username: String) {
-        if (twitterSystem.users.any() { user -> user.username == username }) throw UserException("Username already taken")
     }
 
     fun getUser(ctx: Context) {
