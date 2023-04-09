@@ -7,6 +7,7 @@ import org.unq.TweetException
 import org.unq.TwitterSystem
 import org.unq.User
 import org.unq.UserException
+import org.unqui.dtos.DraftUserDTO
 import org.unqui.dtos.TweetsResultDTO
 import org.unqui.dtos.UserLoginDTO
 import org.unqui.dtos.UsersResultDTO
@@ -36,7 +37,20 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         return twitterSystem.users.find { user -> user.username == userDTO.username } ?: throw UserException("Invalid username or password")
     }
 
-    fun register(ctx: Context) { ctx.result("TODO") }
+    fun register(ctx: Context) {
+        val draftUserDTO= ctx.bodyValidator<DraftUserDTO>(DraftUserDTO::class.java)
+            .check({ !it.username.isNullOrBlank() },"Username cannot be empty")
+            .check({ it.email!!.matches(Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")) },"Provide a valid email")
+            .check({ !it.password.isNullOrBlank() },"Password cannot be empty").get()
+
+        val user: User
+        try {
+            user= twitterSystem.addNewUser(mapper.registroToDraftUser(draftUserDTO))
+        }catch (e:UserException){
+            throw BadRequestResponse(e.message!!)
+        }
+        ctx.json(mapper.userToUserDTO(user))
+    }
 
     fun getUser(ctx: Context) {
         try {
