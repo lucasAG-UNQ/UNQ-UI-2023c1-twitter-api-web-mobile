@@ -12,26 +12,16 @@ import java.time.LocalDateTime.*
 class TweetController(var twitterSystem: TwitterSystem) {
 
     fun searchTweet(ctx: Context) {
-        try {
-            val results = twitterSystem.search( ctx.queryParam("text") as String)
-            val tweetsFound =  TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
-            ctx.status(200)
-            ctx.json(tweetsFound)
-        }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
-        }
+        val results = twitterSystem.search( ctx.queryParam("text") as String)
+        val tweetsFound =  TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
+        ctx.status(200)
+        ctx.json(tweetsFound)
     }
     fun getTrendingTopicks(ctx: Context) {
-         try {
-             val results = twitterSystem.getTrendingTopics()
-             val tweetsFound = TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
-             ctx.status(200)
-             ctx.json(tweetsFound)
-        }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
-        }
+         val results = twitterSystem.getTrendingTopics()
+         val tweetsFound = TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
+         ctx.status(200)
+         ctx.json(tweetsFound)
     }
 
     fun postTweet(ctx: Context) {
@@ -43,9 +33,6 @@ class TweetController(var twitterSystem: TwitterSystem) {
             ctx.status(200)
             ctx.json(TweetMapper(twitterSystem).tweetToTweetDTO(tweet))
         }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
-        }
         catch (e: UserException){
             throw BadRequestResponse("No se encontró e Usuario")
         }
@@ -56,9 +43,6 @@ class TweetController(var twitterSystem: TwitterSystem) {
             val tweetDTO =  TweetMapper(twitterSystem).tweetToTweetDTO(tweet)
             ctx.status(200)
             ctx.json(tweetDTO)
-        }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
         }
         catch (e: TweetException){
             throw BadRequestResponse("No se encontró e Tweet")
@@ -72,9 +56,6 @@ class TweetController(var twitterSystem: TwitterSystem) {
             val tweet = twitterSystem.toggleLike(idTweet,  idUser)
             ctx.status(200)
             ctx.json(TweetMapper(twitterSystem).tweetToTweetDTO(tweet))
-        }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
         }
         catch (e: TweetException){
             throw BadRequestResponse("No se encontró e Tweet")
@@ -93,9 +74,6 @@ class TweetController(var twitterSystem: TwitterSystem) {
             ctx.status(200)
             ctx.json(TweetMapper(twitterSystem).tweetToTweetDTO(tweet))
         }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
-        }
         catch (e: TweetException){
             throw BadRequestResponse("No se encontró e Tweet")
         }
@@ -112,9 +90,6 @@ class TweetController(var twitterSystem: TwitterSystem) {
             val tweet = twitterSystem.replyTweet(draftReplyTweet)
             ctx.status(200)
             ctx.json(TweetMapper(twitterSystem).tweetToTweetDTO(tweet))
-        }
-        catch (e: NotFoundToken){
-            throw UnauthorizedResponse("Token not found")
         }
         catch (e: TweetException){
             throw BadRequestResponse("No se encontró e Tweet")
