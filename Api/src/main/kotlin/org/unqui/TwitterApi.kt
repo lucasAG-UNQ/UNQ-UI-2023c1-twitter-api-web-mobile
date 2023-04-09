@@ -43,7 +43,7 @@ class TwitterApi(private val port: Int) {
                 path("followingTweets") { get(userController::getFollowingTweets, TwitterApiRole.USER) }
                 path("usersToFollow") { get(userController::getUsersToFollow, TwitterApiRole.USER) }
                 path("{id}") {
-                    get(userController::getUser, TwitterApiRole.USER)
+                    get(userController::getUserByID, TwitterApiRole.USER)
                     path("follow") { put(userController::followUser, TwitterApiRole.USER) }
                 }
             }
