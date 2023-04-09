@@ -37,8 +37,6 @@ class TwitterApi(private val port: Int) {
     }
 
     private fun registerUserRoutes(app: Javalin) {
-        //val salida = UserController(twitterSystem).getUser(twitterSystem.users.first().id)
-
         app.routes {
             path("user") {
                 get(userController::getUser, TwitterApiRole.USER)
@@ -60,7 +58,7 @@ class TwitterApi(private val port: Int) {
                 post(tweetController::postTweet, TwitterApiRole.USER)
                 path("{id}") {
                     get(tweetController::getTweet, TwitterApiRole.USER)
-                    path("like") { put(tweetController::addLike, TwitterApiRole.USER) }
+                    path("like") { put(tweetController::toggleLike, TwitterApiRole.USER) }
                     path("retweet") { post(tweetController::retweet, TwitterApiRole.USER) }
                     path("replay") { post(tweetController::replay, TwitterApiRole.USER) }
                 }
