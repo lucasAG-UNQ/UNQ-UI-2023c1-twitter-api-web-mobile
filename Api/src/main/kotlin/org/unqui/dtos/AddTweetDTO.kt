@@ -1,4 +1,4 @@
 package org.unqui.dtos
 
-class AddTweetDTO(var content: String, var image :String?) {
+class AddTweetDTO(var content: String? = null, var image :String? = null) {
 }
