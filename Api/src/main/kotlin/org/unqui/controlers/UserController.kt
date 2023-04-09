@@ -40,8 +40,7 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
 
     fun getUser(ctx: Context) {
         try {
-            val token = ctx.header("Authorization")
-            val id = JwtController().validate(token as String)
+            val id = ctx.attribute<User>("user")!!.id
             val user: User = twitterSystem.getUser(id)
             val userDTO =  UserMapper(twitterSystem).userToUserDTO(user)
             ctx.status(200)
@@ -50,15 +49,14 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         catch (e: NotFoundToken){
             throw UnauthorizedResponse("Token not found")
         }
-        catch (e: TweetException){
+        catch (e: UserException){
             throw BadRequestResponse("No se encontró el Usuario")
         }
     }
 
     fun getFollowingTweets(ctx: Context) {
         try {
-            val token = ctx.header("Authorization")
-            val id = JwtController().validate(token as String)
+            val id = ctx.attribute<User>("user")!!.id
             val listTweet = twitterSystem.getFollowingTweets(id)
             val listSimplTweetDTO = TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(listTweet.toMutableList())
             val tweetReuslt = TweetsResultDTO(listSimplTweetDTO)
@@ -68,14 +66,13 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         catch (e: NotFoundToken){
             throw UnauthorizedResponse("Token not found")
         }
-        catch (e: TweetException){
+        catch (e: UserException){
             throw BadRequestResponse("No se encontró el Usuario")
         }
     }
 
     fun getUsersToFollow(ctx: Context) { try {
-        val token = ctx.header("Authorization")
-        val id = JwtController().validate(token as String)
+        val id = ctx.attribute<User>("user")!!.id
         val listUsers = twitterSystem.getUsersToFollow(id)
         val listSimplUserDTO = UserMapper(twitterSystem).listUserToListSimpleUserDTO(listUsers.toMutableList())
         val userReuslt = UsersResultDTO(listSimplUserDTO)
