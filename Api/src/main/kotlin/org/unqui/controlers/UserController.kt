@@ -25,7 +25,6 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
 
         try {
             val twitterUser: User = findUserToLogin(userDTO)
-            if (twitterUser.password!=userDTO.password) throw UserException("Invalid username or password")
             val userToken = jwtController.generateToken(twitterUser)
 
             ctx.header("Authorization", userToken)
@@ -35,8 +34,8 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         }
     }
 
-    private fun findUserToLogin(userDTO: UserLoginDTO): User {
-        return twitterSystem.users.find { user -> user.username == userDTO.username } ?: throw UserException("Invalid username or password")
+    private fun findUserToLogin(userLoginDTO: UserLoginDTO): User {
+        return twitterSystem.users.find { user -> user.username == userLoginDTO.username && user.password == userLoginDTO.password} ?: throw UserException("Invalid username or password")
     }
 
     fun register(ctx: Context) {
