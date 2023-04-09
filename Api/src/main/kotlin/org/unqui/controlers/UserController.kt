@@ -2,6 +2,7 @@ package org.unqui.controlers
 
 import io.javalin.http.BadRequestResponse
 import io.javalin.http.Context
+import io.javalin.http.NotFoundResponse
 import io.javalin.http.UnauthorizedResponse
 import org.unq.TweetException
 import org.unq.TwitterSystem
@@ -100,5 +101,15 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         throw BadRequestResponse("No se encontró el Usuario")
     } }
 
-    fun followUser(ctx: Context) { ctx.result("TODO") }
+    fun followUser(ctx: Context) {
+        val userToFollowID=ctx.pathParam("id")
+        val logedUser=ctx.attribute<User>("user")!!.id
+        val res: User
+        try {
+            res= twitterSystem.toggleFollow(userToFollowID,logedUser)
+        }catch (e:UserException){
+            throw NotFoundResponse(e.message!!)
+        }
+        ctx.json(mapper.userToUserDTO(res))
+    }
 }
