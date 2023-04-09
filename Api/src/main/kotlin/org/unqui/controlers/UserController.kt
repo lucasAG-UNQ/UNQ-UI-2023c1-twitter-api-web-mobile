@@ -68,7 +68,7 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
             ctx.json(userDTO)
         }
         catch (e: UserException){
-            throw BadRequestResponse("No se encontró el Usuario")
+            throw NotFoundResponse("No se encontró el Usuario")
         }
     }
 
