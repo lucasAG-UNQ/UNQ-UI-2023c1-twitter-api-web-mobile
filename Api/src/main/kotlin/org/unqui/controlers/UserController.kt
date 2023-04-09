@@ -25,6 +25,7 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
 
         try {
             val twitterUser: User = findUserToLogin(userDTO)
+            if (twitterUser.password!=userDTO.password) throw UserException("Invalid username or password")
             val userToken = jwtController.generateToken(twitterUser)
 
             ctx.header("Authorization", userToken)
