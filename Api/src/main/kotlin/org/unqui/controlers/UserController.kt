@@ -2,10 +2,13 @@ package org.unqui.controlers
 
 import io.javalin.http.BadRequestResponse
 import io.javalin.http.Context
+import io.javalin.http.NotFoundResponse
+import io.javalin.http.UnauthorizedResponse
 import org.unq.TweetException
 import org.unq.TwitterSystem
 import org.unq.User
 import org.unq.UserException
+import org.unqui.dtos.DraftUserDTO
 import org.unqui.dtos.TweetsResultDTO
 import org.unqui.dtos.UserLoginDTO
 import org.unqui.dtos.UsersResultDTO
@@ -31,21 +34,40 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         }
     }
 
-    private fun findUserToLogin(userDTO: UserLoginDTO): User {
-        return twitterSystem.users.find { user -> user.username == userDTO.username && user.password == userDTO.password } ?: throw UserException("Invalid username or password")
+    private fun findUserToLogin(userLoginDTO: UserLoginDTO): User {
+        return twitterSystem.users.find { user -> user.username == userLoginDTO.username && user.password == userLoginDTO.password} ?: throw UserException("Invalid username or password")
     }
 
-    fun register(ctx: Context) { ctx.result("TODO") }
+    fun register(ctx: Context) {
+        val draftUserDTO= ctx.bodyValidator<DraftUserDTO>(DraftUserDTO::class.java)
+            .check({ !it.username.isNullOrBlank() },"Username cannot be empty")
+            .check({ it.email!!.matches(Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")) },"Provide a valid email")
+            .check({ !it.password.isNullOrBlank() },"Password cannot be empty").get()
+
+        val user: User
+        try {
+            user= twitterSystem.addNewUser(mapper.registroToDraftUser(draftUserDTO))
+        }catch (e:UserException){
+            throw BadRequestResponse(e.message!!)
+        }
+        ctx.json(mapper.userToUserDTO(user))
+    }
 
     fun getUser(ctx: Context) {
+        val user = ctx.attribute<User>("user")
+        ctx.json(mapper.userToUserDTO(user!!))
+    }
+
+    fun getUserByID(ctx: Context){
         try {
-            val twitterUser: User = ctx.attribute<User>("user")!!
-            val userDTO =  UserMapper(twitterSystem).userToUserDTO(twitterUser)
+            val id = ctx.pathParam("id")
+            val user: User = twitterSystem.getUser(id)
+            val userDTO =  UserMapper(twitterSystem).userToUserDTO(user)
             ctx.status(200)
             ctx.json(userDTO)
         }
-        catch (e: UserException){ // creo que no es necesatio este handling
-            throw BadRequestResponse("Invalid user ID")
+        catch (e: UserException){
+            throw NotFoundResponse("No se encontró el Usuario")
         }
     }
 
@@ -77,5 +99,15 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         }
     }
 
-    fun followUser(ctx: Context) { ctx.result("TODO") }
+    fun followUser(ctx: Context) {
+        val userToFollowID=ctx.pathParam("id")
+        val logedUser=ctx.attribute<User>("user")!!.id
+        val res: User
+        try {
+            res= twitterSystem.toggleFollow(userToFollowID,logedUser)
+        }catch (e:UserException){
+            throw NotFoundResponse(e.message!!)
+        }
+        ctx.json(mapper.userToUserDTO(res))
+    }
 }
