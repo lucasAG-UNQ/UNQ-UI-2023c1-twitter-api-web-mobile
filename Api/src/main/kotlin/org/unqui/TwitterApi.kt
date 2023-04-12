@@ -1,7 +1,9 @@
 package org.unqui
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import io.javalin.Javalin
 import io.javalin.apibuilder.ApiBuilder.*
+import io.javalin.http.BadRequestResponse
 import io.javalin.security.RouteRole
 import org.unq.initTwitterSystem
 import org.unqui.controlers.JwtController

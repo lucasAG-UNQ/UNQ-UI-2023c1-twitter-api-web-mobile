@@ -16,17 +16,17 @@ class UserMapper(var tweeterSystem: TwitterSystem) {
             user.email,
             user.image,
             user.backgroundImage,
-            SimpleUserDTOMapper().listUserToListSimpleUserDTO(user.following),
             SimpleUserDTOMapper().listUserToListSimpleUserDTO(user.followers),
+            SimpleUserDTOMapper().listUserToListSimpleUserDTO(user.following),
             TweetMapper(tweeterSystem).listTweetToListSimpleTweetDTO( tweeterSystem.tweets.filter { e -> e.user == user }.toMutableList()))
     }
 
     fun registroToDraftUser(registroDTO : DraftUserDTO) : DraftUser {
-        return  DraftUser(registroDTO.username!!,
-            registroDTO.email!!,
-            registroDTO.password!!,
-            registroDTO.image!!,
-            registroDTO.backgroundImage!!)
+        return  DraftUser(registroDTO.username,
+            registroDTO.email,
+            registroDTO.password,
+            registroDTO.image,
+            registroDTO.backgroundImage)
     }
     fun userToSimpleUserDTO(user: User): SimpleUserDTO{
         return SimpleUserDTO(user.id, user.username)

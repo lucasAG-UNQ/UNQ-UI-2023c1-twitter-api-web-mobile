@@ -39,18 +39,19 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
     }
 
     fun register(ctx: Context) {
-        val draftUserDTO= ctx.bodyValidator<DraftUserDTO>(DraftUserDTO::class.java)
-            .check({ !it.username.isNullOrBlank() },"Username cannot be empty")
+        val draftUserDTO: DraftUserDTO = ctx.bodyValidator<DraftUserDTO>(DraftUserDTO::class.java)
+            .check({ !it.username.isNullOrBlank() && !it.email.isNullOrBlank() && !it.password.isNullOrBlank()
+                    && !it.image.isNullOrBlank() && !it.backgroundImage.isNullOrBlank() },"Invalid body. Required: username, email, password, image, backgroundImage")
             .check({ it.email!!.matches(Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")) },"Provide a valid email")
-            .check({ !it.password.isNullOrBlank() },"Password cannot be empty").get()
+            .get()
 
-        val user: User
         try {
-            user= twitterSystem.addNewUser(mapper.registroToDraftUser(draftUserDTO))
-        }catch (e:UserException){
+            val user: User = twitterSystem.addNewUser(mapper.registroToDraftUser(draftUserDTO))
+            ctx.status(200)
+            ctx.json(mapper.userToUserDTO(user))
+        } catch (e:UserException){
             throw BadRequestResponse(e.message!!)
         }
-        ctx.json(mapper.userToUserDTO(user))
     }
 
     fun getUser(ctx: Context) {
@@ -98,9 +99,9 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
 
     fun followUser(ctx: Context) {
         val userToFollowID = ctx.pathParam("id")
-        val logedUser = ctx.attribute<User>("user")!!.id
+        val logedUser = ctx.attribute<User>("user")!!
         try {
-            val res: User = twitterSystem.toggleFollow(logedUser,userToFollowID)
+            val res: User = twitterSystem.toggleFollow(logedUser.id, userToFollowID)
             ctx.json(mapper.userToUserDTO(res))
         } catch (e:UserException){
             throw NotFoundResponse(e.message!!)
