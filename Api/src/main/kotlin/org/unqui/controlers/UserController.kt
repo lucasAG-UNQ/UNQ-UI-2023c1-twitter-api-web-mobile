@@ -54,17 +54,16 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
     }
 
     fun getUser(ctx: Context) {
-        val user = ctx.attribute<User>("user")
-        ctx.json(mapper.userToUserDTO(user!!))
+        val twitterUser: User = ctx.attribute<User>("user")!!
+        ctx.status(200)
+        ctx.json(mapper.userToUserDTO(twitterUser))
     }
 
     fun getUserByID(ctx: Context){
         try {
-            val id = ctx.pathParam("id")
-            val user: User = twitterSystem.getUser(id)
-            val userDTO =  UserMapper(twitterSystem).userToUserDTO(user)
+            val twitterUser: User = twitterSystem.getUser(ctx.pathParam("id"))
             ctx.status(200)
-            ctx.json(userDTO)
+            ctx.json(mapper.userToUserDTO(twitterUser))
         }
         catch (e: UserException){
             throw NotFoundResponse("No se encontró el Usuario")
@@ -76,9 +75,8 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
             val twitterUser: User = ctx.attribute<User>("user")!!
             val listTweet = twitterSystem.getFollowingTweets(twitterUser.id)
             val listSimplTweetDTO = TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(listTweet.toMutableList())
-            val tweetReuslt = TweetsResultDTO(listSimplTweetDTO)
             ctx.status(200)
-            ctx.json(tweetReuslt)
+            ctx.json(TweetsResultDTO(listSimplTweetDTO))
         }
         catch (e: TweetException){
             throw BadRequestResponse("No se encontró el Usuario")
@@ -89,10 +87,9 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         try {
             val twitterUser: User = ctx.attribute<User>("user")!!
             val listUsers = twitterSystem.getUsersToFollow(twitterUser.id)
-            val listSimplUserDTO = UserMapper(twitterSystem).listUserToListSimpleUserDTO(listUsers.toMutableList())
-            val userReuslt = UsersResultDTO(listSimplUserDTO)
+            val listSimplUserDTO = mapper.listUserToListSimpleUserDTO(listUsers.toMutableList())
             ctx.status(200)
-            ctx.json(userReuslt)
+            ctx.json(UsersResultDTO(listSimplUserDTO))
         }
         catch (e: TweetException){
             throw BadRequestResponse("No se encontró el Usuario")
@@ -100,14 +97,13 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
     }
 
     fun followUser(ctx: Context) {
-        val userToFollowID=ctx.pathParam("id")
-        val logedUser=ctx.attribute<User>("user")!!.id
-        val res: User
+        val userToFollowID = ctx.pathParam("id")
+        val logedUser = ctx.attribute<User>("user")!!.id
         try {
-            res= twitterSystem.toggleFollow(userToFollowID,logedUser)
-        }catch (e:UserException){
+            val res: User = twitterSystem.toggleFollow(userToFollowID,logedUser)
+            ctx.json(mapper.userToUserDTO(res))
+        } catch (e:UserException){
             throw NotFoundResponse(e.message!!)
         }
-        ctx.json(mapper.userToUserDTO(res))
     }
 }
