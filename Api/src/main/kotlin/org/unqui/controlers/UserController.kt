@@ -100,7 +100,7 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         val userToFollowID = ctx.pathParam("id")
         val logedUser = ctx.attribute<User>("user")!!.id
         try {
-            val res: User = twitterSystem.toggleFollow(userToFollowID,logedUser)
+            val res: User = twitterSystem.toggleFollow(logedUser,userToFollowID)
             ctx.json(mapper.userToUserDTO(res))
         } catch (e:UserException){
             throw NotFoundResponse(e.message!!)
