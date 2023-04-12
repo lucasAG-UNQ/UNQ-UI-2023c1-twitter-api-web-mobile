@@ -6,20 +6,23 @@ import io.javalin.http.UnauthorizedResponse
 import org.unq.*
 import org.unqui.dtos.*
 import org.unqui.mappers.TweetMapper
+import org.unqui.mappers.UserMapper
 import java.time.LocalDateTime.*
 
 
 class TweetController(var twitterSystem: TwitterSystem) {
 
+    private val mapper: TweetMapper = TweetMapper(twitterSystem)
+    
     fun searchTweet(ctx: Context) {
         val results = twitterSystem.search( ctx.queryParam("text") as String)
-        val tweetsFound =  TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
+        val tweetsFound =  TweetsResultDTO(mapper.listTweetToListSimpleTweetDTO(results.toMutableList()))
         ctx.status(200)
         ctx.json(tweetsFound)
     }
     fun getTrendingTopicks(ctx: Context) {
          val results = twitterSystem.getTrendingTopics()
-         val tweetsFound = TweetsResultDTO(TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(results.toMutableList()))
+         val tweetsFound = TweetsResultDTO(mapper.listTweetToListSimpleTweetDTO(results.toMutableList()))
          ctx.status(200)
          ctx.json(tweetsFound)
     }
@@ -31,7 +34,7 @@ class TweetController(var twitterSystem: TwitterSystem) {
             val draftTweet = DraftTweet(idUser, addTweetDTO.content!!, addTweetDTO.image, now())
             val tweet = twitterSystem.addNewTweet(draftTweet)
             ctx.status(200)
-            ctx.json(TweetMapper(twitterSystem).tweetToTweetDTO(tweet))
+            ctx.json(mapper.tweetToTweetDTO(tweet))
         }
         catch (e: UserException){
             throw BadRequestResponse("No se encontró e Usuario")
@@ -39,13 +42,13 @@ class TweetController(var twitterSystem: TwitterSystem) {
     }
     fun getTweet(ctx: Context) {
         try {
-            val tweet = twitterSystem.getTweet( ctx.pathParam("id") as String)
-            val tweetDTO =  TweetMapper(twitterSystem).tweetToTweetDTO(tweet)
+            val tweet = twitterSystem.getTweet(ctx.pathParam("id"))
+            val tweetDTO =  mapper.tweetToTweetDTO(tweet)
             ctx.status(200)
             ctx.json(tweetDTO)
         }
         catch (e: TweetException){
-            throw BadRequestResponse("No se encontró e Tweet")
+            throw BadRequestResponse("No se encontró el Tweet")
         }
     }
 
@@ -55,7 +58,7 @@ class TweetController(var twitterSystem: TwitterSystem) {
             val idTweet = ctx.pathParam("id")
             val tweet = twitterSystem.toggleLike(idTweet,  idUser)
             ctx.status(200)
-            ctx.json(TweetMapper(twitterSystem).tweetToTweetDTO(tweet))
+            ctx.json(mapper.tweetToTweetDTO(tweet))
         }
         catch (e: TweetException){
             throw BadRequestResponse("No se encontró e Tweet")
@@ -72,7 +75,7 @@ class TweetController(var twitterSystem: TwitterSystem) {
             val draftReTweet = DraftReTweet(idUser, idTweet, reTweetDTO.content!!, now())
             val tweet = twitterSystem.addReTweet(draftReTweet)
             ctx.status(200)
-            ctx.json(TweetMapper(twitterSystem).tweetToTweetDTO(tweet))
+            ctx.json(mapper.tweetToTweetDTO(tweet))
         }
         catch (e: TweetException){
             throw BadRequestResponse("No se encontró e Tweet")
@@ -89,7 +92,7 @@ class TweetController(var twitterSystem: TwitterSystem) {
             val draftReplyTweet = DraftReplyTweet(idUser, idTweet, replyTweetDTO.content!!, replyTweetDTO.image!!, now())
             val tweet = twitterSystem.replyTweet(draftReplyTweet)
             ctx.status(200)
-            ctx.json(TweetMapper(twitterSystem).tweetToTweetDTO(tweet))
+            ctx.json(mapper.tweetToTweetDTO(tweet))
         }
         catch (e: TweetException){
             throw BadRequestResponse("No se encontró e Tweet")
