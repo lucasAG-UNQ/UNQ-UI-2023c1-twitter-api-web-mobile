@@ -1,4 +1,7 @@
+/.idea/
+.vscode/
 
 Api/.idea/
 Api/target/
-/.idea/
+
+Web/twitter/node_modules/
