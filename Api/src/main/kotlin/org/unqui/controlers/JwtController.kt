@@ -47,7 +47,7 @@ class TokenAccessManager(private val jwtController: JwtController, private val t
         val authToken = ctx.header("Authorization")
         when {
             roles.contains(TwitterApiRole.ANYONE) -> handler.handle(ctx)
-            authToken == null -> throw BadRequestResponse("Token not present")
+            authToken == null -> throw UnauthorizedResponse("Token not present")
             roles.contains(TwitterApiRole.USER) -> {
                 val twitterUser: User = getLoggedUser(authToken)
                 ctx.attribute("user", twitterUser)
