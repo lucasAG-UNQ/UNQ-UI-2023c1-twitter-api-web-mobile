@@ -13,15 +13,14 @@ class TweetController(var twitterSystem: TwitterSystem) {
     private val mapper: TweetMapper = TweetMapper(twitterSystem)
     
     fun searchTweet(ctx: Context) {
-        try {
-            val results = twitterSystem.search(ctx.queryParam("text") as String)
+
+            val searchText = ctx.queryParam("text")
+            if (searchText.isNullOrBlank()) { throw BadRequestResponse("No se indicó el texto a buscar") }
+
+            val results = twitterSystem.search(searchText)
             val tweetsFound = TweetsResultDTO(mapper.listTweetToListSimpleTweetDTO(results.toMutableList()))
             ctx.status(200)
             ctx.json(tweetsFound)
-        }
-        catch (e: NullPointerException) {
-            throw BadRequestResponse("No se encontro query param 'text'")
-        }
     }
 
     fun getTrendingTopicks(ctx: Context) {

@@ -47,7 +47,7 @@ class TokenAccessManager(private val jwtController: JwtController, private val t
         val authToken = ctx.header("Authorization")
         when {
             roles.contains(TwitterApiRole.ANYONE) -> handler.handle(ctx)
-            authToken == null -> throw UnauthorizedResponse("Token not present")
+            authToken == null -> throw UnauthorizedResponse("Debe iniciar sesión para acceder a este sitio.")
             roles.contains(TwitterApiRole.USER) -> {
                 val twitterUser: User = getLoggedUser(authToken)
                 ctx.attribute("user", twitterUser)
@@ -61,7 +61,7 @@ class TokenAccessManager(private val jwtController: JwtController, private val t
             val userId = jwtController.validate(authToken)
             return twitterSystem.getUser(userId)
         } catch (e: NotFoundToken) {
-            throw UnauthorizedResponse("Invalid token")
+            throw UnauthorizedResponse("Debe iniciar sesión para acceder a este sitio.")
         } catch (e: UserException) {
             throw NotFoundResponse(e.message!!)
         }
