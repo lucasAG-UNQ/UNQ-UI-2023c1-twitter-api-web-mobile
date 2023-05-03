@@ -1,11 +1,11 @@
 import Sidebar from "../molecules/sidebar";
 
-const User = () => {
+const Search = () => {
   return (
     <div>
       <Sidebar />
-      Usuario</div>
+      Buscador</div>
   )
 }
 
-export default User
+export default Search

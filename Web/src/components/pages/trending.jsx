@@ -1,11 +1,11 @@
 import Sidebar from "../molecules/sidebar";
 
-const User = () => {
+const Trending = () => {
   return (
     <div>
       <Sidebar />
-      Usuario</div>
+      Trending topics</div>
   )
 }
 
-export default User
+export default Trending

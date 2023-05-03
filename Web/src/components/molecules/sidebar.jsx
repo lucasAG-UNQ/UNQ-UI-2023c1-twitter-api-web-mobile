@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const NavMenu = () => {
+const Sidebar = () => {
   return (
     <nav>
         <ul>
@@ -11,4 +11,4 @@ const NavMenu = () => {
   )
 }
 
-export default NavMenu
+export default Sidebar
