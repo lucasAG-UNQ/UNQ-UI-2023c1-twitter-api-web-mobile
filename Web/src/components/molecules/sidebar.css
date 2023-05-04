@@ -2,45 +2,39 @@
     background: #000;
     color: #fff;
     height: 100vh;
-    width: 400px;
+    width: 300px;
     transition: all 0.5s;
 }
 
-.top_section {
-    display: flex;
-    align-items: center;
+.sb_top_section {
+    text-align: center;
     padding: 20px 15px;
 }
 
-.logo {
+.sb_logo {
     font-size: 30px;
 }
 
-.bars {
-    font-size: 25px;
-    display: flex;
-    margin-left: 50px;
-}
-
-.link {
+.sb_link {
     display: flex;
     color: #fff;
+    text-decoration: none;
     padding: 10px 15px;
     gap: 15px;
     transition: all 0.5s;
 }
 
-.link:hover {
-    background: lightskyblue;
+.sb_link:hover {
+    background: #0d6efd;
     color: #000;
     transition: all 0.5s;
 }
 
-.active {
-    background: lightskyblue;
+.sb_active {
+    background: #0d6efd;
     color: #000;
 }
 
-.icon, .link_text {
+.sb_icon, .sb_link_text {
     font-size: 20px;
 }

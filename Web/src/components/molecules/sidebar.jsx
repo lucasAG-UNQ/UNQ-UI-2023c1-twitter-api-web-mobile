@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import '../../styles/sidebar.css';
+import React from 'react';
+import './sidebar.css';
 import { NavLink } from 'react-router-dom'
 import { BsHouseFill, BsHash, BsPersonFill, BsDoorOpenFill } from "react-icons/bs";
-import { FaBars } from "react-icons/fa";
+import LoggedUserCard from './loggedusercard';
+import SearchBox from './searchbox';
 
 const Sidebar = ({children}) => {
-  const [sidebarIsOpen, setSidebarIsOpen] = useState(true);
-  const toggleSidebarIsOpen = () => setSidebarIsOpen(!sidebarIsOpen);
 
   const menuItems = [
     { path: "/", name: "Inicio", icon: <BsHouseFill/> },
@@ -16,20 +15,24 @@ const Sidebar = ({children}) => {
   ]
 
   return (
-    <div className='container'>
-      <div style={{width: sidebarIsOpen ? "400px" : "50px"}} className="sidebar">
-        <div className="top_section">
-          <h1 style={{display: sidebarIsOpen ? "block" : "none"}} className="logo">TwitterG5</h1>
-          <div style={{marginLeft: sidebarIsOpen ? "50px" : "0px"}} className="bars"><FaBars onClick={toggleSidebarIsOpen}/></div>
+    <div className="root_container">
+      <div className="sidebar">
+        <div className="sb_top_section">
+          <h1 className="sb_logo">Twitter-G5</h1>
         </div>
+
+        <LoggedUserCard />
+
         {
           menuItems.map((item, index) => (
-            <NavLink to={item.path} key={index} className="link" activeClassName="active">
-              <div className="icon">{item.icon}</div>
-              <div style={{display: sidebarIsOpen ? "block" : "none"}} className="link_text">{item.name}</div>
+            <NavLink to={item.path} key={index} className={({ isActive }) => (isActive ? 'sb_link sb_active' : 'sb_link')}>
+              <div className="sb_icon">{item.icon}</div>
+              <div className="sb_link_text">{item.name}</div>
             </NavLink>
           ))
         }
+
+        <SearchBox />
       </div>
       <main>{children}</main>
     </div>
