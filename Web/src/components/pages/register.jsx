@@ -1,10 +1,10 @@
 import Sidebar from "../molecules/sidebar";
 
-const User = () => {
+const Register = () => {
   return (
     <div>
-      Usuario</div>
+      Register</div>
   )
 }
 
-export default User
+export default Register

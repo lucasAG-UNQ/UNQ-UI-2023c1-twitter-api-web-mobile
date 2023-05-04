@@ -1,10 +1,10 @@
 import Sidebar from "../molecules/sidebar";
 
-const User = () => {
+const Profile = () => {
   return (
     <div>
-      Usuario</div>
+      Perfil</div>
   )
 }
 
-export default User
+export default Profile

@@ -1,10 +1,8 @@
-import NavMenu from "../molecules/navmenu";
+import Sidebar from "../molecules/sidebar";
 
 const Home = () => {
   return (
-    <div>
-      <NavMenu />
-      Twitter G5</div>
+    <div>Twitter G5</div>
   )
 }
 

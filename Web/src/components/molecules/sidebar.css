@@ -1,0 +1,40 @@
+.sidebar {
+    background: #000;
+    color: #fff;
+    height: 100vh;
+    width: 300px;
+    transition: all 0.5s;
+}
+
+.sb_top_section {
+    text-align: center;
+    padding: 20px 15px;
+}
+
+.sb_logo {
+    font-size: 30px;
+}
+
+.sb_link {
+    display: flex;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s;
+}
+
+.sb_link:hover {
+    background: #0d6efd;
+    color: #000;
+    transition: all 0.5s;
+}
+
+.sb_active {
+    background: #0d6efd;
+    color: #000;
+}
+
+.sb_icon, .sb_link_text {
+    font-size: 20px;
+}

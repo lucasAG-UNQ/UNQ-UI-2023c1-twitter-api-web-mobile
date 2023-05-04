@@ -1,24 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
+import './styles/style.css'
 import reportWebVitals from './reportWebVitals';
 
-import Home from './components/pages/home'
-import User from './components/pages/user'
-import NotFound from './components/pages/notfound'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './components/pages/home';
+import Trending from './components/pages/trending';
+import Profile from './components/pages/profile';
+import Logout from './components/pages/logout';
+import User from './components/pages/user';
+import Login from './components/pages/login';
+import Register from './components/pages/register';
+import Twitt from './components/pages/twitt';
+import Search from './components/pages/search';
+import NotFound from './components/pages/notfound';
 
-const router = createBrowserRouter(
-  [ { path: '/', element: <Home />, errorElement: <NotFound /> },
-    { path: '/user', element: <User /> }
-  ]
-);
+import Sidebar from './components/molecules/sidebar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <BrowserRouter>
+      <Sidebar>
+        <Routes>
+          <Route path="/" element={<Home />} errorElement={<NotFound />} />
+          <Route path="/trending" element={<Trending />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/twitt" element={<Twitt />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </Sidebar>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
