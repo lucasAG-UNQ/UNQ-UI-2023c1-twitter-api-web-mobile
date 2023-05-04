@@ -1,10 +1,10 @@
 import Sidebar from "../molecules/sidebar";
 
-const Twitt = () => {
+const Profile = () => {
   return (
     <div>
-      Twitt</div>
+      Perfil</div>
   )
 }
 
-export default Twitt
+export default Profile

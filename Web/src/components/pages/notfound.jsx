@@ -5,7 +5,6 @@ const NotFound = () => {
   const routingError = useRouteError()
   return (
     <div>
-      <Sidebar />
       <p>440 - notfound page</p>
       <p>{routingError.statusText || routingError.message}</p>
     </div>

@@ -1,20 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
+import './styles/style.css'
 import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Home from './components/pages/home'
-import User from './components/pages/user'
-import Login from './components/pages/login'
-import Register from './components/pages/register'
-import Trending from './components/pages/trending'
-import Search from './components/pages/search'
-import Twitt from './components/pages/twitt'
-import NotFound from './components/pages/notfound'
+import Home from './components/pages/home';
+import Trending from './components/pages/trending';
+import Profile from './components/pages/profile';
+import Logout from './components/pages/logout';
+import User from './components/pages/user';
+import Login from './components/pages/login';
+import Register from './components/pages/register';
+import Twitt from './components/pages/twitt';
+import Search from './components/pages/search';
+import NotFound from './components/pages/notfound';
 
-import Sidebar from "./molecules/sidebar";
+import Sidebar from './components/molecules/sidebar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,12 +26,14 @@ root.render(
       <Sidebar>
         <Routes>
           <Route path="/" element={<Home />} errorElement={<NotFound />} />
+          <Route path="/trending" element={<Trending />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/user" element={<User />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/trending" element={<Trending />} />
-          <Route path="/search" element={<Search />} />
           <Route path="/twitt" element={<Twitt />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </Sidebar>
     </BrowserRouter>
