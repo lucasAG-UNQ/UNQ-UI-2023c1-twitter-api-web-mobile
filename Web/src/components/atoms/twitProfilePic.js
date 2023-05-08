@@ -1,6 +1,6 @@
-const TwitProfilePic= ({className,src,alt})=>{
+const TwitProfilePic= (user)=>{
     return(
-        <img height={48} className={"rounded-circle "+className} src={src} alt={alt}/>
+        <img height={48} className={"rounded-circle "+user.class} src={user.src} alt={user.alt}/>
     )
 }
 

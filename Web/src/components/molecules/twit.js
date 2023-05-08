@@ -1,12 +1,16 @@
 import TwitProfilePic from "../atoms/twitProfilePic";
+import TwitPost from "./twitPost";
 import {BsChatDots, BsChatDotsFill, BsArrowRepeat, BsHeartFill, BsHeart} from "react-icons/bs";
 import { Link } from "react-router-dom";
 import "./twit.css"
 
 const Twit= ()=>{
-    const objTest={className:"test", src:"https://gravatar.com/avatar/de84db04b0c7b43efdc840391ffe56ff", alt:"asd", date:"3 mayo"}
+    const objTest={class:"test", src:"https://gravatar.com/avatar/de84db04b0c7b43efdc840391ffe56ff", alt:"asd", date:"3 mayo"}
     return(
+    <>
+    <TwitPost {...objTest} />
     <article className="Twitt">
+        
         <TwitProfilePic {...objTest}/>
         <div className="twitContainer">
             <div>
@@ -19,17 +23,19 @@ const Twit= ()=>{
                 test test test test test test test test test test
             </span>
             <div className="iconsContainer">
-                
-                <BsChatDots className="tw-coment"/>
-                <BsArrowRepeat className="tw-retwit"/>
-                <BsHeart className="tw-like"/>
-                {/*<img className="tw-coment" src="" alt="test"></img>
-                <img className="tw-ico" src="" alt="test"></img>
-                <img className="tw-ico" src="" alt="test"></img>*/}
+                <button> 
+                    <BsChatDotsFill className="tw-coment"/>
+                </button> 
+                <button>
+                    <BsArrowRepeat className="tw-retwit"/>
+                </button>
+                <button>
+                    <BsHeartFill className="tw-like"/>
+                </button>
             </div>
         </div>
-
     </article>
+    </>
     )
 }
 

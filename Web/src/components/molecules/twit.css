@@ -1,10 +1,9 @@
 .Twitt{
     background-color: #333;
     display: flex;
-    align-items: top;
     padding: 1.5%;
     border-radius: 12px;
-    max-width: 70%;
+    max-width: 75%;
     flex-direction: row;
 }
 .twitContainer{
@@ -22,4 +21,21 @@
     display: flex;
     padding-right: 30%;
     justify-content: space-between;
+}
+.iconsContainer button{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    transition: background-color .75s;
+    transition: color .5s;
+    color: #fff
+}
+.iconsContainer button:hover{
+    background-color: #fff;
+    color: #000;
 }

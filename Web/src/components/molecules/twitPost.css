@@ -1,0 +1,9 @@
+.twitPostContainer{
+    background-color: #999;
+    padding: 1.5%;
+    border-radius: 12px;
+    max-width: 75%;
+    margin-bottom: 10px;
+    display: flex;
+}
+
