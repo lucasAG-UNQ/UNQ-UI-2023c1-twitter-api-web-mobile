@@ -17,7 +17,7 @@ import Twitt from './components/pages/twitt';
 import Search from './components/pages/search';
 import NotFound from './components/pages/notfound';
 
-import Sidebar from './components/molecules/sidebar';
+import Sidebar from './components/organisms/sidebar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const SearchBox = () => {
   const [searchText, setSearchText] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmitSearch = (event) => {
     event.preventDefault();
     alert(`Buscando: ${searchText}`)
     console.log(`Buscando: ${searchText}`)
@@ -11,18 +11,18 @@ const SearchBox = () => {
 
   return (
     <div className="container pt-5">
-       <form onSubmit={handleSubmit}>
-        <div class="text-center">
+       <form onSubmit={handleSubmitSearch}>
+        <div className="text-center">
           <input 
             type="text" 
             className="form-control mt-5 mb-1" 
             id="searchText" 
             placeholder="..." 
             value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            onChange={(event) => setSearchText(event.target.value)}
           />
         </div>
-        <div class="text-center">
+        <div className="text-center">
           <button type="submit" className="btn btn-primary">Buscar</button>
         </div>
       </form>
