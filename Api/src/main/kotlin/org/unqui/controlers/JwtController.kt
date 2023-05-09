@@ -44,7 +44,7 @@ class UserTokenGenerator() : JWTGenerator<User> {
 class TokenAccessManager(private val jwtController: JwtController, private val twitterSystem: TwitterSystem): AccessManager {
 
     override fun manage(handler: Handler, ctx: Context, roles: Set<RouteRole>) {
-        val authToken = ctx.header("Authorization")
+        val authToken = ctx.header("authorization")
         when {
             roles.contains(TwitterApiRole.ANYONE) -> handler.handle(ctx)
             authToken == null -> throw UnauthorizedResponse("Debe iniciar sesión para acceder a este sitio.")

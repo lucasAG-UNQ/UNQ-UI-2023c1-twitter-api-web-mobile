@@ -21,6 +21,13 @@ class TwitterApi(private val port: Int) {
     fun start(): Javalin {
         val app = Javalin.create { config ->
             config.http.defaultContentType = "application/json"
+
+            config.plugins.enableCors { cors ->
+                cors.add { it ->
+                    it.anyHost()
+                    it.allowCredentials = true
+                    it.exposeHeader("*")} }
+
             config.accessManager(TokenAccessManager(jwtController, twitterSystem))
         }
         app.get("/", { ctx -> ctx.result("Twitter API") } , TwitterApiRole.ANYONE)
