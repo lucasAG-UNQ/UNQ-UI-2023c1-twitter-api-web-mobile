@@ -27,7 +27,7 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
             val twitterUser: User = findUserToLogin(userDTO)
             val userToken = jwtController.generateToken(twitterUser)
 
-            ctx.header("Authorization", userToken)
+            ctx.header("authorization", userToken)
             ctx.json(mapper.userToUserDTO(twitterUser))
         } catch (e: UserException) {
             throw BadRequestResponse(e.message!!)
