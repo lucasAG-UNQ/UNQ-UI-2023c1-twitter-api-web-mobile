@@ -5,11 +5,11 @@ const TwitPost= (usuario)=>{
     return(
         <div className="twitPostContainer">
             <TwitProfilePic {...usuario}/>
-            <form class="form-inline">
-                <div class="form-group mx-sm-3 mb-2">
-                    <input class="form-control" id="inputTwit" placeholder="¿Qué está pasando?"/>
+            <form className="form-inline">
+                <div className="form-group mx-sm-3 mb-2">
+                    <input className="form-control" id="inputTwit" placeholder="¿Qué está pasando?"/>
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Twittear</button>
+                <button type="submit" className="btn btn-primary mb-2">Twittear</button>
             </form>
         </div>
     )
