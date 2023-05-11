@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBox = () => {
+  const navigate = useNavigate();
   const [searchText, setSearchText] = useState("");
 
   const handleSubmitSearch = (event) => {
     event.preventDefault();
-    alert(`Buscando: ${searchText}`)
-    console.log(`Buscando: ${searchText}`)
+    navigate(`/search?q=${searchText}`)
   }
 
   return (

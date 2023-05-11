@@ -25,15 +25,15 @@ root.render(
     <BrowserRouter>
       <Sidebar>
         <Routes>
-          <Route path="/" element={<Home />} errorElement={<NotFound />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/user" element={<User />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/twitt" element={<Twitt />} />
+          <Route path="/user/:id" element={<User />} />
+          <Route path="/twitt/:id" element={<Twitt />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route index path="/" element={<Home />} errorElement={<NotFound />} />
         </Routes>
       </Sidebar>
     </BrowserRouter>
