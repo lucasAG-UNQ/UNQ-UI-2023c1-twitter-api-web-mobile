@@ -2,25 +2,48 @@ import TwitProfilePic from "../atoms/twitProfilePic"
 import "./twit.css"
 import {BsChatDots, BsChatDotsFill, BsArrowRepeat, BsHeartFill, BsHeart} from "react-icons/bs";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-const Twit= (user, twit)=>{
+
+
+const Twit= ({userImage, twit})=>{
+
+    
+{/*const axios = require("axios"); esto no funciona, funciona solo con el import axios from "axios"*/}
+    const [user,setUser] = useState([])    
+
+    async function getUser(){
+        const config={
+            Authorization:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0"
+        }
+        const userTest= await axios({method:'get',
+                            url:'http://localhost:7070/user/u_1',
+                            headers:config})
+                    /*.then(response=> console.log(response.data))
+                    .catch(err=>console.log(err))*/
+         setUser(userTest.data)
+    }
+    
+    useEffect(()=>{getUser()},[])
+
     return(
         <article className="Twitt">
-            <TwitProfilePic {...user.im}/>
+            <TwitProfilePic image={user.image} username={twit.user.username} />
             <div className="twitContainer">
                 <div>
                     <strong>Usuario1</strong>
                     <span className="date">{twit.date}</span>
                 </div>
                 <span className="textContainer">
-                    
+                    {twit.content}
                 </span>
                 <div className="iconsContainer">
                     <div className="button-stat">
                         <button> 
                             <BsChatDotsFill className="tw-coment"/>
                         </button>
-                        <span>2222222222</span>
+                        <span>{twit.repliesAmount}</span>
                     </div>
                     <div className="button-stat">
                         <button> 
