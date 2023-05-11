@@ -1,9 +1,15 @@
-import Sidebar from "../molecules/sidebar";
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const Search = () => {
+
+  const [params] = useSearchParams();
+
   return (
-    <div>
-      Buscador</div>
+    <>
+      <h1>Buscador</h1>
+      <div>{params.getAll('q')}</div>
+    </>
   )
 }
 

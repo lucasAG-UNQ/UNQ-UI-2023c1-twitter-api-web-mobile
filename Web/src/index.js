@@ -17,7 +17,7 @@ import Twitt from './components/pages/twitt';
 import Search from './components/pages/search';
 import NotFound from './components/pages/notfound';
 
-import Sidebar from './components/molecules/sidebar';
+import Sidebar from './components/organisms/sidebar';
 
 import axios from 'axios';
 
@@ -30,15 +30,15 @@ root.render(
     <BrowserRouter>
       <Sidebar>
         <Routes>
-          <Route path="/" element={<Home />} errorElement={<NotFound />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/user" element={<User />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/twitt" element={<Twitt />} />
+          <Route path="/user/:id" element={<User />} />
+          <Route path="/twitt/:id" element={<Twitt />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route index path="/" element={<Home />} errorElement={<NotFound />} />
         </Routes>
       </Sidebar>
     </BrowserRouter>

@@ -2,8 +2,8 @@ import React from 'react';
 import './sidebar.css';
 import { NavLink } from 'react-router-dom'
 import { BsHouseFill, BsHash, BsPersonFill, BsDoorOpenFill } from "react-icons/bs";
-import LoggedUserCard from './loggedusercard';
-import SearchBox from './searchbox';
+import LoggedUserCard from '../molecules/loggedusercard';
+import SearchBox from '../molecules/searchbox';
 
 const Sidebar = ({children}) => {
 
@@ -16,7 +16,7 @@ const Sidebar = ({children}) => {
 
   return (
     <div className="root_container">
-      <div className="sidebar">
+      <div className="sidebar bg-dark">
         <div className="sb_top_section">
           <h1 className="sb_logo">Twitter-G5</h1>
         </div>

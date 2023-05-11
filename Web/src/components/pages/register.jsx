@@ -1,4 +1,4 @@
-import Sidebar from "../molecules/sidebar";
+import React from 'react';
 
 const Register = () => {
   return (
