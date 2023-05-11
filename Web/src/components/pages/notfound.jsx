@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import Sidebar from "../molecules/sidebar";
+import React from 'react';
 
 const NotFound = () => {
   const routingError = useRouteError()

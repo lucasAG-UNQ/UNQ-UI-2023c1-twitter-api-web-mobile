@@ -1,6 +1,9 @@
-import Sidebar from "../molecules/sidebar";
+import React from 'react';
 
 const Logout = () => {
+  
+  localStorage.removeItem('twitterAcessToken');
+
   return (
     <div>Logout</div>
   )
