@@ -1,12 +1,23 @@
 import React from 'react';
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import TwApi from '../services.js'
 
 const Logout = () => {
+ 
+  const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged());
   
-  localStorage.removeItem('twitterAcessToken');
+  useEffect(() => {
+    if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
+  }, []);
 
+  if (!isLoggedUser) { return (<Navigate replace to="/" />); }
+  
+  TwApi.logout();
   return (
-    <div>Logout</div>
-  )
+    <h1>Saliendo...</h1>
+  );
+
 }
 
 export default Logout
