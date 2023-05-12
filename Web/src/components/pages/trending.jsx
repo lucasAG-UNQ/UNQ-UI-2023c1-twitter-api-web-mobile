@@ -1,16 +1,6 @@
-import { React, useState, useEffect } from 'react';
-import { Navigate } from "react-router-dom";
-import TwApi from '../services.js'
+import React from 'react';
 
 const Trending = () => {
-
-  const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged());
-
-  useEffect(() => {
-    if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
-  }, []);
-
-  if (!isLoggedUser) { return (<Navigate replace to="/login" />); }
 
   return (
     <div>

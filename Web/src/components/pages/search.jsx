@@ -1,18 +1,9 @@
-import { React, useState, useEffect } from 'react';
-import { useSearchParams, Navigate } from 'react-router-dom';
-import TwApi from '../services.js'
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 const Search = () => {
 
   const [params] = useSearchParams();
-
-  const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged());
-
-  useEffect(() => {
-    if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
-  }, []);
-
-  if (!isLoggedUser) { return (<Navigate replace to="/login" />); }
 
   return (
     <>

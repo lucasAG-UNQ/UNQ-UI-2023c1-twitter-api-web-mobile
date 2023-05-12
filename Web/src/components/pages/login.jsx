@@ -1,15 +1,9 @@
-import { React, useState, useEffect } from 'react';
-import { Navigate } from "react-router-dom";
+import { React, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import TwApi from '../services.js'
 
 const Login = () => {
-
-  const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged());
-  
-  useEffect(() => {
-    if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
-  }, []);
-
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState({username: "", password: ""});
   
   const handleInputChange = name => event => {
@@ -19,9 +13,8 @@ const Login = () => {
   const handleLoginSubmit = (event) => {
     event.preventDefault();
     TwApi.login(loginData);
+    navigate("/");
   }
-  
-  if (isLoggedUser) { return (<Navigate replace to="/" />); }
 
   return (
     <>
