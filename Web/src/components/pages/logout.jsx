@@ -11,8 +11,8 @@ const Logout = () => {
     if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
   }, []);
 
-  if (!isLoggedUser) { return (<Navigate replace to="/" />); }
-  
+  if (!isLoggedUser) { return (<Navigate replace to="/" state={{ isLoggedUser: false}}/>); }
+ 
   TwApi.logout();
   return (
     <h1>Saliendo...</h1>

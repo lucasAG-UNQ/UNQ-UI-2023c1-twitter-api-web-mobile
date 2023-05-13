@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import PublicRoute from './components/atoms/publicroute';
+import PrivateRoute from './components/atoms/privateroute';
+
 import Home from './components/pages/home';
 import Trending from './components/pages/trending';
 import Profile from './components/pages/profile';
@@ -25,14 +28,16 @@ root.render(
     <BrowserRouter>
       <Sidebar>
         <Routes>
-          <Route path="/trending" element={<Trending />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/user/:id" element={<User />} />
-          <Route path="/twitt/:id" element={<Twitt />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/trending" element={<PrivateRoute><Trending /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/user/:id" element={<PrivateRoute><User /></PrivateRoute>} />
+          <Route path="/twitt/:id" element={<PrivateRoute><Twitt /></PrivateRoute>} />
+          <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />
+          
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/logout" element={<Logout />} />
+          
           <Route index path="/" element={<Home />} errorElement={<NotFound />} />
         </Routes>
       </Sidebar>
