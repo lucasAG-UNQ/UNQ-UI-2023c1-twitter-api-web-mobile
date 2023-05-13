@@ -1,57 +1,77 @@
-import { React, useState, useEffect } from 'react';
-import { Navigate } from "react-router-dom";
+import { React, useState, useEffect} from 'react';
+import { NavLink, Redirect } from "react-router-dom";
+import { useNavigate } from 'react-router'
 import TwApi from '../services.js'
+import {ImagenTweetter,Boton, InputTextLogin}from "../atoms/atomos_login.jsx";
+import "../css_style/login.css";
 
 const Login = () => {
+  const [user, setuser] = useState('')
+  const [pass, setpass] = useState('')
+  const [token, setToken] = useState(TwApi.isUserLogged())
+  const [error, setError] = useState("")
 
-  const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged());
+  const navigate = useNavigate()
+    let loginData = {
+      username: user,
+      password: pass
+    }
+
+  const validar = () => {
+    let valida = true
+    if(loginData.password.length < 1){
+        setError("Debe ingresar la contraseña")
+        valida = false
+    }
+    if(loginData.username.length < 1){
+        setError("Debe ingresar un nombre de usuario")
+        valida = false
+    }
+    return valida
+  }
+  
+  const handleLoginSubmit =   (event) => {
+    event.preventDefault();
+    if (validar()) {
+      TwApi.login(loginData, setToken, setError);
+    }
+  }
   
   useEffect(() => {
-    if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
-  }, []);
+    console.log("---->>> useeffect");
+    if (token) { 
+      console.log("---->>> useeffect    LOGGED");
+      navigate("/loged");
+    }
+  }, [token]);
+  
 
-  const [loginData, setLoginData] = useState({username: "", password: ""});
-  
-  const handleInputChange = name => event => {
-    setLoginData(prevState => ({ ...prevState , [name]: event.target.value}))
-  }
-  
-  const handleLoginSubmit = (event) => {
-    event.preventDefault();
-    TwApi.login(loginData);
-  }
-  
-  if (isLoggedUser) { return (<Navigate replace to="/" />); }
-
-  return (
-    <>
-      <h1>Login</h1>
-      <div className="container">
-        <div className="col-md-6 col-sm-12">
-          <form onSubmit={handleLoginSubmit}>
-            <div className="form-floating mb-3">              
-              <input type="text" 
-                name="username" 
-                className="form-control" 
-                placeholder="usuario" 
-                value={loginData.username}
-                onChange={handleInputChange("username")}/>
-              <label htmlFor="username">Usuario</label>
+  return ( 
+    <div className="container py-5 h-100">
+      <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+          <div className="card bg-dark text-white" >
+            <div className="card-body p-5 text-center">
+              <ImagenTweetter/>
+              <form onSubmit={handleLoginSubmit}>
+                <div className="mb-md-5 mt-md-4 pb-5">
+                  <h1 className="fw-bold mb-2">LOGIN</h1>
+                  <p className="text-white-50 mb-5">Por favor ingrese su usuario y contraseña</p>
+                  <InputTextLogin seccion={'Usuario'} setFuncion={setuser}/>
+                  <InputTextLogin seccion={'Password'} setFuncion={setpass}/>
+                  <Boton funciondeboton ={'Login'} loguear={handleLoginSubmit}/>
+                  <div className="etiquetaRoja">{error}</div>
+                </div>
+                
+              </form>
+            <div>
+              No tenes cuanta?  <NavLink to="/register">REGISTRATE</NavLink>
             </div>
-            <div className="form-floating mb-3">
-              <input type="password" 
-                name="password" 
-                className="form-control" 
-                placeholder="contraseña" 
-                value={loginData.password}
-                onChange={handleInputChange("password")}/>
-              <label htmlFor="password">Contraseña</label>
-            </div>
-            <button type="submit" className="btn btn-primary">Login</button>
-          </form>
+          </div>
         </div>
       </div>
-    </>
+    </div>
+    </div>
   )
 }
 

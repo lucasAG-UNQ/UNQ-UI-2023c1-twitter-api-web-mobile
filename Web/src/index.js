@@ -23,19 +23,12 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Sidebar>
         <Routes>
-          <Route path="/trending" element={<Trending />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/user/:id" element={<User />} />
-          <Route path="/twitt/:id" element={<Twitt />} />
-          <Route path="/search" element={<Search />} />
+          <Route path="/loged" element={<Sidebar />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
-          <Route index path="/" element={<Home />} errorElement={<NotFound />} />
+          <Route index path="/" element={<Login />} errorElement={<NotFound />} />
         </Routes>
-      </Sidebar>
     </BrowserRouter>
   </React.StrictMode>
 );
