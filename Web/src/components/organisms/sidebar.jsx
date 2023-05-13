@@ -1,6 +1,6 @@
-import React from 'react';
+import { React, useState, useEffect } from 'react';
 import './sidebar.css';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { BsHouseFill, BsHash, BsPersonFill, BsPersonPlusFill, BsDoorOpenFill } from "react-icons/bs";
 import { BiLogIn } from "react-icons/bi";
 import LoggedUserCard from '../molecules/loggedusercard';
@@ -8,22 +8,34 @@ import SearchBox from '../molecules/searchbox';
 import TwApi from '../services.js'
 import Login from '../pages/login';
 
+const userMenuItems = () => {
+  return [
+  { path: "/", name: "Inicio", icon: <BsHouseFill/> },
+  { path: "/trending", name: "Tendencias", icon: <BsHash/> },
+  { path: "/profile", name: "Perfil", icon: <BsPersonFill/> },
+  { path: "/logout", name: "Salir", icon: <BsDoorOpenFill/> }
+]};
+
+const guestMenuItems = () => {
+  return [
+  { path: "/", name: "Inicio", icon: <BsHouseFill/> },
+  { path: "/login", name: "Ingresar", icon: <BiLogIn/> },
+  { path: "/register", name: "Registrarse", icon: <BsPersonPlusFill/> },
+]};
+
+
 const Sidebar = ({children}) => {
 
-  const userMenuItems = [
-    { path: "/", name: "Inicio", icon: <BsHouseFill/> },
-    { path: "/trending", name: "Tendencias", icon: <BsHash/> },
-    { path: "/profile", name: "Perfil", icon: <BsPersonFill/> },
-    { path: "/logout", name: "Salir", icon: <BsDoorOpenFill/> }
-  ];
+  const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged());
+  const location = useLocation();
+  
+  useEffect(() => {
+    if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
+    console.log("use effect del sidebar", isLoggedUser)
+    console.log("state ", location.state?.isLoggedUser)
+  }, [location.state, isLoggedUser]);
 
-  const guestMenuItems = [
-    { path: "/", name: "Inicio", icon: <BsHouseFill/> },
-    { path: "/login", name: "Ingresar", icon: <BiLogIn/> },
-    { path: "/register", name: "Registrarse", icon: <BsPersonPlusFill/> },
-  ];
-
-  const menuItems = TwApi.isUserLogged() ? userMenuItems : guestMenuItems;
+  const menuItems = TwApi.isUserLogged() ? userMenuItems() : guestMenuItems();
 
   if (TwApi.isUserLogged()){
   return (
@@ -33,7 +45,7 @@ const Sidebar = ({children}) => {
           <h1 className="sb_logo">Twitter-G5</h1>
         </div>
 
-        <LoggedUserCard />
+        { isLoggedUser && <LoggedUserCard /> }
 
         {
           menuItems.map((item, index) => (
@@ -44,7 +56,7 @@ const Sidebar = ({children}) => {
           ))
         }
 
-        <SearchBox />
+        { isLoggedUser && <SearchBox />}
       </div>
       <main>{children}</main>
     </div>

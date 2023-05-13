@@ -6,6 +6,9 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import PublicRoute from './components/atoms/publicroute';
+import PrivateRoute from './components/atoms/privateroute';
+
 import Home from './components/pages/home';
 import Trending from './components/pages/trending';
 import Profile from './components/pages/profile';
@@ -23,12 +26,21 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <Sidebar>
         <Routes>
-          <Route path="/loged" element={<Sidebar />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/trending" element={<PrivateRoute><Trending /></PrivateRoute>} />
+          <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
+          <Route path="/user/:id" element={<PrivateRoute><User /></PrivateRoute>} />
+          <Route path="/twitt/:id" element={<PrivateRoute><Twitt /></PrivateRoute>} />
+          <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />
+          
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/logout" element={<Logout />} />
-          <Route index path="/" element={<Login />} errorElement={<NotFound />} />
+          
+          <Route index path="/" element={<Home />} errorElement={<NotFound />} />
         </Routes>
+      </Sidebar>
     </BrowserRouter>
   </React.StrictMode>
 );

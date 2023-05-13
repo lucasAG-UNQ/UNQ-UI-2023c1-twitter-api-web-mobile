@@ -1,16 +1,8 @@
-import { React, useState, useEffect } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import TwApi from '../services.js'
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
 const Twitt = () => {
   const  { id } = useParams();
-  const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged());
-
-  useEffect(() => {
-    if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
-  }, []);
-
-  if (!isLoggedUser) { return (<Navigate replace to="/login" />); }
 
   return (
     <>
