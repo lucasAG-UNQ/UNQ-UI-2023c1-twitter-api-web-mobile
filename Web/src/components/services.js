@@ -61,12 +61,54 @@ const isUserLogged = () => {
 
 const trendingTopics = () => { twGet('/trendingTopics') }
 
+function getUser(id){
+  const res= axios(`/user/${id}`)
+                .then(response => response.data)
+                .catch(error => {
+                    console.log(error.toJSON());
+                    Promise.reject(error);
+                })
+  return res
+}
+
+function getTweet(id){
+  const res=  axios(`/tweet/${id}`)
+              .then(response => response.data)
+              .catch(error => {
+                  console.log(error.toJSON());
+                  Promise.reject(error);
+              })
+  return res
+}
+
+function getFollowingTweets(){
+  const res= axios("/user/followingTweets")
+            .then(response => response.data)
+            .catch(error => {
+                    console.log(error.toJSON());
+                    Promise.reject(error);
+                  })
+  return res
+}
+
+function postNormalTwit(data) {
+  axios.post("/tweets", data)
+    .catch(err=>{
+        console.log(err.response.data.title)
+    });
+    
+}
+
 const TwApi = {
     login,
     logout,
     isUserLogged,
     trendingTopics,
-    register
+    register,
+    getUser,
+    getTweet,
+    getFollowingTweets,
+    postNormalTwit
 }
 
 export default TwApi;

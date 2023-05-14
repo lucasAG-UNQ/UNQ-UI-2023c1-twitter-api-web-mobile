@@ -1,0 +1,46 @@
+.Twitt{
+    background-color: #000;
+    display: flex;
+    padding: 1.5%;
+    border-radius: 12px;
+    max-width: 75%;
+    flex-direction: row;
+    column-gap: 10px;
+}
+.twitContainer{
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+}
+.date{
+    color: #999;
+    border: 0 solid white;
+}
+.iconsContainer{
+    display: flex;
+    padding-right: 25%;
+    justify-content: space-between;
+}
+.iconsContainer button{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background-color: transparent;
+    border-color: transparent;
+    transition: all .5s;
+    color: #fff
+}
+.iconsContainer button:hover{
+    background-color: #ddd;
+    color: #000;
+}
+
+.button-stat {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
