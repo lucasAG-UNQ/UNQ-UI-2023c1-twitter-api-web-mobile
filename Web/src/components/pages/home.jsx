@@ -1,24 +1,33 @@
 import Twit from "../molecules/twit";
 import TwitPost from "../molecules/twitPost";
+import TwApi from "../services";
 import "./home.css"
+import { useState,useEffect } from "react";
 
 const Home = () => {
-  const userTest={id: "u_1",
-     username: "a",
-     email: "pepito123@a.com",
-     image: "https://gravatar.com/avatar/de84db04b0c7b43efdc840391ffe56ff",
-     backgroundImage: "https://gravatar.com/avatar/de84db04b0c7b43efdc840391ffe56ff",
-     followers: [],
-     following: [],
-     tweets: []}
-  const simpleUserTest={id:"u_1",username:"a"}
-  const twitTypeTest={tweet:null, image:"https://gravatar.com/avatar/de84db04b0c7b43efdc840391ffe56ff"}
-  const simpleTwitTest={id:"12345645", twitType:{...twitTypeTest},user:{...simpleUserTest}, content: "test test testtest test testtest test testtest test testtest test test",
-                        date:"3 mayo", repliesAmount:3,reTweetAmount:4,likes:[{...simpleUserTest}]}
+  const [followingTweets,setFollowingTweets] =useState();
+  const [loggedUser,setLoggedUser]=useState()
+  const [error,setError]=useState(false)
+
+  useEffect(()=>{TwApi.getFollowingTweets()
+                      .then(data=>setFollowingTweets(data))
+                      .catch(err=>{
+                          console.log(err)
+                          if(err.status === 404)
+                            setError=true
+                      })
+                 TwApi.getUser("u_1").then(data=>setLoggedUser(data))},[followingTweets,loggedUser])
+                 console.log("test")
+                 
+
+  if (error) return <div>error</div>
+
+  if (!followingTweets) return <div>loading...</div>
+
   return (
     <>
-      <TwitPost {...userTest} />
-      <Twit userImage={userTest.image} twit={simpleTwitTest} />
+      <TwitPost {...loggedUser} />
+      {followingTweets.results.map((tweet,index)=><Twit twit={tweet} />)}
     </>
   )
 }

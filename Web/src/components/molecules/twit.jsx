@@ -7,19 +7,23 @@ import { useEffect, useState } from "react";
 import TwApi from "../services";
 
 
-const Twit= ({userImage, twit})=>{
+const Twit= ({twit})=>{
 
     const [user,setUser] = useState([])
-    const [like,setLike] = useState([])
+    const [like,setLike] = useState(false)
 
-    TwApi.getUser().then(data=>setUser(data))
+    useEffect(()=>{TwApi.getUser(twit.user.id).then(data=>setUser(data))},[user])
 
+    const handleLike=()=>{
+        TwApi.toggleLike(twit.id).then(_=>setLike(!like))
+    }
+    
     return(
         <article className="Twitt">
             <TwitProfilePic image={user.image} username={twit.user.username} />
             <div className="twitContainer">
                 <div>
-                    <strong>Usuario1</strong>
+                    <strong> {twit.user.username} </strong>
                     <span className="date">{twit.date}</span>
                 </div>
                 <span className="textContainer">
@@ -39,23 +43,14 @@ const Twit= ({userImage, twit})=>{
                         <button> 
                             <BsArrowRepeat className="tw-coment"/>
                         </button>
-                        <span>22222</span>
+                        <span> {twit.reTweetAmount} </span>
                     </div>
                     <div className="button-stat">
                         <button> 
                             <BsHeart className="tw-coment"/>
                         </button>
-                        <span>222222222</span>
+                        <span> {twit.likes.length} </span>
                     </div>
-                    {/*<button> 
-                        <BsChatDotsFill className="tw-coment"/>
-                    </button> 
-                    <button>
-                        <BsArrowRepeat className="tw-retwit"/>
-                    </button>
-                    <button>
-                        <BsHeart className="tw-like"/>
-                    </button>*/}
                 </div>
             </div>
         </article>
