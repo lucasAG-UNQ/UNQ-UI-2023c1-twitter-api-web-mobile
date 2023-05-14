@@ -26,6 +26,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <Routes>
+        <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+      </Routes>
       <Sidebar>
         <Routes>
           <Route path="/trending" element={<PrivateRoute><Trending /></PrivateRoute>} />
@@ -33,11 +37,8 @@ root.render(
           <Route path="/user/:id" element={<PrivateRoute><User /></PrivateRoute>} />
           <Route path="/twitt/:id" element={<PrivateRoute><Twitt /></PrivateRoute>} />
           <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />
-          
           <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/logout" element={<Logout />} />
-          
           <Route index path="/" element={<Home />} errorElement={<NotFound />} />
         </Routes>
       </Sidebar>

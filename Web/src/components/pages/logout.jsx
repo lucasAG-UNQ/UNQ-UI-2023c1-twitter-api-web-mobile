@@ -14,7 +14,7 @@ const Logout = () => {
   }, [TwApi.isUserLogged()]);
 
   if (!isLoggedUser) {
-    setTimeout(() => {navigate("/")}, 3000);
+    setTimeout(() => {navigate("/login")}, 3000);
   }
    
   TwApi.logout();

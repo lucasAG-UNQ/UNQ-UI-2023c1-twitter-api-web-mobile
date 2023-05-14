@@ -18,8 +18,7 @@ const twPost = (endpoint, data, seter, setError) => {
         } else if (err.request){
           setError("Error de conexión")
         }
-          });
-      
+      });
 }
 
 const twGet = (endpoint) => {
@@ -49,6 +48,7 @@ const twGet = (endpoint) => {
 }
 
 const login = (loginData, setToken, setError) => { twPost('/login', loginData, setToken, setError)}
+const register = (regData, setToken, setError) => { twPost('/register', regData, setToken, setError)}
 
 const logout = () => {
   localStorage.removeItem('twitterAcessToken');
@@ -104,6 +104,7 @@ const TwApi = {
     logout,
     isUserLogged,
     trendingTopics,
+    register,
     getUser,
     getTweet,
     getFollowingTweets,

@@ -16,13 +16,11 @@ const Home = () => {
                           if(err.status === 404)
                             setError=true
                       })
-                 TwApi.getUser("u_1").then(data=>setLoggedUser(data))},[followingTweets,loggedUser])
-                 console.log("test")
-                 
+                 TwApi.getUser("u_1").then(data=>setLoggedUser(data))},[])
 
   if (error) return <div>error</div>
 
-  if (!followingTweets) return <div>loading...</div>
+  if (!followingTweets) return <div>loading... </div>
 
   return (
     <>

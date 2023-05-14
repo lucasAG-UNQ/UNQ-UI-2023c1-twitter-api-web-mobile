@@ -5,18 +5,20 @@ const InputTextLogin = ({seccion, setFuncion}) => {
       setFuncion(e.target.value)
     }
     return(
-        <div className="form-outline form-white mb-4">
+      <div className="d-flex flex-row align-items-center mb-4">
+        <div className="form-outline flex-fill mb-0">
             <input type={seccion==='Password'?'password':'text'} placeholder={seccion} 
             className="form-control" id={seccion} onChange={handler} />
             <label htmlFor={seccion} className="form-label">{seccion}</label>
         </div>
+      </div>
     );
   }
   
-  const ImagenTweetter = () => {
+  const ImagenTweetter = ({clase}) => {
     return(
         <div>
-            <img src="./img/tweetter_logo.png" alt="Twitter" className="img_logo_25" />
+            <img src="./img/tweetter_logo.png" alt="Twitter" className={clase} />
         </div>
     );
   }
