@@ -1,7 +1,6 @@
 import Twit from "../molecules/twit";
 import TwitPost from "../molecules/twitPost";
 import TwApi from "../services";
-import "./home.css"
 import { useState,useEffect } from "react";
 
 const Home = () => {
@@ -10,11 +9,11 @@ const Home = () => {
   const [error,setError]=useState(false)
 
   useEffect(()=>{TwApi.getFollowingTweets()
-                      .then(data=>setFollowingTweets(data))
+                      .then(response => setFollowingTweets(response.data.results))
                       .catch(err=>{
                           console.log(err)
                           if(err.status === 404)
-                            setError=true
+                            setError(true)
                       })
                  TwApi.getUser("u_1").then(data=>setLoggedUser(data))},[])
 
@@ -25,7 +24,7 @@ const Home = () => {
   return (
     <>
       <TwitPost {...loggedUser} />
-      {followingTweets.results.map((tweet,index)=><Twit twit={tweet} />)}
+      { followingTweets.map((tweet,index)=><Twit twit={tweet} key={tweet.id} />)}
     </>
   )
 }

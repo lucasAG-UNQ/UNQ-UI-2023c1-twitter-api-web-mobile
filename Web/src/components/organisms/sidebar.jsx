@@ -5,6 +5,7 @@ import { BsHouseFill, BsHash, BsPersonFill, BsPersonPlusFill, BsDoorOpenFill } f
 import { BiLogIn } from "react-icons/bi";
 import LoggedUserCard from '../molecules/loggedusercard';
 import SearchBox from '../molecules/searchbox';
+import TwitterLogo from '../atoms/twitterlogo';
 import TwApi from '../services.js'
 import Login from '../pages/login';
 
@@ -37,11 +38,13 @@ const Sidebar = ({children}) => {
 
   const menuItems = TwApi.isUserLogged() ? userMenuItems() : guestMenuItems();
 
-  if (TwApi.isUserLogged()){
+  //if (TwApi.isUserLogged()){
+  if (1){
   return (
     <div className="root_container">
       <div className="sidebar bg-dark">
         <div className="sb_top_section">
+          <TwitterLogo sizeClass="img_logo_25" />
           <h1 className="sb_logo">Twitter-G5</h1>
         </div>
 

@@ -1,110 +1,74 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:7070';
+// axios.defaults.baseURL = 'http://localhost:7070';
+axios.defaults.baseURL = 'http://192.168.0.192:7070';
 
-const twPost = (endpoint, data, seter, setError) => {
-    axios.post(endpoint, data)
-      .then( (response) => {
-        //console.log(response)
-        localStorage.setItem('twitterAcessToken', response.headers.authorization);
-        axios.defaults.headers.common['authorization'] = response.headers.authorization;
-       seter(true);
-      })
-      .catch(err=>{
-        if (err.response) {
-          console.log(Object.keys(err))
-          console.log(err.response.data.title)
-          setError(err.response.data.title)
-        } else if (err.request){
-          setError("Error de conexión")
-        }
-      });
+const twPost = (endpoint, data) => {
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
+  return axios.post(endpoint, data)
+    .then( ( response ) => response )
+    .catch( (error) => handleError(error) );
 }
 
 const twGet = (endpoint) => {
-  axios.get(endpoint)
-    .then( (response) => {
-      console.log(response)
-    })
-    .catch( (error) => {
-      // console.log('Error: ' , error.response.data.message)
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-        // http.ClientRequest in node.js
-        console.log(error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log('Error: ', error.message);
-      }
-      console.log(error.config);
-    })
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
+  return axios.get(endpoint)
+    .then( ( response ) => response )
+    .catch( (error) => handleError(error) );
 }
 
-const login = (loginData, setToken, setError) => { twPost('/login', loginData, setToken, setError)}
-const register = (regData, setToken, setError) => { twPost('/register', regData, setToken, setError)}
+const handleError = (error) => {
+  if (error.response) {
+    // The request was made and the server responded with a status code
+    // that falls out of the range of 2xx
+    console.log("RESPONSE_ERROR")
+    console.log(error.response.data);
+    console.log(error.response.status);
+    console.log(error.response.headers);
+    return Promise.reject(error.response);
+  } else if (error.request) {
+    // The request was made but no response was received
+    // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+    // http.ClientRequest in node.js
+    console.log("REQUEST_ERROR")
+    console.log(error.request);
+    return Promise.reject(error.request);
+  } else {
+    // Something happened in setting up the request that triggered an Error
+    console.log("UNEXPECTED_ERROR")
+    console.log(error.message);
+    return Promise.reject(error);
+  }
+  // console.log(error.config);
+}
+
+const login = (loginData) => twPost('/login', loginData);
+
+const register = (regData) => twPost('/register', regData);
 
 const logout = () => {
   localStorage.removeItem('twitterAcessToken');
   axios.defaults.headers.common['authorization'] = null;
 }
 
-const isUserLogged = () => {
-  return !!localStorage.getItem('twitterAcessToken')
-}
+const isUserLogged = () => !!localStorage.getItem('twitterAcessToken');
 
-const trendingTopics = () => { twGet('/trendingTopics') }
+const trendingTopics = () => twGet('/trendingTopics')
 
-function getUser(id){
-  const res= axios(`/user/${id}`)
-                .then(response => response.data)
-                .catch(error => {
-                    console.log(error.toJSON());
-                    Promise.reject(error);
-                })
-  return res
-}
+const getUser = (id) => twGet(`/user/${id}`);
 
-function getTweet(id){
-  const res=  axios(`/tweet/${id}`)
-              .then(response => response.data)
-              .catch(error => {
-                  console.log(error.toJSON());
-                  Promise.reject(error);
-              })
-  return res
-}
+const getTweet = (id) => twGet(`/tweet/${id}`);
 
-function getFollowingTweets(){
-  const res= axios("/user/followingTweets")
-            .then(response => response.data)
-            .catch(error => {
-                    console.log(error.toJSON());
-                    Promise.reject(error);
-                  })
-  return res
-}
+const getFollowingTweets = () => twGet("/user/followingTweets");
 
-function postNormalTwit(data) {
-  axios.post("/tweets", data)
-    .catch(err=>{
-        console.log(err.response.data.title)
-    });
-    
-}
+const postNormalTwit = (data) => twPost("/tweets", data);
 
 const TwApi = {
     login,
     logout,
+    register,
     isUserLogged,
     trendingTopics,
-    register,
     getUser,
     getTweet,
     getFollowingTweets,
