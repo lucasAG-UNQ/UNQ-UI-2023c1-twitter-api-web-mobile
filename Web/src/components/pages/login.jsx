@@ -2,7 +2,7 @@ import { React, useState, useEffect} from 'react';
 import { NavLink, Redirect } from "react-router-dom";
 import { useNavigate } from 'react-router'
 import TwApi from '../services.js'
-import {ImagenTweetter,Boton, InputTextLogin}from "../atoms/atomos_login.jsx";
+import {ImagenTweetter,Boton, InputTextLogin}from "../atoms/atomos_basic.jsx";
 import "../css_style/login.css";
 
 const Login = () => {
@@ -38,18 +38,16 @@ const Login = () => {
   }
   
   useEffect(() => {
-    console.log("---->>> useeffect");
     if (token) { 
-      console.log("---->>> useeffect    LOGGED");
-      navigate("/loged");
+      navigate("/");
     }
   }, [token]);
   
 
   return ( 
-    <div className="container py-5 h-100">
+    <div className="container py-4 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
-        <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div className="col-12 col-md-8 col-lg-6 col-xl-4">
           <div className="card bg-dark text-white" >
             <div className="card-body p-5 text-center">
               <ImagenTweetter/>
@@ -65,7 +63,7 @@ const Login = () => {
                 
               </form>
             <div>
-              No tenes cuanta?  <NavLink to="/register">REGISTRATE</NavLink>
+              ¿No tenes cuanta?  <NavLink to="/register">REGISTRATE</NavLink>
             </div>
           </div>
         </div>

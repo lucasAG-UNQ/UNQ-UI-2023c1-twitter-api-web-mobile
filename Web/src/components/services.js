@@ -2,13 +2,13 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:7070';
 
-const twPost = (endpoint, data) => {
+const twPost = (endpoint, data, seter, setError) => {
     axios.post(endpoint, data)
       .then( (response) => {
         //console.log(response)
         localStorage.setItem('twitterAcessToken', response.headers.authorization);
         axios.defaults.headers.common['authorization'] = response.headers.authorization;
-       setToken(true);
+       seter(true);
       })
       .catch(err=>{
         if (err.response) {
@@ -48,7 +48,7 @@ const twGet = (endpoint) => {
     })
 }
 
-const login = (loginData) => { twPost('/login', loginData)}
+const login = (loginData, setToken, setError) => { twPost('/login', loginData, setToken, setError)}
 
 const logout = () => {
   localStorage.removeItem('twitterAcessToken');

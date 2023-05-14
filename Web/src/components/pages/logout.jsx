@@ -9,9 +9,12 @@ const Logout = () => {
   
   useEffect(() => {
     if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
-  }, []);
+  }, [TwApi.isUserLogged()]);
 
-  if (!isLoggedUser) { return (<Navigate replace to="/" state={{ isLoggedUser: false}}/>); }
+  if (!isLoggedUser) { 
+    setTimeout(() => {return <Navigate replace to="/" state={{ isLoggedUser: false}}/>}, 3000);
+    //return <Navigate replace to="/" state={{ isLoggedUser: false}}/>;
+   }
  
   TwApi.logout();
   return (
