@@ -6,6 +6,7 @@ import { BiLogIn } from "react-icons/bi";
 import LoggedUserCard from '../molecules/loggedusercard';
 import SearchBox from '../molecules/searchbox';
 import TwApi from '../services.js'
+import Login from '../pages/login';
 
 const userMenuItems = () => {
   return [
@@ -36,6 +37,7 @@ const Sidebar = ({children}) => {
 
   const menuItems = TwApi.isUserLogged() ? userMenuItems() : guestMenuItems();
 
+  if (TwApi.isUserLogged()){
   return (
     <div className="root_container">
       <div className="sidebar bg-dark">
@@ -57,6 +59,11 @@ const Sidebar = ({children}) => {
         { isLoggedUser && <SearchBox />}
       </div>
       <main>{children}</main>
+    </div>
+  )}
+  return (
+    <div className="root_container">
+      <Login />
     </div>
   )
 }
