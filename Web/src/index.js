@@ -19,11 +19,6 @@ import NotFound from './components/pages/notfound';
 
 import Sidebar from './components/organisms/sidebar';
 
-import axios from 'axios';
-
-axios.defaults.baseURL="http://localhost:7070"
-axios.defaults.headers.common["Authorization"]= "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0"//`Bearer ${localStorage.token}`
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

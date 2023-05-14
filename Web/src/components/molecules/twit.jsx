@@ -4,25 +4,15 @@ import {BsChatDots, BsChatDotsFill, BsArrowRepeat, BsHeartFill, BsHeart} from "r
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-
+import TwApi from "../services";
 
 
 const Twit= ({userImage, twit})=>{
 
-    
-{/*const axios = require("axios"); esto no funciona, funciona solo con el import axios from "axios"*/}
     const [user,setUser] = useState([])
     const [like,setLike] = useState([])
 
-    async function getUser(){
-        const userTest= await   axios({method:'get',
-                                        url:'/user/u_1'})
-        setUser(userTest.data)
-    }
-    
-    
-    useEffect(()=>{getUser()},[])
+    TwApi.getUser().then(data=>setUser(data))
 
     return(
         <article className="Twitt">
@@ -35,6 +25,9 @@ const Twit= ({userImage, twit})=>{
                 <span className="textContainer">
                     {twit.content}
                 </span>
+                <div className="tw-type-container">
+
+                </div>
                 <div className="iconsContainer">
                     <div className="button-stat">
                         <button> 

@@ -1,4 +1,3 @@
-import Sidebar from "../molecules/sidebar";
 import Twit from "../molecules/twit";
 import TwitPost from "../molecules/twitPost";
 import "./home.css"
