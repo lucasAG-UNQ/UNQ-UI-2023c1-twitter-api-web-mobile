@@ -9,6 +9,7 @@ const Twitt = () => {
       <h1>Twitt</h1>
       <div className="twitt">Twitt ID: {id}</div>
     </>
-  )}
+  )
+}
 
 export default Twitt
