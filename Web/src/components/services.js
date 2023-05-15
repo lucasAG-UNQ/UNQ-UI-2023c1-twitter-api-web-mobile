@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:7070';
-axios.defaults.baseURL = 'http://192.168.0.192:7070';
+axios.defaults.baseURL = 'http://localhost:7070';
+//axios.defaults.baseURL = 'http://192.168.0.192:7070';
 
 const twPost = (endpoint, data) => {
   axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
   return axios.post(endpoint, data)
     .then( ( response ) => response )
-    .catch( (error) => handleError(error) );
+    //.catch( (error) => handleError(error) );
 }
 
 const twGet = (endpoint) => {
