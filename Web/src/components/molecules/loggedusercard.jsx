@@ -3,10 +3,6 @@ import { NavLink } from 'react-router-dom'
 
 const LoggedUserCard = () => {
 
-  // const loggedUser = localStorage.getItem('twitterLoggedUser') 
-  //   ? JSON.parse(localStorage.getItem('twitterLoggedUser'))
-  //   : {username : '', image : ''};
-
   const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
 
   return (

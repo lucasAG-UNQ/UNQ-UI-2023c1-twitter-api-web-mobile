@@ -8,7 +8,7 @@ import TwitterLogo from '../atoms/twitterlogo';
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('.')
+  const [error, setError] = useState('')
 
   const navigate = useNavigate()
 
