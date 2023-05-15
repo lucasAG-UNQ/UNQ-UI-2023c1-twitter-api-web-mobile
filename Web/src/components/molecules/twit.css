@@ -11,7 +11,7 @@
     color: #fff;
     display: flex;
     flex-direction: column;
-    min-width: 100%;
+    width: 80%;
 }
 .date{
     color: #999;
@@ -19,8 +19,9 @@
 }
 .iconsContainer{
     display: flex;
-    padding-right: 25%;
-    justify-content: space-between;
+    padding-right: 10%;
+    padding-left: 10%;
+    justify-content:space-between;
 }
 .iconsContainer button{
     display: flex;
@@ -43,4 +44,12 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.imageContainer{
+    text-align: center;
+}
+
+.imageContainer img{
+    max-width: 100%;
 }

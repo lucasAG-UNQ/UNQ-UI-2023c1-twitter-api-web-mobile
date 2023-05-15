@@ -5,19 +5,36 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import TwApi from "../services";
+import IconButtonStat from "../atoms/iconButtonStat";
 
 
 const Twit= ({twit})=>{
 
-    const [user,setUser] = useState([])
-    const [like,setLike] = useState(false)
 
-    useEffect(()=>{TwApi.getUser(twit.user.id).then(data=>setUser(data))},[user])
+    const [user,setUser] = useState([])
+    const [like,setLike] = useState()
+
+    console.log("test1")
+
+    useEffect(()=>{ 
+        console.log("test2")
+        TwApi.getLoggedUser().then(user=> setLike(twit.likes.some(like=>like.id==user.data.id)))
+        TwApi.getUser(twit.user.id).then(response=>setUser(response.data))
+    },[])
 
     const handleLike=()=>{
-        TwApi.toggleLike(twit.id).then(_=>setLike(!like))
+        TwApi.toggleLike(twit.id).then(response=>twit.likes=response.data.likes)
+        TwApi.getLoggedUser().then(user=> setLike(twit.likes.some(like=>like.id==user.data.id)))
     }
-    
+
+    const handleImage=()=>twit.tipe.image? <img src={twit.tipe.image} alt={"test"} />: <></>
+
+    const handleRetweet=()=>{}
+
+    const handleReply=()=>{}
+
+    const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
+
     return(
         <article className="Twitt">
             <TwitProfilePic image={user.image} username={twit.user.username} />
@@ -29,28 +46,16 @@ const Twit= ({twit})=>{
                 <span className="textContainer">
                     {twit.content}
                 </span>
+                <div className="imageContainer">
+                    {handleImage()}
+                </div>
                 <div className="tw-type-container">
 
                 </div>
                 <div className="iconsContainer">
-                    <div className="button-stat">
-                        <button> 
-                            <BsChatDotsFill className="tw-coment"/>
-                        </button>
-                        <span>{twit.repliesAmount}</span>
-                    </div>
-                    <div className="button-stat">
-                        <button> 
-                            <BsArrowRepeat className="tw-coment"/>
-                        </button>
-                        <span> {twit.reTweetAmount} </span>
-                    </div>
-                    <div className="button-stat">
-                        <button> 
-                            <BsHeart className="tw-coment"/>
-                        </button>
-                        <span> {twit.likes.length} </span>
-                    </div>
+                    <IconButtonStat stat={twit.repliesAmount} > <BsChatDotsFill className="tw-coment"/> </IconButtonStat>
+                    <IconButtonStat stat={twit.reTweetAmount}> <BsArrowRepeat className="tw-retweet"/> </IconButtonStat>
+                    <IconButtonStat stat={twit.likes.length} action={handleLike}> {liked()} </IconButtonStat>
                 </div>
             </div>
         </article>

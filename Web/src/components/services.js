@@ -17,6 +17,13 @@ const twGet = (endpoint) => {
     .catch( (error) => handleError(error) );
 }
 
+const twPut = (endpoint)=>{
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
+  return axios.put(endpoint)
+    .then( ( response ) => response )
+    .catch( (error) => handleError(error) );
+}
+
 const handleError = (error) => {
   if (error.response) {
     // The request was made and the server responded with a status code
@@ -42,6 +49,7 @@ const handleError = (error) => {
   // console.log(error.config);
 }
 
+
 const login = (loginData) => twPost('/login', loginData);
 
 const register = (regData) => twPost('/register', regData);
@@ -63,6 +71,10 @@ const getFollowingTweets = () => twGet("/user/followingTweets");
 
 const postNormalTwit = (data) => twPost("/tweets", data);
 
+const getLoggedUser = () => twGet("/user")
+
+const toggleLike = (id) => twPut(`/tweet/${id}/like`)
+
 const TwApi = {
     login,
     logout,
@@ -72,7 +84,9 @@ const TwApi = {
     getUser,
     getTweet,
     getFollowingTweets,
-    postNormalTwit
+    postNormalTwit,
+    getLoggedUser,
+    toggleLike
 }
 
 export default TwApi;
