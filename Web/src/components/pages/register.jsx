@@ -12,7 +12,7 @@ const Register = () => {
   const [backImg, setBackImg] = useState('')
 
   const [token, setToken] = useState(TwApi.isUserLogged())
-  const [error, setError] = useState('')
+  const [error, setError] = useState('.')
 
   const regData = {
     username: user,
@@ -52,7 +52,9 @@ const Register = () => {
   const handleRegisterSubmit =   (event) => {
     event.preventDefault();
     if (validar()) {
-      TwApi.register(regData, setToken, setError);
+      TwApi.register(regData)
+      .catch( (error) => setError(error.response.data.title));
+      setToken(true)
     }
   }
   
