@@ -8,7 +8,7 @@ import TwitterLogo from '../atoms/twitterlogo';
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState('.')
 
   const navigate = useNavigate()
 
@@ -34,7 +34,7 @@ const Login = () => {
         localStorage.setItem('twitterLoggedUser', JSON.stringify(response.data));
         navigate("/home", { state: { isLoggedUser: true } });
       })
-      .catch( (error) => setError('Error inesperado!', error));
+      .catch( (error) => setError(error.response.data.title));
     }
   }
 
@@ -54,7 +54,7 @@ const Login = () => {
                     <p className="text-white-50 mb-5">Por favor ingrese su usuario y contraseña</p>
                   </div>
                   <InputTextLogin seccion={'Usuario'} setFuncion={setUsername}/>
-                  <InputTextLogin seccion={'password'} setFuncion={setPassword}/>
+                  <InputTextLogin seccion={'Password'} setFuncion={setPassword}/>
                   <div className="text-center">
                     <Boton funciondeboton ={'Login'} loguear={handleLoginSubmit}/>
                   </div>

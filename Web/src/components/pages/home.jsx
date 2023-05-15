@@ -15,7 +15,7 @@ const Home = () => {
                           if(err.status === 404)
                             setError(true)
                       })
-                 TwApi.getUser("u_1").then(data=>setLoggedUser(data))},[])
+                 TwApi.getUser("u_1").then(response=>setLoggedUser(response.data))},[])
 
   if (error) return <div>error</div>
 

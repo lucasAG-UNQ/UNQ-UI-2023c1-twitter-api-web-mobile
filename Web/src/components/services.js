@@ -1,18 +1,25 @@
 import axios from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:7070';
-axios.defaults.baseURL = 'http://192.168.0.192:7070';
+axios.defaults.baseURL = 'http://localhost:7070';
+//axios.defaults.baseURL = 'http://192.168.0.192:7070';
 
 const twPost = (endpoint, data) => {
   axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
   return axios.post(endpoint, data)
     .then( ( response ) => response )
-    .catch( (error) => handleError(error) );
+    //.catch( (error) => handleError(error) );
 }
 
 const twGet = (endpoint) => {
   axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
   return axios.get(endpoint)
+    .then( ( response ) => response )
+    .catch( (error) => handleError(error) );
+}
+
+const twPut = (endpoint)=>{
+  axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
+  return axios.put(endpoint)
     .then( ( response ) => response )
     .catch( (error) => handleError(error) );
 }
@@ -42,6 +49,7 @@ const handleError = (error) => {
   // console.log(error.config);
 }
 
+
 const login = (loginData) => twPost('/login', loginData);
 
 const register = (regData) => twPost('/register', regData);
@@ -64,6 +72,10 @@ const getFollowingTweets = () => twGet("/user/followingTweets");
 
 const postNormalTwit = (data) => twPost("/tweets", data);
 
+const getLoggedUser = () => twGet("/user")
+
+const toggleLike = (id) => twPut(`/tweet/${id}/like`)
+
 const TwApi = {
     login,
     logout,
@@ -73,7 +85,9 @@ const TwApi = {
     getUser,
     getTweet,
     getFollowingTweets,
-    postNormalTwit
+    postNormalTwit,
+    getLoggedUser,
+    toggleLike
 }
 
 export default TwApi;
