@@ -2,14 +2,21 @@ import React from 'react';
 import { NavLink } from 'react-router-dom'
 
 const LoggedUserCard = () => {
+
+  // const loggedUser = localStorage.getItem('twitterLoggedUser') 
+  //   ? JSON.parse(localStorage.getItem('twitterLoggedUser'))
+  //   : {username : '', image : ''};
+
+  const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
+
   return (
     <div className="card bg-transparent text-center">
         <div className="card-body">
             <NavLink to="/profile" className="text-reset text-decoration-none">
                 <div>
-                    <img className="rounded-circle" alt="" src="https://gravatar.com/avatar/de84db04b0c7b43efdc840391ffe56ff" />
+                    <img className="rounded-circle" alt="" src={loggedUser?.image} />
                 </div>
-                <p className="card-title font-weight-bold">@nombre</p>
+                <p className="card-title font-weight-bold">{loggedUser?.username}</p>
             </NavLink>
         </div>
     </div>

@@ -48,6 +48,7 @@ const register = (regData) => twPost('/register', regData);
 
 const logout = () => {
   localStorage.removeItem('twitterAcessToken');
+  localStorage.removeItem('twitterLoggedUser');
   axios.defaults.headers.common['authorization'] = null;
 }
 

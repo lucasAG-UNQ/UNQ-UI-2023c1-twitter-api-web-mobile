@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router'
 import TwApi from '../services.js'
@@ -6,7 +6,6 @@ import { Boton, InputTextLogin } from "../atoms/atomos_basic";
 import TwitterLogo from '../atoms/twitterlogo';
 
 const Login = () => {
-  const [user, setUser] = useState({})
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -30,20 +29,14 @@ const Login = () => {
     event.preventDefault();
     if (validar()) {
       TwApi.login({ username: username, password: password })
-      .then( (response) => { 
-        setUser(response.data)
+      .then( (response) => {
         localStorage.setItem('twitterAcessToken', response.headers.authorization);
+        localStorage.setItem('twitterLoggedUser', JSON.stringify(response.data));
+        navigate("/home", { state: { isLoggedUser: true } });
       })
       .catch( (error) => setError('Error inesperado!', error));
     }
   }
-  
-  useEffect(() => {
-    if (TwApi.isUserLogged()) { 
-      navigate("/");
-    }
-  }, [user]);
-  
 
   return ( 
     <div className="container py-4 h-100">

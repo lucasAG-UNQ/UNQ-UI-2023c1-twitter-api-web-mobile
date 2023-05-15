@@ -6,12 +6,11 @@ import { BiLogIn } from "react-icons/bi";
 import LoggedUserCard from '../molecules/loggedusercard';
 import SearchBox from '../molecules/searchbox';
 import TwitterLogo from '../atoms/twitterlogo';
-import TwApi from '../services.js'
-import Login from '../pages/login';
+import TwApi from '../services.js';
 
 const userMenuItems = () => {
   return [
-  { path: "/", name: "Inicio", icon: <BsHouseFill/> },
+  { path: "/home", name: "Inicio", icon: <BsHouseFill/> },
   { path: "/trending", name: "Tendencias", icon: <BsHash/> },
   { path: "/profile", name: "Perfil", icon: <BsPersonFill/> },
   { path: "/logout", name: "Salir", icon: <BsDoorOpenFill/> }
@@ -26,48 +25,44 @@ const guestMenuItems = () => {
 
 
 const Sidebar = ({children}) => {
-
-  const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged());
   const location = useLocation();
-  
+  const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged() || location.state?.isLoggedUser);
+  const [menuItems, setMenuItems] = useState([]);
+    
   useEffect(() => {
-    if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
-    console.log("use effect del sidebar", isLoggedUser)
-    console.log("state ", location.state?.isLoggedUser)
+    setIsLoggedUser(TwApi.isUserLogged() || location.state?.isLoggedUser);
+    console.log("use effect del sidebar", isLoggedUser);
+    console.log("state ", location.state?.isLoggedUser);
+    setMenuItems(isLoggedUser ? userMenuItems() : guestMenuItems());
   }, [location.state, isLoggedUser]);
 
-  const menuItems = TwApi.isUserLogged() ? userMenuItems() : guestMenuItems();
+  if (isLoggedUser){
+    return (
+      <div className="root_container">
+        <div className="sidebar bg-dark">
+          <div className="sb_top_section">
+            <TwitterLogo sizeClass="img_logo_25" />
+            <h1 className="sb_logo">Twitter-G5</h1>
+          </div>
 
-  //if (TwApi.isUserLogged()){
-  if (1){
-  return (
-    <div className="root_container">
-      <div className="sidebar bg-dark">
-        <div className="sb_top_section">
-          <TwitterLogo sizeClass="img_logo_25" />
-          <h1 className="sb_logo">Twitter-G5</h1>
+          { isLoggedUser && <LoggedUserCard /> }
+
+          {
+            menuItems.map((item, index) => (
+              <NavLink to={item.path} key={index} className={({ isActive }) => (isActive ? 'sb_link sb_active' : 'sb_link')}>
+                <div className="sb_icon">{item.icon}</div>
+                <div className="sb_link_text">{item.name}</div>
+              </NavLink>
+            ))
+          }
+
+          { isLoggedUser && <SearchBox />}
         </div>
-
-        { isLoggedUser && <LoggedUserCard /> }
-
-        {
-          menuItems.map((item, index) => (
-            <NavLink to={item.path} key={index} className={({ isActive }) => (isActive ? 'sb_link sb_active' : 'sb_link')}>
-              <div className="sb_icon">{item.icon}</div>
-              <div className="sb_link_text">{item.name}</div>
-            </NavLink>
-          ))
-        }
-
-        { isLoggedUser && <SearchBox />}
+        <main>{children}</main>
       </div>
-      <main>{children}</main>
-    </div>
   )}
   return (
-    <div className="root_container">
-      <Login />
-    </div>
+    <main>{children}</main>
   )
 }
 

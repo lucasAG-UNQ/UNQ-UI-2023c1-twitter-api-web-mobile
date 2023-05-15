@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import TwApi from '../services.js'
 import TwitterLogo from '../atoms/twitterlogo';
@@ -6,8 +6,12 @@ import TwitterLogo from '../atoms/twitterlogo';
 const Logout = () => {
   const navigate = useNavigate()
 
-  TwApi.logout();
-  setTimeout(() => { navigate("/login") }, 3000);
+  useEffect(() => {
+    setTimeout(() => { 
+      TwApi.logout();
+      navigate("/", { state: { isLoggedUser: false } }) 
+    }, 3000);
+  }, []);
   
   return (
       <div className="container py-4 h-100">
