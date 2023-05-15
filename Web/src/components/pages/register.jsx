@@ -12,7 +12,7 @@ const Register = () => {
   const [backImg, setBackImg] = useState('')
 
   const [token, setToken] = useState(TwApi.isUserLogged())
-  const [error, setError] = useState('.')
+  const [error, setError] = useState('')
 
   const regData = {
     username: user,
@@ -31,7 +31,7 @@ const Register = () => {
       return false
     }
     if(email.length < 5 || !email.includes("@") || !email.includes(".")){
-      setError("Debe ingresar un eMail válido")
+      setError("Debe ingresar un e-mail válido")
       return false
     }
     if(pass.length < 1){
@@ -39,22 +39,22 @@ const Register = () => {
         return false
     }
     if(imagen.length < 12 || (!imagen.toLowerCase().startsWith("http://") && !imagen.toLowerCase().startsWith("https://"))){
-      setError("La imagen debe ser una URL válidad")
+      setError("La imagen debe ser una URL válida")
       return false
     }
     if(backImg.length < 12 || (!backImg.toLowerCase().startsWith("http://") && !backImg.toLowerCase().startsWith("https://"))){
-      setError("La imagen de fondo debe ser una URL válidad")
+      setError("La imagen de fondo debe ser una URL válida")
       return false
     }
     return valida
   }
   
-  const handleRegisterSubmit =   (event) => {
+  const handleRegisterSubmit = (event) => {
     event.preventDefault();
     if (validar()) {
       TwApi.register(regData)
-      .catch( (error) => setError(error.response.data.title));
-      setToken(true)
+        .then( (response) => setToken(true) )
+        .catch( (error) => setError(error.response.data.title));
     }
   }
   

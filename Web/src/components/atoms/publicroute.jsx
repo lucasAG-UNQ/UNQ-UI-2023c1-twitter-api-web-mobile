@@ -7,10 +7,10 @@ const PublicRoute = ({ children }) => {
     const [isLoggedUser, setIsLoggedUser] = useState(TwApi.isUserLogged());
     
     useEffect(() => {
-      if (TwApi.isUserLogged()) { setIsLoggedUser(TwApi.isUserLogged()); }
-    }, []);
+      setIsLoggedUser(TwApi.isUserLogged());
+    }, [isLoggedUser]);
   
-    if (isLoggedUser) { return (<Navigate replace to="/" />); }
+    if (isLoggedUser) { return (<Navigate replace to="/home" />); }
 
     return children;
 }

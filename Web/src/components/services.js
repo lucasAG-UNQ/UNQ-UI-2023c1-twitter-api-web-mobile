@@ -7,7 +7,7 @@ const twPost = (endpoint, data) => {
   axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
   return axios.post(endpoint, data)
     .then( ( response ) => response )
-    //.catch( (error) => handleError(error) );
+    .catch( (error) => handleError(error) );
 }
 
 const twGet = (endpoint) => {
@@ -17,6 +17,7 @@ const twGet = (endpoint) => {
     .catch( (error) => handleError(error) );
 }
 
+// TODO: el put no lleva data?
 const twPut = (endpoint)=>{
   axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
   return axios.put(endpoint)
@@ -56,6 +57,7 @@ const register = (regData) => twPost('/register', regData);
 
 const logout = () => {
   localStorage.removeItem('twitterAcessToken');
+  localStorage.removeItem('twitterLoggedUser');
   axios.defaults.headers.common['authorization'] = null;
 }
 
