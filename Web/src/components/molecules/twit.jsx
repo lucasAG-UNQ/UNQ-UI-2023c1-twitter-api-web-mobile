@@ -27,7 +27,7 @@ const Twit= ({twit})=>{
         TwApi.getLoggedUser().then(user=> setLike(twit.likes.some(like=>like.id==user.data.id)))
     }
 
-    const handleImage=()=>twit.tipe.image? <img src={twit.tipe.image} alt={"test"} />: <></>
+    const handleImage=()=>twit.tipe.image? <img className="img-fluid reduce-a-cuarto" src={twit.tipe.image} alt={"test"} />: <></>
 
     const handleRetweet=()=>{}
 
@@ -36,7 +36,7 @@ const Twit= ({twit})=>{
     const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
 
     return(
-        <article className="Twitt">
+        <article className="Twitt mb-3">
             <TwitProfilePic image={user.image} username={twit.user.username} />
             <div className="twitContainer">
                 <div>

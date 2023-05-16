@@ -3,6 +3,7 @@ import TwitPost from "../molecules/twitPost";
 import TwApi from "../services";
 import { useState,useEffect } from "react";
 
+
 const Home = () => {
   const [followingTweets,setFollowingTweets] =useState();
   const [loggedUser,setLoggedUser]=useState()
@@ -23,8 +24,10 @@ const Home = () => {
 
   return (
     <>
+    <div className="vh-100 overflow-auto">
       <TwitPost {...loggedUser} />
-      { followingTweets.map((tweet,index)=><Twit twit={tweet} key={tweet.id} />)}
+      { followingTweets.map((tweet)=><Twit twit={tweet} />)}
+    </div>
     </>
   )
 }
