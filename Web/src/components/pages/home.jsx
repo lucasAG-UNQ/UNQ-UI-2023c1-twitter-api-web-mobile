@@ -4,6 +4,7 @@ import TwApi from "../services";
 import { useState,useEffect } from "react";
 import TwitLog from "../organisms/twitLog";
 
+
 const Home = () => {
 
   const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
@@ -24,8 +25,12 @@ const Home = () => {
 
   return (
     <>
+    <div className="vh-100 overflow-auto">
       <TwitPost {...loggedUser} />
+      { followingTweets.map((tweet)=><Twit twit={tweet} />)}
       <TwitLog twits={followingTweets} />
+    </div>
+
     </>
   )
 }
