@@ -1,16 +1,13 @@
+import Twit from "./twit"
 import TwitProfilePic from "../atoms/twitProfilePic"
 import "./twit.css"
 import {BsChatDots, BsChatDotsFill, BsArrowRepeat, BsHeartFill, BsHeart} from "react-icons/bs";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import TwApi from "../services";
 import IconButtonStat from "../atoms/iconButtonStat";
 
-
-const Twit= ({twit})=>{
-
-
+const Retweet=({twit})=>{
+    
     const [user,setUser] = useState([])
     const [like,setLike] = useState()
 
@@ -24,7 +21,7 @@ const Twit= ({twit})=>{
         TwApi.getLoggedUser().then(user=> setLike(twit.likes.some(like=>like.id==user.data.id)))
     }
 
-    const handleImage=()=>twit.tipe.image? <img src={twit.tipe.image} alt={"test"} />: <></>
+    const handleReTweeted=()=><Twit twit={twit.tipe.tweet}/>
 
     const handleRetweet=()=><></>
 
@@ -44,7 +41,7 @@ const Twit= ({twit})=>{
                     {twit.content}
                 </span>
                 <div className="imageContainer">
-                    {handleImage()}
+                    {handleReTweeted()}
                 </div>
                 <div className="tw-type-container">
 
@@ -59,4 +56,4 @@ const Twit= ({twit})=>{
     )
 }
 
-export default Twit
+export default Retweet
