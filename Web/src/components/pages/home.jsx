@@ -2,23 +2,24 @@ import Twit from "../molecules/twit";
 import TwitPost from "../molecules/twitPost";
 import TwApi from "../services";
 import { useState,useEffect } from "react";
+import TwitLog from "../organisms/twitLog";
 
 
 const Home = () => {
+
+  const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
+
   const [followingTweets,setFollowingTweets] =useState();
-  const [loggedUser,setLoggedUser]=useState()
   const [error,setError]=useState(false)
 
   useEffect(()=>{TwApi.getFollowingTweets()
                       .then(response => setFollowingTweets(response.data.results))
                       .catch(err=>{
                           console.log(err)
-                          if(err.status === 404)
                             setError(true)
-                      })
-                 TwApi.getUser("u_1").then(response=>setLoggedUser(response.data))},[])
+                      })},[])
 
-  if (error) return <div>error</div>
+  if (error) return <div>Ups... algo salio mal</div>
 
   if (!followingTweets) return <div>loading... </div>
 
@@ -28,6 +29,7 @@ const Home = () => {
       <TwitPost {...loggedUser} />
       { followingTweets.map((tweet)=><Twit twit={tweet} />)}
     </div>
+    <TwitLog twits={followingTweets} />
     </>
   )
 }

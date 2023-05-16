@@ -77,6 +77,8 @@ const getLoggedUser = () => twGet("/user")
 
 const toggleLike = (id) => twPut(`/tweet/${id}/like`)
 
+const retweet=(id,content) => twPost(`/tweet/${id}/retweet`,content)
+
 const TwApi = {
     login,
     logout,
@@ -88,7 +90,8 @@ const TwApi = {
     getFollowingTweets,
     postNormalTwit,
     getLoggedUser,
-    toggleLike
+    toggleLike,
+    retweet
 }
 
 export default TwApi;
