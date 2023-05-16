@@ -28,8 +28,9 @@ const Home = () => {
     <div className="vh-100 overflow-auto">
       <TwitPost {...loggedUser} />
       { followingTweets.map((tweet)=><Twit twit={tweet} />)}
+      <TwitLog twits={followingTweets} />
     </div>
-    <TwitLog twits={followingTweets} />
+
     </>
   )
 }
