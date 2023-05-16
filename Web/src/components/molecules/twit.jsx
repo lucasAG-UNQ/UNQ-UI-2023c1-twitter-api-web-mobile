@@ -1,8 +1,6 @@
 import TwitProfilePic from "../atoms/twitProfilePic"
 import "./twit.css"
 import {BsChatDots, BsChatDotsFill, BsArrowRepeat, BsHeartFill, BsHeart} from "react-icons/bs";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import TwApi from "../services";
 import IconButtonStat from "../atoms/iconButtonStat";
@@ -10,12 +8,13 @@ import IconButtonStat from "../atoms/iconButtonStat";
 
 const Twit= ({twit})=>{
 
+    
+    const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
 
     const [user,setUser] = useState([])
-    const [like,setLike] = useState()
+    const [like,setLike] = useState(twit.likes.map(like=>like.id).includes(loggedUser.id))
 
     useEffect(()=>{ 
-        TwApi.getLoggedUser().then(user=> setLike(twit.likes.some(like=>like.id==user.data.id)))
         TwApi.getUser(twit.user.id).then(response=>setUser(response.data))
     },[])
 

@@ -5,8 +5,10 @@ import { useState,useEffect } from "react";
 import TwitLog from "../organisms/twitLog";
 
 const Home = () => {
+
+  const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
+
   const [followingTweets,setFollowingTweets] =useState();
-  const [loggedUser,setLoggedUser]=useState()
   const [error,setError]=useState(false)
 
   useEffect(()=>{TwApi.getFollowingTweets()
@@ -14,8 +16,7 @@ const Home = () => {
                       .catch(err=>{
                           console.log(err)
                             setError(true)
-                      })
-                 TwApi.getUser("u_1").then(response=>setLoggedUser(response.data))},[])
+                      })},[])
 
   if (error) return <div>Ups... algo salio mal</div>
 
@@ -24,7 +25,6 @@ const Home = () => {
   return (
     <>
       <TwitPost {...loggedUser} />
-      {console.log(followingTweets)}
       <TwitLog twits={followingTweets} />
     </>
   )
