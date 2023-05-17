@@ -75,7 +75,7 @@ class TweetController(var twitterSystem: TwitterSystem) {
             ctx.json(mapper.tweetToTweetDTO(tweet))
         }
         catch (e: TweetException){
-            throw BadRequestResponse("No se encontró e Tweet")
+            throw BadRequestResponse("No se encontró el Tweet")
         }
     }
 
@@ -90,7 +90,7 @@ class TweetController(var twitterSystem: TwitterSystem) {
             ctx.json(mapper.tweetToTweetDTO(tweet))
         }
         catch (e: TweetException){
-            throw BadRequestResponse("No se encontró e Tweet")
+            throw BadRequestResponse("No se encontró el Tweet")
         }
     }
 

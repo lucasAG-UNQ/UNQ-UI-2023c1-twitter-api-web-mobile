@@ -54,7 +54,7 @@ const Register = () => {
     if (validar()) {
       TwApi.register(regData)
         .then( (response) => setToken(true) )
-        .catch( (error) => setError(error.response.data.title));
+        .catch( (error) => setError(error.description));
     }
   }
   

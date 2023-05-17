@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './styles/style.css'
-import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -23,7 +22,6 @@ import NotFound from './components/pages/notfound';
 
 import Sidebar from './components/organisms/sidebar';
 
-import PruebasApi from './components/pruebasApi';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -41,7 +39,6 @@ root.render(
           <Route path="/logout" element={<PrivateRoute><Logout /></PrivateRoute>} />
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
           <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-          <Route path="/pruebasApi" element={<PruebasApi />} />
         </Routes>
       </Sidebar>
     </BrowserRouter>
