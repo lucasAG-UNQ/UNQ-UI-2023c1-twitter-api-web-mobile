@@ -1,13 +1,16 @@
-import Twit from "../molecules/twit"
+import FullTwittWithActions from "../molecules/fullTwittWithActions"
 import Retweet from "../molecules/reTweet"
+import ReplyTwitt from "../molecules/replyTwitt"
 
 const TwitLog= ({twits})=>{
     
     const decideTwit=(twit)=>{
         if(twit.tipe.tweet==null){
-            return <Twit twit={twit} key={twit.id} />
+            return <FullTwittWithActions twit={twit} key={twit.id} />
         }else if(twit.tipe.image==null){
             return <Retweet twit={twit} key={twit.id} />
+        }else{
+            return <ReplyTwitt twit={twit} key={twit.id}/>
         }
     }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import TwApi from "../services"
-import Twit from "../molecules/twit";
+import FullTwittWithActions from "../molecules/fullTwittWithActions";
 import TwitLog from "../organisms/twitLog";
 import { useState, useEffect } from "react";
 import { useSearchParams } from 'react-router-dom';
@@ -24,7 +24,7 @@ const Search = () => {
       <h1 className="fw-bold mb-4">Resultados de la búsqueda</h1>
       <h3>Resultados para: <strong>{params.getAll('text')}</strong></h3>
       { (twitts.length > 0)?  
-        twitts.map((twitt)=><Twit twit={twitt} key={twitt.id}/>):
+        twitts.map((twitt)=><FullTwittWithActions twit={twitt} key={twitt.id}/>):
         <p>No se encontraron resultados.</p>}
       <TwitLog twits={twitts} />
     </div>
