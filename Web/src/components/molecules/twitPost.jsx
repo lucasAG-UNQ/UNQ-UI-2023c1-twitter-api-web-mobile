@@ -15,7 +15,7 @@ const TwitPost= (usuario)=>{
     }
 
     return(
-        <div className="twitPostContainer">
+        <div className="twitPostContainer container-fluid">
             <TwitProfilePic {...usuario}/>
             <div className="container">
                 <form className="form-inline mx-sm-3" onSubmit={handleTwitPost}>

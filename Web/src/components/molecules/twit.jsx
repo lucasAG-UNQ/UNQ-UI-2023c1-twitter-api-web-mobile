@@ -32,7 +32,7 @@ const Twit= ({twit})=>{
     const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
 
     return(
-        <article className="Twitt mb-3">
+        <article className="Twitt container-fluid mb-3">
             <TwitProfilePic image={user.image} userId={twit.user.id} />
             <div className="twitContainer">
                 <div>

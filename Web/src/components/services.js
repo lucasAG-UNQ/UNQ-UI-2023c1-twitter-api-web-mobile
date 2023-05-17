@@ -69,6 +69,8 @@ const getUser = (id) => twGet(`/user/${id}`);
 
 const getTweet = (id) => twGet(`/tweet/${id}`);
 
+const search = (text) => twGet(`/search/?text=${text}`);
+
 const getFollowingTweets = () => twGet("/user/followingTweets");
 
 const postNormalTwit = (data) => twPost("/tweets", data);
@@ -91,7 +93,8 @@ const TwApi = {
     postNormalTwit,
     getLoggedUser,
     toggleLike,
-    retweet
+    retweet,
+    search
 }
 
 export default TwApi;
