@@ -1,11 +1,15 @@
-.Twitt{
-    display: flex;
-    padding: 1.5%;
-    border-radius: 12px;
+.FullTwittWithActions{
     max-width: 80%;
+    border-radius: 12px;
+    padding: 1.5%;
+}
+
+.SimpleTwitt{
+    display: flex;
     flex-direction: row;
     column-gap: 10px;
 }
+
 .twitContainer{
     color: #fff;
     display: flex;

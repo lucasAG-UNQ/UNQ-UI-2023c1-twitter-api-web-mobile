@@ -1,4 +1,4 @@
-import Twit from "../molecules/twit";
+import FullTwittWithActions from "../molecules/fullTwittWithActions";
 import TwitPost from "../molecules/twitPost";
 import TwApi from "../services";
 import { useState,useEffect } from "react";
@@ -27,7 +27,7 @@ const Home = () => {
     <>
     <div className="vh-100 overflow-auto ">
       <TwitPost {...loggedUser} />
-      { followingTweets.map((tweet)=><Twit twit={tweet} key={Math.floor(Math.random() * 100000) + 1}/>)}
+      { followingTweets.map((tweet)=><FullTwittWithActions twit={tweet} key={Math.floor(Math.random() * 100000) + 1}/>)}
       <TwitLog twits={followingTweets} />
     </div>
     </>

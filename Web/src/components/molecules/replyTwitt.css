@@ -1,0 +1,10 @@
+.ReplyThread{
+    display: flex;
+    flex-direction: row;
+}
+.thread{
+    border:solid 5px gray;
+}
+.tweetsInThread{
+    flex-direction: column;
+}
