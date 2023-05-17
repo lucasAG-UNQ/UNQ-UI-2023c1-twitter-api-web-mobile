@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:7070';
-//axios.defaults.baseURL = 'http://192.168.0.192:7070';
+// axios.defaults.baseURL = 'http://localhost:7070';
+axios.defaults.baseURL = 'http://192.168.0.192:7070';
 
 const twPost = (endpoint, data) => {
   axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
@@ -25,27 +25,27 @@ const twPut = (endpoint)=>{
     .catch( (error) => handleError(error) );
 }
 
+// this helps the error handle return a common error for every case
+const apiError = (type, code, status, description) => { return {type, code, status, description} }
+
 const handleError = (error) => {
   if (error.response) {
     // The request was made and the server responded with a status code
     // that falls out of the range of 2xx
-    console.log("RESPONSE_ERROR")
-    console.log(error.response.data);
+    console.log("RESPONSE_ERROR -- ", error.response.data);
     console.log(error.response.status);
     console.log(error.response.headers);
-    return Promise.reject(error.response);
+    return Promise.reject(apiError('RESPONSE_ERROR', error.code, error.response.status, error.response.data.title));
   } else if (error.request) {
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     // http.ClientRequest in node.js
-    console.log("REQUEST_ERROR")
-    console.log(error.request);
-    return Promise.reject(error.request);
+    console.log("REQUEST_ERROR -- ", error.request);
+    return Promise.reject(apiError('REQUEST_ERROR', error.code, error.code, `Error consultando al servidor: [${error.code}] ${error.message}`));
   } else {
     // Something happened in setting up the request that triggered an Error
-    console.log("UNEXPECTED_ERROR")
-    console.log(error.message);
-    return Promise.reject(error);
+    console.log("UNEXPECTED_ERROR -- ", error.message);
+    return Promise.reject(apiError('UNEXPECTED_ERROR', error.code, error.code, error.message));
   }
   // console.log(error.config);
 }
@@ -73,6 +73,7 @@ const getFollowingTweets = () => twGet("/user/followingTweets");
 
 const postNormalTwit = (data) => twPost("/tweets", data);
 
+// const getLoggedUser = () => localStorage.getItem('twitterLoggedUser');
 const getLoggedUser = () => twGet("/user")
 
 const toggleLike = (id) => twPut(`/tweet/${id}/like`)

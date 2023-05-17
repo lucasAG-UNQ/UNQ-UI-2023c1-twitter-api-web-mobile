@@ -34,7 +34,7 @@ const Login = () => {
         localStorage.setItem('twitterLoggedUser', JSON.stringify(response.data));
         navigate("/home", { state: { isLoggedUser: true } });
       })
-      .catch( (error) => setError(error.response.data.title));
+      .catch( (error) => setError(error.description));
     }
   }
 

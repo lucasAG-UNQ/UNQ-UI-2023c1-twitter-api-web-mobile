@@ -15,7 +15,7 @@ const Home = () => {
   useEffect(()=>{TwApi.getFollowingTweets()
                       .then(response => setFollowingTweets(response.data.results))
                       .catch(err=>{
-                          console.log(err)
+                          console.log(err.description)
                             setError(true)
                       })},[])
 
