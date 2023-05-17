@@ -16,17 +16,17 @@ const Search = () => {
                       .catch((error) => setError(error.data.title))
                 },[searchParams])
 
-  if (error!="") return <div><h2>Ups... algo salio mal</h2><p>{error}</p></div>
+  if (error!="") return <div><h2>Ups... algo salió mal</h2><p>{error}</p></div>
 
-  if (!tweets) return <div className="fw-bold mb-2">loading... </div>
+  if (!tweets) return <div className="fw-bold mb-2">Loading... </div>
 
   return (
     <>
     <div className="vh-100 overflow-auto">
-      <h1 className="fw-bold mb-4">Resultado de la búsqueda</h1>
+      <h1 className="fw-bold mb-4">Resultados de la búsqueda</h1>
       { (tweets.length > 0)?  
         tweets.map((tweet)=><Twit twit={tweet} key={Math.floor(Math.random() * 10000000) + 1}/>):
-        <p>No se encontraron esultados.</p>}
+        <p>No se encontraron resultados.</p>}
       <TwitLog twits={tweets} />
     </div>
 
