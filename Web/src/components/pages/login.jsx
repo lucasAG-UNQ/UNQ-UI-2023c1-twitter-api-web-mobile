@@ -58,7 +58,7 @@ const Login = () => {
                   <div className="text-center">
                     <Boton funciondeboton ={'Login'} loguear={handleLoginSubmit}/>
                   </div>
-                  <div className="etiquetaRoja  text-center">{error}</div>
+                  <div className="etiquetaRoja text-center">{error}</div>
                 </div>
               </form>
               <div className="text-center">

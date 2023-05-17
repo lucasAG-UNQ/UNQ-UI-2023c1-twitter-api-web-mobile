@@ -30,7 +30,7 @@ const Retweet=({twit})=>{
     const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
 
     return(
-        <article className="Twitt">
+        <article className="Twitt bg-dark">
             <TwitProfilePic image={user.image} userId={twit.user.id} />
             <div className="twitContainer">
                 <div>

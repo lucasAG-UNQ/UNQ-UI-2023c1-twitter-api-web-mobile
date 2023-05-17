@@ -8,7 +8,6 @@ import IconButtonStat from "../atoms/iconButtonStat";
 
 const Twit= ({twit})=>{
 
-    
     const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
 
     const [user,setUser] = useState([])
@@ -32,7 +31,7 @@ const Twit= ({twit})=>{
     const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
 
     return(
-        <article className="Twitt container-fluid mb-3">
+        <article className="Twitt bg-dark container-fluid mb-3">
             <TwitProfilePic image={user.image} userId={twit.user.id} />
             <div className="twitContainer">
                 <div>
