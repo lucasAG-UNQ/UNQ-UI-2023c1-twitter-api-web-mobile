@@ -11,7 +11,7 @@ const TwitPost= (usuario)=>{
     const handleTwitPost = (event) => {
         event.preventDefault()
         const twitToPost= {"content":textPost, "image":imagePost}
-        TwApi.postNormalTwit(twitToPost)
+        TwApi.postNormalTwitt(twitToPost)
     }
 
     return(
