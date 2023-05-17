@@ -35,14 +35,14 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
     }
 
     private fun findUserToLogin(userLoginDTO: UserLoginDTO): User {
-        return twitterSystem.users.find { user -> user.username == userLoginDTO.username && user.password == userLoginDTO.password} ?: throw UserException("Invalid username or password")
+        return twitterSystem.users.find { user -> user.username == userLoginDTO.username && user.password == userLoginDTO.password} ?: throw UserException("Usuario o contraseña incorrectos")
     }
 
     fun register(ctx: Context) {
         val draftUserDTO: DraftUserDTO = ctx.bodyValidator<DraftUserDTO>(DraftUserDTO::class.java)
             .check({ !it.username.isNullOrBlank() && !it.email.isNullOrBlank() && !it.password.isNullOrBlank()
                     && !it.image.isNullOrBlank() && !it.backgroundImage.isNullOrBlank() },"Invalid body. Required: username, email, password, image, backgroundImage")
-            .check({ it.email!!.matches(Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")) },"Provide a valid email")
+            .check({ it.email!!.matches(Regex("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}\$")) },"Formato de e-mail inválido")
             .get()
 
         try {
