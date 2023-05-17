@@ -25,12 +25,11 @@ const Home = () => {
 
   return (
     <>
-    <div className="vh-100 overflow-auto">
+    <div className="vh-100 overflow-auto ">
       <TwitPost {...loggedUser} />
-      { followingTweets.map((tweet)=><Twit twit={tweet} />)}
+      { followingTweets.map((tweet)=><Twit twit={tweet} key={Math.floor(Math.random() * 100000) + 1}/>)}
       <TwitLog twits={followingTweets} />
     </div>
-
     </>
   )
 }

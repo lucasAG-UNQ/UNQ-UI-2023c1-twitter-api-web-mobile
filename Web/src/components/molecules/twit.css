@@ -3,7 +3,7 @@
     display: flex;
     padding: 1.5%;
     border-radius: 12px;
-    max-width: 75%;
+    max-width: 80%;
     flex-direction: row;
     column-gap: 10px;
 }

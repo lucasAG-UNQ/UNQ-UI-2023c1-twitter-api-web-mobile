@@ -7,7 +7,9 @@ const SearchBox = () => {
 
   const handleSubmitSearch = (event) => {
     event.preventDefault();
-    navigate(`/search?q=${searchText}`)
+    if (searchText != ""){
+      navigate(`/search?text=${searchText}`)
+    }
   }
 
   return (
