@@ -1,0 +1,13 @@
+.profile-sidebar img {
+  height: 70px;
+  width: 70px;
+  margin-top: 2px;
+  border: 6px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile img {
+    height: 120px;
+    width: 120px;
+    margin-top: 2px;
+    border: 6px solid rgba(10, 10, 10, 0.2);
+  }

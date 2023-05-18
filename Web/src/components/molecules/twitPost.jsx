@@ -1,8 +1,7 @@
+import React, { useState } from "react";
 import TwitProfilePic from "../atoms/twitProfilePic"
 import "./twitPost.css"
 import TwApi from "../services"
-import { useSearchParams } from "react-router-dom";
-import { useState } from "react";
 
 const TwitPost= (usuario)=>{
     const [textPost, setTextPost] = useState("")
