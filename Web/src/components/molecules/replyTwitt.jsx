@@ -9,10 +9,10 @@ const ReplyTwitt=({twit})=>{
 
     return(
         <div className="Reply bg-dark container-fluid mb-3">
-            <span className="text-muted">Respondió a {twit.tipe.tweet.user.username}</span>
+            <span className="text-muted">Respondió a {twit.type.tweet.user.username}</span>
             <SimpleTwitt twit={twit} />
             <div className="CommentedTwit">
-                <SimpleTwitt twit={twit.tipe.tweet} />
+                <SimpleTwitt twit={twit.type.tweet} />
             </div>
             <TwittActions twit={twit} />
         </div>
