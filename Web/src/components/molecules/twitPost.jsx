@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import TwitProfilePic from "../atoms/twitProfilePic"
 import "./twitPost.css"
 import TwApi from "../services"

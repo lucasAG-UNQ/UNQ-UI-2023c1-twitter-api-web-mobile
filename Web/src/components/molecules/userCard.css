@@ -1,0 +1,40 @@
+.profile-sidebar img {
+  height: 70px;
+  width: 70px;
+  margin-top: 2px;
+  border: 6px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-card {
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.profile-background {
+    height: 200px;
+    width: 100%;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+}
+.profile-avatar img {
+    position: relative;
+    display: block;
+    margin-left: 20px;
+    margin-top: -80px;
+    z-index: 1;
+    width: 120px;
+    height: 120px;
+    border: 6px solid rgba(10, 10, 10, 0.2);
+    background: rgba(75, 85, 105, 0.3);
+}
+
+.f-27 {
+    font-size: 27px;
+}
+.f-24 {
+    font-size: 24px;
+}
+.f-18 {
+    font-size: 18px;
+}
