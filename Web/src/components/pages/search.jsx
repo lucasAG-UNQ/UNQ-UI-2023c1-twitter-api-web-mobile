@@ -21,12 +21,9 @@ const Search = () => {
 
   return (
     <div className="vh-100 overflow-auto">
-      <h1 className="fw-bold mb-4">Resultados de la búsqueda</h1>
-      <h3>Resultados para: <strong>{params.getAll('text')}</strong></h3>
-      { (twitts.length > 0)?  
-        twitts.map((twitt)=><FullTwittWithActions twit={twitt} key={twitt.id}/>):
-        <p>No se encontraron resultados.</p>}
-      <TwitLog twits={twitts} />
+      <h1 className="fw-bold mb-4 p-4">Resultados de la búsqueda</h1>
+      <h3 className='p-4'>Resultados para: "<strong>{params.getAll('text')}</strong>"</h3>
+      { (twitts.length > 0)?<TwitLog twits={twitts} />:<p>No se encontraron resultados.</p>}
     </div>
   )
 }
