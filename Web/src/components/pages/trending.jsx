@@ -17,11 +17,17 @@ const Trending = () => {
   if (!twitts) return <div className="fw-bold mb-2">Loading... </div>
 
   return (
-    <div className="vh-100 overflow-auto">
-      <h1 className="fw-bold mb-4 p-4">Trending Topics</h1>
-      { (twitts.length > 0)?<TwitLog twits={twitts} />:<p>No se encontraron Twits de tendencia.</p>}
+    <div className="vh-100 overflow-hidden">
+      <div>
+        <h1 className="fw-bold mb-4 p-4">Trending Topics</h1>
+      </div>
+      <div className="vh-100 overflow-auto">
+        { (twitts.length > 0)?<TwitLog twits={twitts} />:<p>No se encontraron Twits de tendencia.</p>}
+      </div>
     </div>
   )
 }
 
 export default Trending
+
+    
