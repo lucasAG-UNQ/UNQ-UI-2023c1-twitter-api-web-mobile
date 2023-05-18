@@ -19,11 +19,16 @@ const Search = () => {
   if (!twitts) return <div className="fw-bold mb-2">Loading... </div>
 
   return (
-    <div className="vh-100 overflow-auto">
-      <h1 className="fw-bold mb-4 p-4">Resultados de la búsqueda</h1>
-      <h3 className='p-4'>Resultados para: "<strong>{params.getAll('text')}</strong>"</h3>
-      { (twitts.length > 0)?<TwitLog twits={twitts} />:<p>No se encontraron resultados.</p>}
+    <div className="vh-100 overflow-hidden">
+      <div>
+        <h1 className="fw-bold mb-4 p-4">Resultados de la búsqueda</h1>
+        <h3 className='p-4'>Resultados para: "<strong>{params.getAll('text')}</strong>"</h3>
+      </div>
+      <div className="vh-100 overflow-auto">
+        { (twitts.length > 0)?<TwitLog twits={twitts} />:<p>No se encontraron resultados.</p>}
+      </div>
     </div>
   )
 }
 export default Search
+
