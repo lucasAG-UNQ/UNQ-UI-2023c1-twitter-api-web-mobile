@@ -45,6 +45,9 @@ const TwittActions= ({twit})=>{
     const overlayToOpen=()=>  openReply? <ReplyPost id={twit.id} onPost={toggleOverlay} />: <RetweetPost id={twit.id} onPost={toggleOverlay} />
 
     const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
+
+    const canRetweet=()=> {return !(twit.user.id==loggedUser.id)? handleRetweet: (_=>_)
+    }
     
     if (!loggedUser) return <div>Loading... </div>;
     
@@ -53,7 +56,7 @@ const TwittActions= ({twit})=>{
             <Overlay isOpen={isOpen} onClose={toggleOverlay}>{overlayToOpen()}</Overlay>
             <div className="iconsContainer">
                 <IconButtonStat stat={twit.repliesAmount} action={handleReply}> <BsChatDotsFill className="tw-coment"/> </IconButtonStat>
-                <IconButtonStat stat={twit.reTweetAmount} action={handleRetweet}> <BsArrowRepeat className="tw-retweet"/> </IconButtonStat>
+                <IconButtonStat stat={twit.reTweetAmount} action={canRetweet()}> <BsArrowRepeat className="tw-retweet"/> </IconButtonStat> 
                 <IconButtonStat stat={twit.likes.length} action={handleLike}> {liked()} </IconButtonStat>
             </div>
         </div>
