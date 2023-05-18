@@ -1,7 +1,7 @@
 import { React, useState, useEffect} from 'react';
 import { useNavigate } from 'react-router'
 import TwApi from '../services.js'
-import { Boton, InputTextLogin}from '../atoms/atomos_basic';
+import { Boton, InputText}from '../atoms/atomos_basic';
 import TwitterLogo from '../atoms/twitterlogo';
 
 const Register = () => {
@@ -75,11 +75,11 @@ const Register = () => {
               <div className="col-8 order-2 order-lg-1" >
                 <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Registro</p>
                 <form onSubmit={handleRegisterSubmit} className="">
-                  <InputTextLogin seccion={'Nombre de usuario'} setFuncion={setuser}/>
-                  <InputTextLogin seccion={'eMail'} setFuncion={setEmail}/>
-                  <InputTextLogin seccion={'Password'} setFuncion={setpass}/>
-                  <InputTextLogin seccion={'Imgen de perfil'} setFuncion={setImagen}/>
-                  <InputTextLogin seccion={'Imagen de fondo'} setFuncion={setBackImg}/>
+                  <InputText seccion={'Nombre de usuario'} setFuncion={setuser}/>
+                  <InputText seccion={'eMail'} setFuncion={setEmail}/>
+                  <InputText seccion={'Password'} setFuncion={setpass}/>
+                  <InputText seccion={'Imgen de perfil'} setFuncion={setImagen}/>
+                  <InputText seccion={'Imagen de fondo'} setFuncion={setBackImg}/>
                   <div className="text-center">
                     <Boton funciondeboton ={'Registrarse'} loguear={handleRegisterSubmit}/>
                   </div>

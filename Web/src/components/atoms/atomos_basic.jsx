@@ -1,6 +1,6 @@
 import React from 'react';
 
-const InputTextLogin = ({seccion, setFuncion}) => {
+const InputText = ({seccion, setFuncion}) => {
   const handler = (e) => {
     setFuncion(e.target.value)
   }
@@ -20,4 +20,4 @@ const Boton = ({funciondeboton, loguear}) => {
   );
 }
 
-export {InputTextLogin, Boton}
+export {InputText, Boton}
