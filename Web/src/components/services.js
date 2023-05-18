@@ -73,7 +73,7 @@ const search = (text) => twGet(`/search/?text=${text}`);
 
 const getFollowingTweets = () => twGet("/user/followingTweets");
 
-const postNormalTwit = (data) => twPost("/tweets", data);
+const postNormalTwit = (data) => twPost("/tweet", data);
 
 // const getLoggedUser = () => localStorage.getItem('twitterLoggedUser');
 const getLoggedUser = () => twGet("/user")

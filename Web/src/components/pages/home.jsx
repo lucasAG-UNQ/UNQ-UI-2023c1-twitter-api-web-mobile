@@ -7,7 +7,6 @@ import TwitLog from "../organisms/twitLog";
 
 const Home = () => {
 
-  const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
 
   const [followingTweets,setFollowingTweets] =useState();
   const [error,setError]=useState(false)
@@ -26,7 +25,7 @@ const Home = () => {
   return (
     <>
     <div className="vh-100 overflow-auto ">
-      <TwitPost {...loggedUser} />
+      <TwitPost />
       { followingTweets.map((tweet)=><FullTwittWithActions twit={tweet} key={Math.floor(Math.random() * 100000) + 1}/>)}
       <TwitLog twits={followingTweets} />
     </div>
