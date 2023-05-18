@@ -26,9 +26,13 @@ const Home = () => {
 
   return (
     <>
-    <div className="vh-100 overflow-auto ">
-      <TwitPost />
-      <TwitLog twits={followingTwitts} />
+    <div className="vh-100 overflow-hidden">
+      <div>
+        <TwitPost />
+      </div>
+      <div className="vh-100 overflow-auto">
+        <TwitLog twits={followingTwitts} />
+      </div>
     </div>
     </>
   )

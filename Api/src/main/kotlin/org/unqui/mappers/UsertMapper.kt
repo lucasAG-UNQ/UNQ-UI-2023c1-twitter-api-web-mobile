@@ -18,7 +18,7 @@ class UserMapper(var tweeterSystem: TwitterSystem) {
             user.backgroundImage,
             SimpleUserDTOMapper().listUserToListSimpleUserDTO(user.followers),
             SimpleUserDTOMapper().listUserToListSimpleUserDTO(user.following),
-            TweetMapper(tweeterSystem).listTweetToListSimpleTweetDTO( tweeterSystem.tweets.filter { e -> e.user == user }.toMutableList()))
+            TweetMapper(tweeterSystem).listTweetToListSimpleTweetDTO( tweeterSystem.tweets.filter { e -> e.user == user }.toMutableList()).sortedByDescending { tweet -> tweet.date }.toMutableList())
     }
 
     fun registroToDraftUser(registroDTO : DraftUserDTO) : DraftUser {

@@ -31,7 +31,7 @@ const UserCard = (user) => {
 
     return (
         <>
-            <div className="container mb-3 justify-content-center">
+            <div className="container mb-3 mt-3 justify-content-center">
                 <div className="profile-card">
                     <img
                         src={user.backgroundImage}
