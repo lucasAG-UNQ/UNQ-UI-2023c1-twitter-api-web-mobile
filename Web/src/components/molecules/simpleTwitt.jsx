@@ -1,6 +1,7 @@
 import TwitProfilePic from "../atoms/twitProfilePic"
 import { useEffect, useState } from "react";
 import TwApi from "../services";
+import { Link } from "react-router-dom";
 
 const SimpleTwitt= ({twit})=>{
     
