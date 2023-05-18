@@ -19,6 +19,7 @@ const Profile = () => {
         <TwitPost {...loggedUser} />
       </section>
       <section>
+        {console.log(twitts)}
         <TwitLog twits={twitts} />
       </section>
     </>
