@@ -3,6 +3,8 @@ import { useState } from "react";
 import IconButtonStat from "../atoms/iconButtonStat";
 import TwApi from "../services";
 import { Overlay } from "./overlay";
+import RetweetPost from "./retweetPost";
+import ReplyPost from "./replyPost";
 
 const TwittActions= ({twit})=>{
     
@@ -32,7 +34,7 @@ const TwittActions= ({twit})=>{
         toggleOverlay()
     }
 
-    const overlayToOpen=()=>  openReply? <></>: <></>
+    const overlayToOpen=()=>  openReply? <ReplyPost id={twit.id} />: <RetweetPost id={twit.id} />
 
     const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
     return(

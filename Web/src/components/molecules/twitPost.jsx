@@ -15,7 +15,7 @@ const TwitPost= ()=>{
         event.preventDefault()
         const twitToPost= {"content":textPost, "image":imagePost}
         TwApi.postNormalTwitt(twitToPost)
-                .then(response=>setError(""))
+                .then(_=>setError(""))
                 .catch(error=>setError(error.status))
     }
 

@@ -3,21 +3,20 @@ import { useState } from "react"
 import TwitProfilePic from "../atoms/twitProfilePic"
 import { useNavigate } from "react-router-dom"
 
-const RetweetPost= ({id})=>{
+const ReplyPost= ({id})=>{
     const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
     const navigate = useNavigate()
 
     const [textPost, setTextPost] = useState("")
+    const [imagePost, setImagePost]= useState("")
     const [error, setError]= useState("")
 
     const handleTwitPost = (event) => {
         event.preventDefault()
-        const twitToPost= {"content":textPost}
-        TwApi.retwitt(id,twitToPost)
-                .then(response=>{setError("")
-                        const retwit= (response.data.reTweet.filter(retwit=>retwit.user.id==loggedUser.id)
-                                                            .sort((ra,rb)=>Date.parse(rb.date)-Date.parse(ra.date)))[0]
-                        navigate(`/tweet/${retwit.id}`)
+        const twitToPost= {"content":textPost, "image":imagePost}
+        TwApi.reply(id,twitToPost)
+                .then(_=>{setError("")
+                        navigate(`/tweet/${id}`)
                 })
                 .catch(error=>setError(error.status))
     }
@@ -40,7 +39,14 @@ const RetweetPost= ({id})=>{
                                 value={textPost}
                                 onChange={(event) => setTextPost(event.target.value)}
                             />
-                            <button type="submit" className="btn btn-primary">ReTwittear</button>
+                            <input 
+                                className="form-control mb-2" 
+                                id="inputTwitImageSrc" 
+                                placeholder="Link a Imagen"
+                                value={imagePost}
+                                onChange={(event) => setImagePost(event.target.value)}
+                            />
+                            <button type="submit" className="btn btn-primary">Reply</button>
                         </div>
                     </form>
                 </div>
@@ -49,4 +55,4 @@ const RetweetPost= ({id})=>{
     )
 }
 
-export default RetweetPost
+export default ReplyPost
