@@ -15,7 +15,7 @@ const Twitt = () => {
   useEffect(()=>{TwApi.getTwitt(id)
                       .then(response => setTwitt(response.data))
                       .catch((error) => setError(error.description))
-                },[])
+                },[twitt])
 
   const decideTwit=(twit)=>{
         if(twit.type.tweet==null){

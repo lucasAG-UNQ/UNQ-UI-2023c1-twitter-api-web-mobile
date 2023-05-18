@@ -3,7 +3,7 @@ import { useState } from "react"
 import TwitProfilePic from "../atoms/twitProfilePic"
 import { useNavigate,redirect } from "react-router-dom"
 
-const ReplyPost= ({id})=>{
+const ReplyPost= ({id, onPost})=>{
     const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
     const navigate = useNavigate()
 
@@ -17,6 +17,7 @@ const ReplyPost= ({id})=>{
         TwApi.reply(id,twitToPost)
                 .then(_=>{setError("")
                         redirect(`/twitt/${id}`)
+                        onPost()
                 })
                 .catch(error=>setError(error.status))
     }

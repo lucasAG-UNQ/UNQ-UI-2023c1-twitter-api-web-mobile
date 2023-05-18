@@ -3,7 +3,7 @@ import { useState } from "react"
 import TwitProfilePic from "../atoms/twitProfilePic"
 import { useNavigate } from "react-router-dom"
 
-const RetweetPost= ({id})=>{
+const RetweetPost= ({id, onPost})=>{
     const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
     const navigate = useNavigate()
 
@@ -18,6 +18,7 @@ const RetweetPost= ({id})=>{
                         const retwit= (response.data.reTweet.filter(retwit=>retwit.user.id==loggedUser.id)
                                                             .sort((ra,rb)=>Date.parse(rb.date)-Date.parse(ra.date)))[0]
                         navigate(`/twitt/${retwit.id}`)
+                        onPost()
                 })
                 .catch(error=>{setError(error.status)})
     }
