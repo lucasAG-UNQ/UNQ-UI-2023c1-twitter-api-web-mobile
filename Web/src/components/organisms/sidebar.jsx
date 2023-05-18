@@ -31,8 +31,6 @@ const Sidebar = ({children}) => {
     
   useEffect(() => {
     setIsLoggedUser(TwApi.isUserLogged() || location.state?.isLoggedUser);
-    //console.log("use effect del sidebar", isLoggedUser);
-    //console.log("state ", location.state?.isLoggedUser);
     setMenuItems(isLoggedUser ? userMenuItems() : guestMenuItems());
   }, [location.state, isLoggedUser]);
 
