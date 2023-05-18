@@ -8,10 +8,9 @@ import { useEffect } from "react";
 const User = () => {
     const { id } = useParams();
 
-    // const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
     const [user, setUser] = useState();
     const [twitts, setTwitts] = useState([]);
-    const [error, setError] = useState("");
+    const [error, setError] = useState('');
 
     useEffect(() => {
         TwApi.getUser(id)
@@ -34,14 +33,14 @@ const User = () => {
     if (!twitts || !user) return <div>Loading... </div>;
 
     return (
-        <>
+        <div className="vh-100 overflow-auto">
             <section>
                 <UserCard {...user} />
             </section>
             <section>
                 <TwitLog twits={twitts} />
             </section>
-        </>
+        </div>
     );
 };
 
