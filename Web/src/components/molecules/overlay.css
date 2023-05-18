@@ -10,7 +10,6 @@
   }
   
   .overlay__container {
-    background-color: white;
     position: fixed;
     top: 0;
     right: 0;
@@ -18,9 +17,9 @@
     left: 0;
     margin: auto;
     z-index: 10;
-    padding: 30px;
-    width: fit-content;
+    padding: 10px;
     height: fit-content;
+    width: 80%;
   }
   
   .overlay__controls {
@@ -39,4 +38,5 @@
     background-color: transparent;
     font-size: 36px;
     cursor: pointer;
+    color: gray;
   }

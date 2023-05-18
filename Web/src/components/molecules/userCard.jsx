@@ -3,12 +3,12 @@ import TwApi from "../services";
 import "./userCard.css";
 
 const UserCard = (user) => {
-    const [loggedUser, setLoggedUser] = useState()
-    const [isLoggedUser, setIsLoggedUser] = useState(false)
+    const [loggedUser, setLoggedUser] = useState();
+    const [isLoggedUser, setIsLoggedUser] = useState(false);
     const [isFollowingUser, setIsFollowingUser] = useState(false);
 
-    const buttonFollowText = isFollowingUser ? 'Dejar de seguir' : 'Seguir'
-    const buttonFollowClass = isFollowingUser ? 'btn btn-outline-danger' : 'btn btn-outline-primary'
+    const buttonFollowText = isFollowingUser ? 'Dejar de seguir' : 'Seguir';
+    const buttonFollowClass = isFollowingUser ? 'btn btn-outline-danger' : 'btn btn-outline-primary';
 
     useEffect(() => {
         TwApi.getLoggedUser()
@@ -17,7 +17,7 @@ const UserCard = (user) => {
                 setIsLoggedUser(response.data.id === user.id);
                 setIsFollowingUser(response.data.following.some((usr) => usr.id === user.id));
             })    
-    }, [])
+    }, []);
     
     const handleClickFollow = () => {
         TwApi.followUser(user.id)
@@ -25,7 +25,7 @@ const UserCard = (user) => {
                     setIsFollowingUser(!isFollowingUser)})
                 .catch((err) => {
                     console.log(err.description) })
-    }
+    };
 
     if (!loggedUser) return <div>Loading... </div>;
 

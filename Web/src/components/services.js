@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:7070';
-//axios.defaults.baseURL = 'http://192.168.0.192:7070';
 
 const twPost = (endpoint, data) => {
   axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
@@ -17,7 +16,6 @@ const twGet = (endpoint) => {
     .catch( (error) => handleError(error) );
 }
 
-// TODO: el put no lleva data?
 const twPut = (endpoint)=>{
   axios.defaults.headers.common['authorization'] = localStorage.getItem('twitterAcessToken');
   return axios.put(endpoint)
@@ -57,7 +55,6 @@ const register = (regData) => twPost('/register', regData);
 
 const logout = () => {
   localStorage.removeItem('twitterAcessToken');
-  localStorage.removeItem('twitterLoggedUser');
   axios.defaults.headers.common['authorization'] = null;
 }
 
@@ -75,7 +72,6 @@ const getFollowingTwitts = () => twGet("/user/followingTweets");
 
 const postNormalTwitt = (data) => twPost("/tweet", data);
 
-// const getLoggedUser = () => localStorage.getItem('twitterLoggedUser');
 const getLoggedUser = () => twGet("/user")
 
 const toggleLike = (id) => twPut(`/tweet/${id}/like`)
@@ -83,6 +79,8 @@ const toggleLike = (id) => twPut(`/tweet/${id}/like`)
 const retwitt = (id,content) => twPost(`/tweet/${id}/retweet`,content)
 
 const followUser = (id) => twPut(`/user/${id}/follow`)
+
+const reply = (id,content) => twPost(`/tweet/${id}/replay`,content)
 
 const TwApi = {
     login,
@@ -98,7 +96,8 @@ const TwApi = {
     toggleLike,
     retwitt,
     search,
-    followUser
+    followUser,
+    reply
 }
 
 export default TwApi;

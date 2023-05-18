@@ -31,7 +31,6 @@ const Login = () => {
       TwApi.login({ username: username, password: password })
       .then( (response) => {
         localStorage.setItem('twitterAcessToken', response.headers.authorization);
-        localStorage.setItem('twitterLoggedUser', JSON.stringify(response.data));
         navigate("/home", { state: { isLoggedUser: true } });
       })
       .catch( (error) => setError(error.description));

@@ -1,23 +1,41 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import './userCard.css';
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import TwApi from "../services";
+import "./userCard.css";
 
 const LoggedUserCard = () => {
+    const [loggedUser, setLoggedUser] = useState();
 
-  const loggedUser = JSON.parse(localStorage.getItem('twitterLoggedUser'))
+    useEffect(() => {
+      TwApi.getLoggedUser()
+          .then((response) => {
+              setLoggedUser(response.data);
+          })    
+  }, []);
 
-  return (
-    <div className="card bg-transparent text-center">
-        <div className="card-body">
-            <NavLink to="/profile" className="text-reset text-decoration-none">
-                <div className="profile-sidebar">
-                    <img className="rounded-circle" alt="" src={loggedUser?.image} />
-                </div>
-                <p className="card-title font-weight-bold">{loggedUser?.username}</p>
-            </NavLink>
+    if (!loggedUser) return <div>Loading... </div>;
+
+    return (
+        <div className="card bg-transparent text-center">
+            <div className="card-body">
+                <NavLink
+                    to="/profile"
+                    className="text-reset text-decoration-none"
+                >
+                    <div className="profile-sidebar">
+                        <img
+                            className="rounded-circle"
+                            alt=""
+                            src={loggedUser?.image}
+                        />
+                    </div>
+                    <p className="card-title font-weight-bold">
+                        {loggedUser?.username}
+                    </p>
+                </NavLink>
+            </div>
         </div>
-    </div>
-  )
-}
+    );
+};
 
-export default LoggedUserCard
+export default LoggedUserCard;
