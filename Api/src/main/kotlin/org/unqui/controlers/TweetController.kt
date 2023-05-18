@@ -25,7 +25,7 @@ class TweetController(var twitterSystem: TwitterSystem) {
 
     fun getTrendingTopicks(ctx: Context) {
          val results = twitterSystem.getTrendingTopics()
-         val tweetsFound = TweetsResultDTO(mapper.listTweetToListSimpleTweetDTO(results.toMutableList()))
+         var tweetsFound = TweetsResultDTO(mapper.listTweetToListSimpleTweetDTO(results.toMutableList()))
          ctx.status(200)
          ctx.json(tweetsFound)
     }

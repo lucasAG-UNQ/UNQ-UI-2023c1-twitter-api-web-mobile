@@ -75,7 +75,7 @@ class UserController(private val twitterSystem: TwitterSystem, private val jwtCo
         try {
             val twitterUser: User = ctx.attribute<User>("user")!!
             val listTweet = twitterSystem.getFollowingTweets(twitterUser.id)
-            val listSimplTweetDTO = TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(listTweet.toMutableList())
+            val listSimplTweetDTO = TweetMapper(twitterSystem).listTweetToListSimpleTweetDTO(listTweet.toMutableList()).sortedByDescending { tweet -> tweet.date }.toMutableList()
             ctx.status(200)
             ctx.json(TweetsResultDTO(listSimplTweetDTO))
         }
