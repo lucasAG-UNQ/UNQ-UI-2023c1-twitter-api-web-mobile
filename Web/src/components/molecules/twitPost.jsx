@@ -1,7 +1,8 @@
 import TwitProfilePic from "../atoms/twitProfilePic"
 import "./twitPost.css"
 import TwApi from "../services"
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router'
 
 const TwitPost= ()=>{
 
@@ -10,21 +11,45 @@ const TwitPost= ()=>{
     const [textPost, setTextPost] = useState("")
     const [imagePost, setImagePost]= useState("")
     const [error, setError]= useState("")
+    const [tweetId, setTweetId]= useState("")
+
+    const navigate = useNavigate()
+
+    const validar = () => {
+        let valida = true
+        if(textPost.length < 1){
+          setError("Debe ingresar un texto para el Tweet")
+          return false
+        }
+        if(imagePost.length > 0 && (imagePost.length < 12 || (!imagePost.toLowerCase().startsWith("http://") && !imagePost.toLowerCase().startsWith("https://")))){
+            setError("La imagen debe ser una URL válida")
+          return false
+        }
+        return valida
+      }
 
     const handleTwitPost = (event) => {
         event.preventDefault()
-        const twitToPost= {"content":textPost, "image":imagePost}
-        TwApi.postNormalTwitt(twitToPost)
-                .then(response=>setError(""))
-                .catch(error=>setError(error.status))
+        if (validar()){
+            const twitToPost= {"content":textPost, "image":imagePost}
+            TwApi.postNormalTwitt(twitToPost)
+                    .then((response)=> {setTweetId(response.data.id);
+                                        console.log("--->>>>>> " + response.data.id)})
+                    .catch( (error) => setError(error.description))
+        }
     }
 
-    const handleError= ()=> error? <span>Ups... algo salio mal</span>:<></> 
-
+    useEffect(() => {
+        if (tweetId) { 
+          setError("HAS GENERADO UN NUEVO TWEET")
+          setTextPost("")
+          setImagePost("")
+          setTimeout(() => { navigate(`/twitt/${tweetId}`) }, 2000);
+        }
+      }, [tweetId]);
 
     return(
         <div>
-            {handleError()}
             <div className="twitPostContainer bg-dark container-fluid mb-3">
                 <TwitProfilePic {...loggedUser}/>
                 <div className="container">
@@ -44,7 +69,10 @@ const TwitPost= ()=>{
                                 value={imagePost}
                                 onChange={(event) => setImagePost(event.target.value)}
                             />
+                            <div>
                             <button type="submit" className="btn btn-primary">Twittear</button>
+                            <div className="etiquetaRoja  text-center">{error}</div>
+                            </div>
                         </div>
                     </form>
                 </div>

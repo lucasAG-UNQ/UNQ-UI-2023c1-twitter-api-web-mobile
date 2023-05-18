@@ -5,9 +5,9 @@ import ReplyTwitt from "../molecules/replyTwitt"
 const TwitLog= ({twits})=>{
     
     const decideTwit=(twit)=>{
-        if(twit.tipe.tweet==null){
+        if(twit.type.tweet==null){
             return <FullTwittWithActions twit={twit} key={twit.id} />
-        }else if(twit.tipe.image==null){
+        }else if(twit.type.image==null){
             return <Retweet twit={twit} key={twit.id} />
         }else{
             return <ReplyTwitt twit={twit} key={twit.id}/>

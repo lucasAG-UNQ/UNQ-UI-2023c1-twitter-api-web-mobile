@@ -5,7 +5,7 @@ import TwittActions from "./twittActions";
 
 const Retweet=({twit})=>{
 
-    const handleReTweeted=()=><SimpleTwitt twit={twit.tipe.tweet}/>
+    const handleReTweeted=()=><SimpleTwitt twit={twit.type.tweet}/>
 
     return(
         <article className="FullTwittWithActions bg-dark container-fluid mb-3">

@@ -1,6 +1,5 @@
 import React from 'react';
 import TwApi from "../services"
-import FullTwittWithActions from "../molecules/fullTwittWithActions";
 import TwitLog from "../organisms/twitLog";
 import { useState, useEffect } from "react";
 import { useSearchParams } from 'react-router-dom';

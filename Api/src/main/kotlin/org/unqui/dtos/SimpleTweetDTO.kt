@@ -2,7 +2,7 @@ package org.unqui.dtos
 
 
 class SimpleTweetDTO (var id: String,
-                      var tipe: TwitterTypeDTO,
+                      var type: TwitterTypeDTO,
                       var user: SimpleUserDTO,
                       var content: String,
                       var date: String,
