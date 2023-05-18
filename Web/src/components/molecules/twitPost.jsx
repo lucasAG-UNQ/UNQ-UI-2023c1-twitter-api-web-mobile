@@ -68,7 +68,7 @@ const TwitPost = () => {
     return (
         <div>
             <div className="twitPostContainer bg-dark container-fluid mb-3">
-                <TwitProfilePic {...loggedUser} />
+                <TwitProfilePic image={loggedUser.image} userId={loggedUser.id} />
                 <div className="container">
                     <form
                         className="form-inline mx-sm-3"
