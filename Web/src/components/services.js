@@ -82,6 +82,8 @@ const toggleLike = (id) => twPut(`/tweet/${id}/like`)
 
 const retwitt = (id,content) => twPost(`/tweet/${id}/retweet`,content)
 
+const followUser = (id) => twPut(`/user/${id}/follow`)
+
 const reply = (id,content) => twPost(`/tweet/${id}/replay`,content)
 
 const TwApi = {
@@ -98,6 +100,7 @@ const TwApi = {
     toggleLike,
     retwitt,
     search,
+    followUser,
     reply
 }
 
