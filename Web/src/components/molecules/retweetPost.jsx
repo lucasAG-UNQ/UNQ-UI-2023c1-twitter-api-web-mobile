@@ -17,9 +17,9 @@ const RetweetPost= ({id})=>{
                 .then(response=>{setError("")
                         const retwit= (response.data.reTweet.filter(retwit=>retwit.user.id==loggedUser.id)
                                                             .sort((ra,rb)=>Date.parse(rb.date)-Date.parse(ra.date)))[0]
-                        navigate(`/tweet/${retwit.id}`)
+                        navigate(`/twitt/${retwit.id}`)
                 })
-                .catch(error=>setError(error.status))
+                .catch(error=>{setError(error.status)})
     }
 
     const handleError= ()=> error? <span>Ups... algo salio mal</span>:<></> 
