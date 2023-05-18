@@ -2,7 +2,7 @@
 const IconButtonStat= ({children,stat,action})=>{
     const handle=(event)=>{
         event.preventDefault()
-        action.call()
+        action()
     }
 
     return(
