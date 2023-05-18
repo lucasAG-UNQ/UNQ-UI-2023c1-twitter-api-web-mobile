@@ -11,7 +11,7 @@ const SimpleTwitt= ({twit})=>{
         TwApi.getUser(twit.user.id).then(response=>setUser(response.data))
     },[])
 
-    const handleImage=()=>twit.tipe.image? <img className="img-fluid reduce-a-cuarto" src={twit.tipe.image} alt={"test"} />: <></>
+    const handleImage=()=>twit.type.image? <img className="img-fluid reduce-a-cuarto" src={twit.type.image} alt={"test"} />: <></>
 
     return(
         <div className="SimpleTwitt">
