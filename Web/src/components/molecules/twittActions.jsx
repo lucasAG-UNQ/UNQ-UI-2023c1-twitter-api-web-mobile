@@ -3,6 +3,8 @@ import {BsChatDots, BsChatDotsFill, BsArrowRepeat, BsHeartFill, BsHeart} from "r
 import IconButtonStat from "../atoms/iconButtonStat";
 import TwApi from "../services";
 import { Overlay } from "./overlay";
+import RetweetPost from "./retweetPost";
+import ReplyPost from "./replyPost";
 
 const TwittActions= ({twit})=>{
     
@@ -40,7 +42,7 @@ const TwittActions= ({twit})=>{
         toggleOverlay()
     }
 
-    const overlayToOpen=()=>  openReply? <></>: <></>
+    const overlayToOpen=()=>  openReply? <ReplyPost id={twit.id} onPost={toggleOverlay} />: <RetweetPost id={twit.id} onPost={toggleOverlay} />
 
     const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
     

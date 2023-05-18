@@ -2,6 +2,7 @@ import TwitProfilePic from "../atoms/twitProfilePic"
 import { useEffect, useState } from "react";
 import TwApi from "../services";
 import { Link } from "react-router-dom";
+import "./simpleTwit.css"
 
 const SimpleTwitt= ({twit})=>{
     
@@ -14,24 +15,26 @@ const SimpleTwitt= ({twit})=>{
     const handleImage=()=>twit.type.image? <img className="img-fluid reduce-a-cuarto" src={twit.type.image} alt={"test"} />: <></>
 
     return(
-        <div className="SimpleTwitt">
-            <TwitProfilePic image={user.image} userId={twit.user.id} />
-                <div className="twitContainer">
-                    <div>
-                        <strong> {twit.user.username} </strong>
-                        <span className="date">{twit.date.replace("T", " a ")}</span>
-                    </div>
-                    <span className="textContainer">
-                        {twit.content}
-                    </span>
-                    <div className="imageContainer">
-                        {handleImage()}
-                    </div>
-                    <div className="tw-type-container">
+        <Link to={`/twitt/${twit.id}`}>
+            <div className="SimpleTwitt">
+                <TwitProfilePic image={user.image} userId={twit.user.id} />
+                    <div className="twitContainer">
+                        <div>
+                            <strong> {twit.user.username} </strong>
+                            <span className="date">{twit.date.replace("T", " a ")}</span>
+                        </div>
+                        <span className="textContainer">
+                            {twit.content}
+                        </span>
+                        <div className="imageContainer">
+                            {handleImage()}
+                        </div>
+                        <div className="tw-type-container">
 
-                    </div>
+                        </div>
+                </div>
             </div>
-        </div>
+        </Link>
     )
 }
 
