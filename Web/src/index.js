@@ -29,7 +29,7 @@ root.render(
     <BrowserRouter>
       <Sidebar>
         <Routes>
-          <Route index path="/" element={<Landing />} errorElement={<NotFound />} />
+          <Route index path="/" element={<PublicRoute><Landing /></PublicRoute>} errorElement={<NotFound />} />
           <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
           <Route path="/trending" element={<PrivateRoute><Trending /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />

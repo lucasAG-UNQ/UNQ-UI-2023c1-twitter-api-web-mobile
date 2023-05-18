@@ -1,33 +1,34 @@
-import FullTwittWithActions from "../molecules/fullTwittWithActions";
+import React, { useState,useEffect } from "react";
 import TwitPost from "../molecules/twitPost";
 import TwApi from "../services";
-import { useState,useEffect } from "react";
 import TwitLog from "../organisms/twitLog";
-
 
 const Home = () => {
 
 
-  const [followingTweets,setFollowingTweets] =useState();
-  const [error,setError]=useState(false)
+  const [followingTwitts,setFollowingTwitts] = useState([]);
+  const [error,setError] = useState('')
 
-  useEffect(()=>{TwApi.getFollowingTweets()
-                      .then(response => setFollowingTweets(response.data.results))
+  useEffect(()=>{TwApi.getFollowingTwitts()
+                      .then(response => setFollowingTwitts(response.data.results))
                       .catch(err=>{
-                          console.log(err.description)
-                            setError(true)
-                      })},[])
+                          //console.log(err.description)
+                          setError(err.description)
+                      })}, [])
 
-  if (error) return <div>Ups... algo salio mal</div>
+  if (error) return (
+    <>
+      <h2>Ups... algo salió mal</h2>
+      <p className="etiquetaRoja">{error}</p></>
+    )
 
-  if (!followingTweets) return <div>loading... </div>
+  if (!followingTwitts) return <div>Loading... </div>
 
   return (
     <>
     <div className="vh-100 overflow-auto ">
       <TwitPost />
-      { followingTweets.map((tweet)=><FullTwittWithActions twit={tweet} key={Math.floor(Math.random() * 100000) + 1}/>)}
-      <TwitLog twits={followingTweets} />
+      <TwitLog twits={followingTwitts} />
     </div>
     </>
   )

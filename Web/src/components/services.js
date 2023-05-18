@@ -67,20 +67,20 @@ const trendingTopics = () => twGet('/trendingTopics')
 
 const getUser = (id) => twGet(`/user/${id}`);
 
-const getTweet = (id) => twGet(`/tweet/${id}`);
+const getTwitt = (id) => twGet(`/tweet/${id}`);
 
 const search = (text) => twGet(`/search/?text=${text}`);
 
-const getFollowingTweets = () => twGet("/user/followingTweets");
+const getFollowingTwitts = () => twGet("/user/followingTweets");
 
-const postNormalTwit = (data) => twPost("/tweet", data);
+const postNormalTwitt = (data) => twPost("/tweet", data);
 
 // const getLoggedUser = () => localStorage.getItem('twitterLoggedUser');
 const getLoggedUser = () => twGet("/user")
 
 const toggleLike = (id) => twPut(`/tweet/${id}/like`)
 
-const retweet=(id,content) => twPost(`/tweet/${id}/retweet`,content)
+const retwitt = (id,content) => twPost(`/tweet/${id}/retweet`,content)
 
 const TwApi = {
     login,
@@ -89,12 +89,12 @@ const TwApi = {
     isUserLogged,
     trendingTopics,
     getUser,
-    getTweet,
-    getFollowingTweets,
-    postNormalTwit,
+    getTwitt,
+    getFollowingTwitts,
+    postNormalTwitt,
     getLoggedUser,
     toggleLike,
-    retweet,
+    retwitt,
     search
 }
 

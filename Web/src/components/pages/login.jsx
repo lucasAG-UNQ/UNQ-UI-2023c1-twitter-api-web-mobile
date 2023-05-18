@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router'
 import TwApi from '../services.js'
-import { Boton, InputTextLogin } from "../atoms/atomos_basic";
+import { Boton, InputText } from "../atoms/atomos_basic";
 import TwitterLogo from '../atoms/twitterlogo';
 
 const Login = () => {
@@ -53,8 +53,8 @@ const Login = () => {
                     <h1 className="fw-bold mb-2">LOGIN</h1>
                     <p className="text-white-50 mb-5">Por favor ingrese su usuario y contraseña</p>
                   </div>
-                  <InputTextLogin seccion={'Usuario'} setFuncion={setUsername}/>
-                  <InputTextLogin seccion={'Password'} setFuncion={setPassword}/>
+                  <InputText seccion={'Usuario'} setFuncion={setUsername}/>
+                  <InputText seccion={'Password'} setFuncion={setPassword}/>
                   <div className="text-center">
                     <Boton funciondeboton ={'Login'} loguear={handleLoginSubmit}/>
                   </div>
