@@ -54,8 +54,8 @@ const TwittActions= ({twit})=>{
         <div>
             <Overlay isOpen={isOpen} onClose={toggleOverlay}>{overlayToOpen()}</Overlay>
             <div className="iconsContainer">
-                <IconButtonStat stat={twit.repliesAmount} action={handleReply} title="Responder"> <BsChatDotsFill className="tw-coment"/> </IconButtonStat>
-                <IconButtonStat stat={twit.reTweetAmount} action={canRetweet()} title="Retwitear"> <BsArrowRepeat className="tw-retweet"/> </IconButtonStat> 
+                <IconButtonStat stat={twit.repliesAmount || twit.replies?.length} action={handleReply} title="Responder"> <BsChatDotsFill className="tw-coment"/> </IconButtonStat>
+                <IconButtonStat stat={twit.reTweetAmount || twit.reTweet?.length} action={canRetweet()} title="Retwitear"> <BsArrowRepeat className="tw-retweet"/> </IconButtonStat> 
                 <IconButtonStat stat={twit.likes.length} action={handleLike}> {liked()} </IconButtonStat>
             </div>
         </div>
