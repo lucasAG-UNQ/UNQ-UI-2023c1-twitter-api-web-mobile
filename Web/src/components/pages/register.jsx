@@ -53,7 +53,10 @@ const Register = () => {
     event.preventDefault();
     if (validar()) {
       TwApi.register(regData)
-        .then( (response) => setToken(true) )
+        .then( (response) => {
+          setToken(true);
+          setError('');
+        } )
         .catch( (error) => setError(error.description));
     }
   }

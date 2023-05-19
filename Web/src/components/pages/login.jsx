@@ -30,6 +30,7 @@ const Login = () => {
     if (validar()) {
       TwApi.login({ username: username, password: password })
       .then( (response) => {
+        setError('');
         localStorage.setItem('twitterAcessToken', response.headers.authorization);
         navigate("/home", { state: { isLoggedUser: true } });
       })

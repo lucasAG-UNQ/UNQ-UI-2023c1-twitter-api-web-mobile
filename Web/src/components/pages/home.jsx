@@ -10,7 +10,10 @@ const Home = () => {
   const [error,setError] = useState('')
 
   useEffect(()=>{TwApi.getFollowingTwitts()
-                      .then(response => setFollowingTwitts(response.data.results))
+                      .then(response => {
+                        setFollowingTwitts(response.data.results);
+                        setError('');
+                      })
                       .catch(err=>{
                           setError(err.description)
                       })}, [])

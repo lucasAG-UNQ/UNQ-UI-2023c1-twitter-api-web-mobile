@@ -12,6 +12,7 @@ const Profile = () => {
     useEffect(() => {
         TwApi.getLoggedUser()
             .then((response) => {
+                setError('');
                 setLoggedUser(response.data);
                 setTwitts(response.data.tweets);
             })

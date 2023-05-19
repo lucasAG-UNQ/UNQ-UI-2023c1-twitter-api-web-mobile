@@ -15,6 +15,7 @@ const User = () => {
     useEffect(() => {
         TwApi.getUser(id)
             .then((response) => {
+                setError('');
                 setUser(response.data);
                 setTwitts(response.data.tweets);
             })

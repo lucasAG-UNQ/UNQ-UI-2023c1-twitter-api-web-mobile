@@ -23,7 +23,9 @@ const UserCard = (user) => {
     const handleClickFollow = () => {
         TwApi.followUser(user.id)
                 .then( response => {
-                    setIsFollowingUser(!isFollowingUser)})
+                    setIsFollowingUser(!isFollowingUser);
+                    setError('');
+                })
                 .catch((err) => {
                     setError(err.description) })
     };

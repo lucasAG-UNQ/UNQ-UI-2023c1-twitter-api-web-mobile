@@ -8,7 +8,10 @@ const Trending = () => {
   const [error,setError] = useState('');
 
   useEffect(()=>{TwApi.trendingTopics()
-                      .then(response => setTwitts(response.data.results))
+                      .then(response => {
+                        setTwitts(response.data.results);
+                        setError('');
+                      })
                       .catch((error) => setError(error.description))
                 },[])
 

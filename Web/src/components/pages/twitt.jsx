@@ -13,7 +13,10 @@ const Twitt = () => {
   const [error,setError] = useState('');
 
   useEffect(()=>{TwApi.getTwitt(id)
-                      .then(response => setTwitt(response.data))
+                      .then(response => {
+                        setTwitt(response.data);
+                        setError('');
+                      })
                       .catch((error) => setError(error.description))
                 },[id])
 

@@ -45,6 +45,7 @@ const TwitPost = () => {
             TwApi.postNormalTwitt(twitToPost)
                 .then((response) => {
                     setTweetId(response.data.id);
+                    setError('');
                 })
                 .catch((error) => setError(error.description));
         }

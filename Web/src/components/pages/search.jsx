@@ -9,8 +9,13 @@ const Search = () => {
   const [twitts,setTwitts] = useState([]);
   const [error,setError] = useState('');
 
+  console.log("params: --->>>", params.getAll('text'));
+
   useEffect(()=>{TwApi.search(params.getAll('text'))
-                      .then(response => setTwitts(response.data.results))
+                      .then(response => {
+                          setTwitts(response.data.results);
+                          setError('');
+                        })
                       .catch((error) => setError(error.description))
                 },[params])
 
