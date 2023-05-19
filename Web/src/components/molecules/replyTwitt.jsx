@@ -1,11 +1,9 @@
-import FullTwittWithActions from "./fullTwittWithActions";
-import Retweet from "./reTweet";
+import React from "react";
 import SimpleTwitt from "./simpleTwitt";
 import TwittActions from "./twittActions";
 import "./replyTwitt.css"
 
 const ReplyTwitt=({twit})=>{
-
 
     return(
         <div className="Reply bg-dark container-fluid mb-3">

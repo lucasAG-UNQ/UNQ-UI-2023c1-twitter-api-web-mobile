@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from "react";
 import TwitProfilePic from "../atoms/twitProfilePic"
-import { useEffect, useState } from "react";
 import TwApi from "../services";
 import { Link } from "react-router-dom";
 import "./simpleTwit.css"
@@ -17,7 +17,7 @@ const SimpleTwitt= ({twit})=>{
     return(
         <Link to={`/twitt/${twit.id}`}>
             <div className="SimpleTwitt">
-                <TwitProfilePic image={user.image} userId={twit.user.id} />
+                <TwitProfilePic {...user} />
                     <div className="twitContainer">
                         <div>
                             <strong> {twit.user.username} </strong>

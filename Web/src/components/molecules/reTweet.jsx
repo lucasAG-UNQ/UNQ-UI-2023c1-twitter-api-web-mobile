@@ -1,9 +1,8 @@
-import "./fullTwittWithActions.css"
-import "./reTweet.css"
+import React from "react";
 import SimpleTwitt from "./simpleTwitt";
 import TwittActions from "./twittActions";
-import TwApi from "../services";
-import { useState,useEffect } from "react";
+import "./reTweet.css"
+import "./fullTwittWithActions.css"
 
 const Retweet=({twit})=>{
 

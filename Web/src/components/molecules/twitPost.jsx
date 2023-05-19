@@ -1,9 +1,8 @@
-import React from "react";
-import TwitProfilePic from "../atoms/twitProfilePic";
-import "./twitPost.css";
-import TwApi from "../services";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
+import TwitProfilePic from "../atoms/twitProfilePic";
+import TwApi from "../services";
+import "./twitPost.css";
 
 const TwitPost = () => {
     const [loggedUser, setLoggedUser] = useState();
@@ -46,7 +45,6 @@ const TwitPost = () => {
             TwApi.postNormalTwitt(twitToPost)
                 .then((response) => {
                     setTweetId(response.data.id);
-                    console.log("--->>>>>> " + response.data.id);
                 })
                 .catch((error) => setError(error.description));
         }
@@ -68,7 +66,7 @@ const TwitPost = () => {
     return (
         <div>
             <div className="twitPostContainer bg-dark container-fluid mb-3">
-                <TwitProfilePic image={loggedUser.image} userId={loggedUser.id} />
+                <TwitProfilePic {...loggedUser} />
                 <div className="container">
                     <form
                         className="form-inline mx-sm-3"

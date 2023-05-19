@@ -6,6 +6,7 @@ const UserCard = (user) => {
     const [loggedUser, setLoggedUser] = useState();
     const [isLoggedUser, setIsLoggedUser] = useState(false);
     const [isFollowingUser, setIsFollowingUser] = useState(false);
+    const [error, setError] = useState('')
 
     const buttonFollowText = isFollowingUser ? 'Dejar de seguir' : 'Seguir';
     const buttonFollowClass = isFollowingUser ? 'btn btn-outline-danger' : 'btn btn-outline-primary';
@@ -24,7 +25,7 @@ const UserCard = (user) => {
                 .then( response => {
                     setIsFollowingUser(!isFollowingUser)})
                 .catch((err) => {
-                    console.log(err.description) })
+                    setError(err.description) })
     };
 
     if (!loggedUser) return <div>Loading... </div>;
