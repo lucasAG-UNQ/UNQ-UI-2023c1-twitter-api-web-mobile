@@ -20,7 +20,7 @@ const TwittActions= ({twit})=>{
                 setLoggedUser(response.data);
                 setLike(twit.likes.some( like => like.id === response.data.id));
             })
-    }, [])
+    }, [twit.likes])
 
     const handleLike=()=>{
         TwApi.toggleLike(twit.id)
@@ -42,15 +42,14 @@ const TwittActions= ({twit})=>{
         toggleOverlay()
     }
 
-    const overlayToOpen=()=>  openReply? <ReplyPost id={twit.id} onPost={toggleOverlay} />: <RetweetPost id={twit.id} onPost={toggleOverlay} />
+    const overlayToOpen = () =>  openReply ? <ReplyPost id={twit.id} onPost={toggleOverlay} /> : <RetweetPost id={twit.id} onPost={toggleOverlay} />;
 
-    const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
+    const liked = () => like ? <BsHeartFill className="tw-like"/> : <BsHeart className="tw-like"/>;
 
-    const canRetweet = () => {return twit.user.id !== loggedUser.id ? handleRetweet : (_=>_)
-    }
+    const canRetweet = () => { return twit.user.id !== loggedUser.id ? handleRetweet : (_=>_) };
     
     if (!loggedUser) return <div>Loading... </div>;
-    //console.log(twit);
+
     return(
         <div>
             <Overlay isOpen={isOpen} onClose={toggleOverlay}>{overlayToOpen()}</Overlay>

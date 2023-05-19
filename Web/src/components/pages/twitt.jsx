@@ -15,7 +15,7 @@ const Twitt = () => {
   useEffect(()=>{TwApi.getTwitt(id)
                       .then(response => setTwitt(response.data))
                       .catch((error) => setError(error.description))
-                },[twitt])
+                },[id])
 
   const decideTwit=(twit)=>{
         if(twit.type.tweet==null){
@@ -32,7 +32,7 @@ const Twitt = () => {
     <div className="vh-100 overflow-auto">
       <h1 className="fw-bold mb-4 p-4">Twitt</h1>
         {(twitt)?decideTwit(twitt):<p>{error}</p> }
-        <div className='replies'>{twitt.replies.map(reply=><FullTwittWithActions twit={reply} />)}</div>
+        <div className='replies'>{twitt.replies.map(reply=><FullTwittWithActions twit={reply} key={reply.id} />)}</div>
     </div>
   )
 }
