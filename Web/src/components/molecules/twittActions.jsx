@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {BsChatDots, BsChatDotsFill, BsArrowRepeat, BsHeartFill, BsHeart} from "react-icons/bs";
+import { BsChatDotsFill, BsArrowRepeat, BsHeartFill, BsHeart } from "react-icons/bs";
 import IconButtonStat from "../atoms/iconButtonStat";
 import TwApi from "../services";
 import { Overlay } from "./overlay";
@@ -46,17 +46,17 @@ const TwittActions= ({twit})=>{
 
     const liked= ()=> like? <BsHeartFill className="tw-like"/>: <BsHeart className="tw-like"/>
 
-    const canRetweet=()=> {return !(twit.user.id==loggedUser.id)? handleRetweet: (_=>_)
+    const canRetweet = () => {return twit.user.id !== loggedUser.id ? handleRetweet : (_=>_)
     }
     
     if (!loggedUser) return <div>Loading... </div>;
-    
+    //console.log(twit);
     return(
         <div>
             <Overlay isOpen={isOpen} onClose={toggleOverlay}>{overlayToOpen()}</Overlay>
             <div className="iconsContainer">
-                <IconButtonStat stat={twit.repliesAmount} action={handleReply} title="Replicar tweet"> <BsChatDotsFill className="tw-coment"/> </IconButtonStat>
-                <IconButtonStat stat={twit.reTweetAmount} action={canRetweet()} title="Retwitear" > <BsArrowRepeat className="tw-retweet"/> </IconButtonStat> 
+                <IconButtonStat stat={twit.repliesAmount} action={handleReply} title="Responder"> <BsChatDotsFill className="tw-coment"/> </IconButtonStat>
+                <IconButtonStat stat={twit.reTweetAmount} action={canRetweet()} title="Retwitear"> <BsArrowRepeat className="tw-retweet"/> </IconButtonStat> 
                 <IconButtonStat stat={twit.likes.length} action={handleLike}> {liked()} </IconButtonStat>
             </div>
         </div>
