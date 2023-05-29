@@ -4,4 +4,5 @@
 Api/.idea/
 Api/target/
 
-Web/twitter/node_modules/
+Web/node_modules/
+Mobile/node_modules/
