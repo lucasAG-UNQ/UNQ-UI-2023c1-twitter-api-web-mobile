@@ -9,7 +9,7 @@ const ReplyPost = ({ id, onPost }) => {
     const [imagePost, setImagePost] = useState("");
     const [error, setError] = useState("");
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     
     const handleTwitPost = (event) => {
         event.preventDefault();
@@ -17,7 +17,7 @@ const ReplyPost = ({ id, onPost }) => {
         TwApi.reply(id, twitToPost)
             .then((_) => {
                 setError("");
-                redirect(`/twitt/${id}`);
+                navigate(`/twitt/${id}`);
                 onPost();
             })
             .catch((error) => setError(error.status));
