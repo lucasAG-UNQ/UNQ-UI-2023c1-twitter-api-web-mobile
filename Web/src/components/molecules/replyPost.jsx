@@ -9,7 +9,7 @@ const ReplyPost = ({ id, onPost }) => {
     const [imagePost, setImagePost] = useState("");
     const [error, setError] = useState("");
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     
     const handleTwitPost = (event) => {
         event.preventDefault();
