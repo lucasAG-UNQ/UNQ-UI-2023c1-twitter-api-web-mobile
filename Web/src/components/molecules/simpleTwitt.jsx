@@ -21,7 +21,7 @@ const SimpleTwitt= ({twit})=>{
                     <div className="twitContainer">
                         <div>
                             <strong> {twit.user.username} </strong>
-                            <span className="date">{twit.date.replace("T", " a ")}</span>
+                            <span className="date">{twit.date.replace("T", " a ").slice(0,18)}</span>
                         </div>
                         <span className="textContainer">
                             {twit.content}
