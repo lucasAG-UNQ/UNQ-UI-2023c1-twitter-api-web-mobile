@@ -30,6 +30,12 @@ const UserCard = (user) => {
                     setError(err.description) })
     };
 
+    if (error) return (
+        <>
+          <h2>Ups... algo salió mal</h2>
+          <p className="etiquetaRoja">{error}</p></>
+        )
+
     if (!loggedUser) return <div>Loading... </div>;
 
     return (
