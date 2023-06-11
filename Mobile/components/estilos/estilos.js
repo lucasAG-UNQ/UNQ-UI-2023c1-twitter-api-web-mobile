@@ -1,9 +1,12 @@
-const styles = {
+import { StyleSheet} from 'react-native';
+
+const loginStyles = StyleSheet.create({
     container: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       padding: 16,
+      backgroundColor: '#000',
     },
     card: {
       backgroundColor: 'dark',
@@ -68,6 +71,10 @@ const styles = {
     registerLink: {
       color: 'blue',
     },
-  };
+    logo: {
+      width: 70,
+      height: 70,
+    },
+});
 
-  export default styles
+  export default loginStyles

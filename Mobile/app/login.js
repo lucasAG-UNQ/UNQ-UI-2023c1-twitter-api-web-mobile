@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
-import loginStyles from "./estilos"
-//import { Link } from "react-router-dom";
-//import { useNavigate } from 'react-router'
-//import TwApi from '../services.js'
-//import TwitterLogo from '../atoms/twitterlogo';
+import { View, Text, TouchableOpacity } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import loginStyles from "../components/estilos/estilos";
+import {Input, InputPass,TwitterLogo} from "../components/atomos_basic";
+import { useNavigation } from '@react-navigation/native';
+import TwApi from "../components/services/services";
+
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  //const navigate = useNavigate()
+  const navigation = useNavigation()
 
   const validar = () => {
     let valida = true
@@ -29,13 +30,13 @@ const Login = () => {
   const handleLoginSubmit = (event) => {
     event.preventDefault();
     if (validar()) {
-//      TwApi.login({ username: username, password: password })
-//      .then( (response) => {
-//        setError('');
-//        localStorage.setItem('twitterAcessToken', response.headers.authorization);
-//        navigate("/home", { state: { isLoggedUser: true } });
-//      })
-//      .catch( (error) => setError(error.description));
+      TwApi.login({ username: username, password: password })
+      .then( (response) => {
+        setError('');
+        AsyncStorage.setItem('twitterAcessToken', response.headers.authorization);
+        navigation.navigate("home", { state: { isLoggedUser: true } });
+      })
+      .catch( (error) => setError(error.description));
     }
   }
 
@@ -43,22 +44,14 @@ const Login = () => {
     <View style={loginStyles.container}>
       <View style={loginStyles.card}>
         <View style={loginStyles.cardBody}>
+          <View style={loginStyles.logoContainer}>
+            <TwitterLogo />
+          </View>
           <View style={loginStyles.formContainer}>
             <Text style={loginStyles.title}>LOGIN</Text>
             <Text style={loginStyles.subtitle}>Por favor ingrese su usuario y contraseña</Text>
-            <TextInput
-              style={loginStyles.input}
-              placeholder="Usuario"
-              value={username}
-              onChangeText={setUsername}
-            />
-            <TextInput
-              style={loginStyles.input}
-              placeholder="Contraseña"
-              secureTextEntry
-              value={password}
-              onChangeText={setPassword}
-            />
+            <Input seccion={"Usuario"} setFuncion={setUsername} />
+            <InputPass seccion={"Contraseña"} setFuncion={setPassword} /> 
             <TouchableOpacity style={loginStyles.button} onPress={handleLoginSubmit}>
               <Text style={loginStyles.buttonText}>Login</Text>
             </TouchableOpacity>
@@ -66,10 +59,13 @@ const Login = () => {
           </View>
           <View style={loginStyles.registerContainer}>
             <Text style={loginStyles.registerText}>¿No tienes cuenta? </Text>
-            <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+            <TouchableOpacity onPress={() => navigation.navigate('register')}>
               <Text style={loginStyles.registerLink}>REGISTRATE</Text>
             </TouchableOpacity>
           </View>
+          <TouchableOpacity style={loginStyles.button} onPress={TwApi.logout()}>
+              <Text style={loginStyles.buttonText}>LOG OUT - olvidar token</Text>
+            </TouchableOpacity>
         </View>
       </View>
     </View>
