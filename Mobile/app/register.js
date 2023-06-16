@@ -5,8 +5,6 @@ import {Input, InputPass,TwitterLogo} from "../components/atomos_basic"
 import { useNavigation } from '@react-navigation/native';
 import TwApi from "../components/services/services";
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 const Register = () => {
   const [user, setuser] = useState('')
   const [email, setEmail] = useState('')
@@ -79,8 +77,9 @@ const Register = () => {
             <TwitterLogo />
           </View>
           <View style={loginStyles.formContainer}>
-          <Text style={loginStyles.title}>LOGIN</Text>
-            <Text style={loginStyles.subtitle}>Por favor ingrese su usuario y contraseña</Text>
+          <Text style={loginStyles.title}>REGISTRO</Text>
+            <Text style={loginStyles.subtitle}>Por favor ingrese los siguientes datos</Text>
+            <Text style={loginStyles.subtitle}>para crear tu cuenta.</Text>
             <Input seccion={'Nombre de usuario'} setFuncion={setuser}/>
             <Input seccion={'eMail'} setFuncion={setEmail}/>
             <InputPass seccion={'Password'} setFuncion={setpass}/>
