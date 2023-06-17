@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 
-const Follow = () => {
+const Following = () => {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{ color: 'white' }}>ACA VA contenido de la página de Siguiendo</Text>
@@ -8,4 +8,4 @@ const Follow = () => {
     );
   };
 
-  export default Follow
+  export default Following
