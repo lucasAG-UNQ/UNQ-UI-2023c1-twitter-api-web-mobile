@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, Text } from 'react-native';
-import homeStyles from "../components/estilos/estilos_home";
+import homeStyles from "../../styles/estilos_home";
 
 const Tabs = ({ currentTab, onChangeTab }) => {
     return (

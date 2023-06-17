@@ -1,8 +1,8 @@
 import React from 'react';
-import Login from './login';
-import Home from './home';
+import Login from './components/screens/login';
+import Home from './components/screens/home';
 import { StatusBar } from 'expo-status-bar';
-import TwApi from '../components/services/services';
+import TwApi from './services/services';
 
 export default function App() {
   //let isLoggedUser = TwApi.isUserLogged();

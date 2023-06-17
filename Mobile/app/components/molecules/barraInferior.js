@@ -14,7 +14,7 @@ const BarraInferior = ({ currentAction, onChangeAction }) => {
           <Icon name="search" size={30} color={currentAction === 'search' ? 'white' : 'gray'} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => onChangeAction('tweet')} >
-          <Icon name="twitter" size={30} color={currentAction === 'tweet' ? 'white' : 'gray'} />
+          <Icon name="pencil-square-o" size={30} color={currentAction === 'tweet' ? 'white' : 'gray'} />
         </TouchableOpacity>
       </View>
     );
