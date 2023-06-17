@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 
-const Perfil = () => {
+const Profile = () => {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text style={{ color: 'white' }}>ACA VA contenido de la página de Perfil</Text>
@@ -8,4 +8,4 @@ const Perfil = () => {
     );
   };
 
-export default Perfil
+export default Profile

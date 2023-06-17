@@ -3,8 +3,8 @@ import { View, RefreshControl, SafeAreaView } from 'react-native';
 import homeStyles from "../components/estilos/estilos_home";
 import { ScrollView } from 'react-native-gesture-handler';
 import Tabs from '../components/tabs';
-import Perfil from '../components/perfil';
-import Follow from '../components/follow';
+import Profile from '../components/profile';
+import Following from '../components/following';
 import BarraInferior from '../components/barraInferior';
 
 const Home = () => {
@@ -17,7 +17,7 @@ const Home = () => {
     }, 500);
   }, []);
 
-  const [currentTab, setCurrentTab] = useState('follow');
+  const [currentTab, setCurrentTab] = useState('following');
   const [currentAction, setCurrentAction] = useState('home');
 
   const handleTabChange = (tab) => {
@@ -32,8 +32,8 @@ const Home = () => {
     <View style={{ flex: 1 }}>
       <Tabs currentTab={currentTab} onChangeTab={handleTabChange} />
       <View style={{ flex: 1 }}>
-        {currentTab === 'perfil' && <Perfil />}
-        {currentTab === 'follow' && <Follow />}
+        {currentTab === 'profile' && <Profile />}
+        {currentTab === 'following' && <Following />}
       </View>
       <BarraInferior currentAction={currentAction} />
     </View>
