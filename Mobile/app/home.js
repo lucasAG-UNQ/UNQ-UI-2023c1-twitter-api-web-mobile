@@ -1,12 +1,12 @@
 import React, {useState, useCallback } from 'react';
 import { View, RefreshControl, SafeAreaView } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import Tabs from '../molecules/tabs';
-import BarraInferior from '../molecules/barraInferior';
-import Profile from './profile';
-import Following from './following';
+import Tabs from './components/molecules/tabs';
+import BarraInferior from './components/molecules/barraInferior';
+import Profile from './components/screens/profile';
+import Following from './components/screens/following';
 
-import homeStyles from "../../styles/estilos_home";
+import homeStyles from "./styles/estilos_home";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
