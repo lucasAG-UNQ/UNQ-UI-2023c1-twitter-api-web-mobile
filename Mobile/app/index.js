@@ -1,10 +1,18 @@
+import React from 'react';
 import Login from './login';
 import Home from './home';
-import TwApi from '../components/services/services';
+import { StatusBar } from 'expo-status-bar';
+import TwApi from './services/services';
 
 export default function App() {
   let isLoggedUser = TwApi.isUserLogged();
+  //let isLoggedUser = true;
   
-  return (isLoggedUser? <Home />: <Login />);
+  return (
+    <>
+      <StatusBar style='light' />
+      { isLoggedUser ? <Home /> : <Login /> }
+    </>
+    );
 }
 

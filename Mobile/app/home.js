@@ -1,12 +1,12 @@
-import {React, useState, useCallback } from 'react';
+import React, {useState, useCallback } from 'react';
 import { View, RefreshControl, SafeAreaView } from 'react-native';
-import homeStyles from "../components/estilos/estilos_home";
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import Tabs from '../components/tabs';
-import Perfil from '../components/perfil';
-import Follow from '../components/follow';
-import BarraInferior from '../components/barraInferior';
+import Tabs from './components/molecules/tabs';
+import BarraInferior from './components/molecules/barraInferior';
+import Profile from './components/screens/profile';
+import Following from './components/screens/following';
+import homeStyles from "./styles/estilos_home";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -19,7 +19,7 @@ const Home = () => {
     }, 500);
   }, []);
 
-  const [currentTab, setCurrentTab] = useState('follow');
+  const [currentTab, setCurrentTab] = useState('following');
   const [currentAction, setCurrentAction] = useState('home');
 
   const handleTabChange = (tab) => {
@@ -45,8 +45,8 @@ const Home = () => {
     <View style={{ flex: 1 }}>
       <Tabs currentTab={currentTab} onChangeTab={handleTabChange} />
       <View style={{ flex: 1 }}>
-        {currentTab === 'perfil' && <Perfil />}
-        {currentTab === 'follow' && <Follow />}
+        {currentTab === 'profile' && <Profile />}
+        {currentTab === 'following' && <Following />}
       </View>
       <BarraInferior currentAction={currentAction} onChangeAction={ejecutarAccion}/>
     </View>

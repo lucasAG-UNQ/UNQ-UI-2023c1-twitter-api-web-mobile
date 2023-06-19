@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import loginStyles from "../components/estilos/estilos";
-import {Input, InputPass,TwitterLogo} from "../components/atomos_basic";
+import { Input, InputPass, TwitterLogo } from "./components/atoms/atomos_basic";
 import { useNavigation } from '@react-navigation/native';
-import TwApi from "../components/services/services";
+import TwApi from "./services/services";
 
+import loginStyles from "./styles/estilos";
 
 const Login = () => {
   const [username, setUsername] = useState('')
