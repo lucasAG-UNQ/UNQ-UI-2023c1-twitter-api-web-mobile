@@ -29,7 +29,7 @@ const Home = () => {
   const ejecutarAccion = (boton) => {
     switch (boton) {
       case 'search':
-        navigation.navigate("search");
+        navigation.navigate("search", {text:''});
         break;
       case 'home':
         navigation.navigate("home");

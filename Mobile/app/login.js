@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Input, InputPass, TwitterLogo } from "./components/atoms/atomos_basic";
 import { useNavigation } from '@react-navigation/native';
 import TwApi from "./services/services";
@@ -33,7 +32,7 @@ const Login = () => {
       TwApi.login({ username: username, password: password })
       .then( (response) => {
         setError('');
-        AsyncStorage.setItem('twitterAcessToken', response.headers.authorization);
+        TwApi.saveData('twitterAcessToken', response.headers.authorization);
         navigation.navigate("home", { state: { isLoggedUser: true } });
       })
       .catch( (error) => setError(error.description));
