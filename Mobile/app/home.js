@@ -1,15 +1,16 @@
 import React, {useState, useCallback } from 'react';
 import { View, RefreshControl, SafeAreaView } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
 import Tabs from './components/molecules/tabs';
 import BarraInferior from './components/molecules/barraInferior';
 import Profile from './components/screens/profile';
 import Following from './components/screens/following';
-
 import homeStyles from "./styles/estilos_home";
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
+  const navigation = useNavigation()
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -25,6 +26,17 @@ const Home = () => {
     setCurrentTab(tab);
   };
 
+  const ejecutarAccion = (boton) => {
+    switch (boton) {
+      case 'search':
+        navigation.navigate("search", {text:''});
+        break;
+      case 'home':
+        navigation.navigate("home");
+        break;
+    }
+  }
+
 
   return (
     <SafeAreaView style={homeStyles.container}>
@@ -36,7 +48,7 @@ const Home = () => {
         {currentTab === 'profile' && <Profile />}
         {currentTab === 'following' && <Following />}
       </View>
-      <BarraInferior currentAction={currentAction} />
+      <BarraInferior currentAction={currentAction} onChangeAction={ejecutarAccion}/>
     </View>
     </ScrollView>
     </SafeAreaView>

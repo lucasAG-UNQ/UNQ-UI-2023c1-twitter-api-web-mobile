@@ -26,6 +26,18 @@ const InputPass = ({seccion, setFuncion}) => {
       onChangeText={handler}/>);
 }
 
+const InputSearch = ({seccion, setFuncion}) => {
+  const handler = (value ) => {
+    setFuncion(value)
+  }
+return(
+  <TextInput
+    style={loginStyles.inputSearch}
+    placeholder={seccion}
+    onChangeText={handler}
+  />);
+}
+
 const TwitterLogo = (props) => {
   return (
     <Image
@@ -44,4 +56,4 @@ const Boton = ({funciondeboton, loguear}) => {
 }
 */
 
-export { Input, InputPass, TwitterLogo }
+export {Input, InputPass, TwitterLogo, InputSearch }
