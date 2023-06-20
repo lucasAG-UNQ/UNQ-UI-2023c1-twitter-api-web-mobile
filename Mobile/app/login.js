@@ -32,7 +32,7 @@ const Login = () => {
       TwApi.login({ username: username, password: password })
       .then( (response) => {
         setError('');
-        TwApi.saveData('twitterAcessToken', response.headers.authorization);
+        TwApi.saveDataToStorage('twitterAccessToken', response.headers.authorization);
         navigation.navigate("home", { state: { isLoggedUser: true } });
       })
       .catch( (error) => setError(error.description));

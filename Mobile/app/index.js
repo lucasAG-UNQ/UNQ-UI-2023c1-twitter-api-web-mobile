@@ -6,8 +6,7 @@ import TwApi from './services/services';
 
 export default function App() {
   let isLoggedUser = TwApi.isUserLogged();
-  //let isLoggedUser = true;
-  
+
   return (
     <>
       <StatusBar style='light' />
