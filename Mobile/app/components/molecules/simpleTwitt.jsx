@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 
 import TwApi from "../../services/services";
 
-const BasicTwitt = (twit) => {
+const BasicTwitt = ({twit}) => {
     const [user, setUser] = useState([]);
 
     useEffect(() => {

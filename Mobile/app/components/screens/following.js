@@ -11,6 +11,7 @@ const Following = () => {
     useEffect(() => {
         TwApi.getFollowingTwitts()
             .then((response) => {
+                console.log(response);
                 setFollowingTwitts(response.data.results);
                 setError("");
             })
@@ -34,7 +35,8 @@ const Following = () => {
         <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-            <BasicTwitt twitt={followingTwitts[0]} />
+            {followingTwitts.map(t=><BasicTwitt twit={t} />)}
+            
             
         </View>
     );
