@@ -7,17 +7,18 @@ const IconButtonStatStyle= StyleSheet.create({
         justifyContent: 'center',
         height: 30,
         width: 30,
-        borderRadius: '50%',
+        borderRadius: 30/2,
         backgroundColor: 'transparent',
         borderColor: 'transparent',
         color: '#fff',
     },
     iconsContainer:{
-        flex:1,
+        flexDirection:'row',
         paddingRight: '10%',
         paddingLeft: '10%',
-        justifyContent:'space-between',
-        color: '#fff',
+        justifyContent: 'space-between',
+        alignItems: 'center', 
+        height: 60,
     }
 });
 
