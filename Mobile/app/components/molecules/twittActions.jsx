@@ -4,6 +4,7 @@ import IconButtonStat from "../atoms/iconButtonStat";
 import TwApi from "../../services/services";
 import { View,Text } from "react-native";
 import IconButtonStatStyle from "../../styles/estilos_iconButtonStat"
+import axios from "axios";
 //import { Overlay } from "./overlay";
 //import RetweetPost from "./retweetPost";
 //import ReplyPost from "./replyPost";
@@ -19,16 +20,17 @@ const TwittActions= ({twit})=>{
     useEffect(() => {
         TwApi.getLoggedUser()
             .then((response) => {
-                setLoggedUser({id:'u_3'})
-                //setLoggedUser(response.data);
+                setLoggedUser(response.data)
                 setLike(twit.likes.some( like => like.id === response.data.id));
             })
+            .catch(error=>console.log(error))
     }, [twit.likes])
 
     const handleLike=()=>{
         TwApi.toggleLike(twit.id)
                 .then(response=>{twit.likes=response.data.likes
                     setLike(twit.likes.some( like => like.id === loggedUser.id))})
+        TwApi.retrieveDataFromStorage('twitterAccessToken').then(data=>console.log(data))
     }
 
     const toggleOverlay = () => {
@@ -37,11 +39,13 @@ const TwittActions= ({twit})=>{
 
     const handleRetweet=()=>{
         setOpenReply(false)
+        TwApi.logout()
         toggleOverlay()
     }
 
     const handleReply=()=>{
         setOpenReply(true)
+        TwApi.saveDataToStorage('twitterAccessToken','eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0').then(console.log("done"))
         toggleOverlay()
     }
 
@@ -60,7 +64,7 @@ const TwittActions= ({twit})=>{
                 <IconButtonStat stat={twit.repliesAmount || twit.replies?.length} action={handleReply} title="Responder"> 
                     <Icon name="comments" color={"white"} size={20}/> 
                 </IconButtonStat>
-                <IconButtonStat stat={twit.reTweetAmount || twit.reTweet?.length} action={canRetweet()} title="Retwitear"> 
+                <IconButtonStat stat={twit.reTweetAmount || twit.reTweet?.length} action={TwApi.logout} title="Retwitear"> 
                     <Icon name="refresh" color={"white"} size={20}/>
                 </IconButtonStat> 
                 <IconButtonStat stat={twit.likes.length} action={handleLike}>
