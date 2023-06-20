@@ -43,6 +43,13 @@ const loginStyles = StyleSheet.create({
       padding: 8,
       marginBottom: 12,
     },
+    inputSearch: {
+      backgroundColor: 'white',
+      borderRadius: 4,
+      padding: 8,
+      marginRight: 10,
+      width: '80%',
+    },
     button: {
       backgroundColor: 'blue',
       borderRadius: 4,
