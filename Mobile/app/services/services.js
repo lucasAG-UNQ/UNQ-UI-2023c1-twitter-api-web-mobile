@@ -1,25 +1,25 @@
 import axios from 'axios';
-import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-//axios.defaults.baseURL = 'http://localhost:7070';
-axios.defaults.baseURL = 'http://192.168.0.91:7070';
+axios.defaults.baseURL = 'http://localhost:7070';
+//axios.defaults.baseURL = 'http://192.168.0.91:7070';
 
 const twPost = (endpoint, data) => {
-  axios.defaults.headers.common['authorization'] = retrieveData('twitterAcessToken');
+  axios.defaults.headers.common['authorization'] = twitterAccessToken();
   return axios.post(endpoint, data)
     .then( ( response ) => response )
     .catch( (error) => handleError(error) );
 }
 
 const twGet = (endpoint) => {
-  axios.defaults.headers.common['authorization'] = retrieveData('twitterAcessToken');
+  axios.defaults.headers.common['authorization'] = twitterAccessToken();
   return axios.get(endpoint)
     .then( ( response ) => response )
     .catch( (error) => handleError(error) );
 }
 
 const twPut = (endpoint)=>{
-  axios.defaults.headers.common['authorization'] = retrieveData('twitterAcessToken');
+  axios.defaults.headers.common['authorization'] = twitterAccessToken();
   return axios.put(endpoint)
     .then( ( response ) => response )
     .catch( (error) => handleError(error) );
@@ -50,13 +50,26 @@ const login = (loginData) => twPost('/login', loginData);
 const register = (regData) => twPost('/register', regData);
 
 const logout = () => {
-  deleteData('twitterAcessToken');
+  deleteDataFromStorage('twitterAccessToken');
   axios.defaults.headers.common['authorization'] = null;
 }
 
-const isUserLogged = () => !!retrieveData('twitterAcessToken');
+const isUserLogged = () => !!twitterAccessToken();
 
-const trendingTopics = () => twGet('/trendingTopics')
+// const twitterAccessToken = () => {
+//   let token = null;
+//   retrieveDataFromStorage('twitterAccessToken')
+//     .then( (val) => token = val);
+//   console.log('t a token ', token);
+//   return token  
+// };
+
+// ToDo: cambiar esto
+const twitterAccessToken = () => {
+  return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0'
+};
+
+const trendingTopics = () => twGet('/trendingTopics');
 
 const getUser = (id) => twGet(`/user/${id}`);
 
@@ -78,26 +91,28 @@ const followUser = (id) => twPut(`/user/${id}/follow`)
 
 const reply = (id,content) => twPost(`/tweet/${id}/replay`,content)
 
-const saveData = async (key, value) => {
+// storage management
+const saveDataToStorage = async (key, data) => {
   try {
-    await SecureStore.setItemAsync(key, value);
+    await AsyncStorage.setItem(key, data);
   } catch (error) {
-    console.log('Error al guardar los datos:', error);
+    throw new Error(error);
   }
 };
 
-const retrieveData = async (key) => {
+const retrieveDataFromStorage =  async (key) => {
   try {
-    const value = await SecureStore.getItemAsync(key);
-  } catch (error) {
-    console.log('Error al recuperar los datos:', error);
+    return await AsyncStorage.getItem(key)
+  } catch(error) {
+    throw new Error(error);
   }
-};
-const deleteData = async (key) => {
+}
+
+const deleteDataFromStorage = async (key) => {
   try {
-    await SecureStore.deleteItemAsync(key);
+    await AsyncStorage.removeItem(key);
   } catch (error) {
-    console.log('Error al eliminar el ítem:', error);
+    throw new Error(error);
   }
 };
 
@@ -117,9 +132,9 @@ const TwApi = {
     search,
     followUser,
     reply,
-    saveData,
-    retrieveData,
-    deleteData
+    saveDataToStorage,
+    retrieveDataFromStorage,
+    deleteDataFromStorage
 }
 
 export default TwApi;

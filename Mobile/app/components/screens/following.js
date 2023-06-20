@@ -29,14 +29,12 @@ const Following = () => {
         );
 
     if (!followingTwitts) return <Text>Loading... </Text>;
-    console.log(followingTwitts);
+
     return (
         <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-            <Text style={{ color: "white" }}>
-                ACA VA contenido de la página de Siguiendo
-            </Text>
+            <BasicTwitt twitt={followingTwitts[0]} />
             
         </View>
     );

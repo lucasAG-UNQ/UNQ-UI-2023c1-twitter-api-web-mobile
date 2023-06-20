@@ -10,14 +10,15 @@ const BasicTwitt = (twit) => {
         TwApi.getUser(twit.user.id).then((response) => setUser(response.data));
     }, []);
 
+    console.log('twitt ', twit);
     return (
         <View key={twit.id} style={styles.twittContainer}>
-            <Text>{user.id}</Text>
-            <Text>{user.image}</Text>
+            <Text>{twit.user.id}</Text>
+            
             <Text>{twit.user.username}</Text>
             <Text>{twit.date}</Text>
             <Text>{twit.content}</Text>
-            <Text>{twit.type}</Text>
+            
         </View>
     );
 };
