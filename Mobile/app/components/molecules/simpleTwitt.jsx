@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
-import homeStyles from "../../styles/estilos_home";
 
 import TwApi from "../../services/services";
 
