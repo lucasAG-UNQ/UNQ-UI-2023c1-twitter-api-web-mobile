@@ -13,11 +13,11 @@ const BasicTwitt = ({twit}) => {
     console.log('twitt ', twit);
     return (
         <View key={twit.id} style={styles.twittContainer}>
-            <Text>{twit.user.id}</Text>
+            <Text style={styles.whiteText}>{twit.user.id}</Text>
             
-            <Text>{twit.user.username}</Text>
-            <Text>{twit.date}</Text>
-            <Text>{twit.content}</Text>
+            <Text style={styles.whiteText}>{twit.user.username}</Text>
+            <Text style={styles.whiteText}>{twit.date}</Text>
+            <Text style={styles.whiteText}>{twit.content}</Text>
             
         </View>
     );
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         paddingTop: 5,
     },
+    whiteText:{color:'white'}
 });
 
 export default BasicTwitt;

@@ -24,12 +24,12 @@ const Following = () => {
         // ToDo: darle estilos al error
         return (
             <View>
-                <Text>Ups... algo salió mal</Text>
-                <Text>{error}</Text>
+                <Text style={{color:'white'}}>Ups... algo salió mal</Text>
+                <Text style={{color:'white'}}>{error}</Text>
             </View>
         );
 
-    if (!followingTwitts) return <Text>Loading... </Text>;
+    if (!followingTwitts) return <Text style={{color:'white'}}>Loading... </Text>;
 
     return (
         <View
