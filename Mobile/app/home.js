@@ -26,17 +26,6 @@ const Home = () => {
         setCurrentTab(tab);
     };
 
-    const handleChangeAction = (boton) => {
-        switch (boton) {
-            case "search":
-                navigation.navigate("search", { text: "" });
-                break;
-            case "home":
-                navigation.navigate("home");
-                break;
-        }
-    };
-
     return (
         <SafeAreaView style={homeStyles.container}>
             <ScrollView
@@ -57,10 +46,7 @@ const Home = () => {
                         {currentTab === "profile" && <Profile />}
                         {currentTab === "following" && <Following />}
                     </View>
-                    <BottomNavigationBar
-                        currentAction={currentAction}
-                        onChangeAction={handleChangeAction}
-                    />
+                    <BottomNavigationBar currentAction={currentAction} />
                 </View>
             </ScrollView>
         </SafeAreaView>

@@ -25,7 +25,6 @@ const SimpleTwitt = ({twit}) => {
 
 const styles = StyleSheet.create({
     twittContainer: {
-        padding: 20,
         paddingBottom: 5,
         paddingTop: 5,
     },
