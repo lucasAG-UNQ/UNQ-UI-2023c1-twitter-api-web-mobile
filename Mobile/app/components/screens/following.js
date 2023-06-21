@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text } from "react-native";
-import BasicTwitt from "../molecules/simpleTwitt";
+import SimpleTwitt from "../molecules/simpleTwitt";
 
 import TwApi from "../../services/services";
 
@@ -35,7 +35,7 @@ const Following = () => {
         <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-            {followingTwitts.map(t=><BasicTwitt twit={t} />)}
+            {followingTwitts.map(t=><SimpleTwitt twit={t} />)}
             
             
         </View>

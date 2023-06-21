@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 
 import TwApi from "../../services/services";
 
-const BasicTwitt = ({twit}) => {
+const SimpleTwitt = ({twit}) => {
     const [user, setUser] = useState([]);
 
     useEffect(() => {
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
     whiteText:{color:'white'}
 });
 
-export default BasicTwitt;
+export default SimpleTwitt;
