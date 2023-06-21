@@ -8,10 +8,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BarraInferior from './components/molecules/barraInferior';
 import {InputSearch} from "./components/atoms/atomos_basic";
 import TwApi from './services/services';
+import BasicTwitt from './components/molecules/simpleTwitt';
 
 const Search = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState('')
+  const [twitts,setTwitts] = useState([]);
   const navigation = useNavigation()
   const [texto, setTexto] = useState('')
 
@@ -52,15 +54,21 @@ const Search = () => {
             <Icon name="search" size={30} color='white' />
           </TouchableOpacity>
         </View>
-        <View style={{ flex: 1 }}>
-          <Text style={homeStyles.titleBold}>B U S Q U E D A = {texto}</Text>
+        <ScrollView contentContainerStyle={{ alignItems: 'flex-start', justifyContent: 'flex-start' }}>
+          <View>
+          {(twitts.length > 0)? twitLog(twitts) : <Text style={homeStyles.titleBold}>B U S Q U E D A = {texto}</Text>}
           <Text style={loginStyles.errorText}>{error}</Text>
-        </View>
+          </View>
+        </ScrollView>
       </ScrollView>
       <BarraInferior currentAction={currentAction} onChangeAction={ejecutarAccion}/>
     </SafeAreaView>
   );
 };
+
+const twitLog = (twits)=> {
+  return twits.map((twit) => <BasicTwitt twit={twit}/>);
+}
 
    
 export default Search

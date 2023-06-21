@@ -63,8 +63,8 @@ const Login = () => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={loginStyles.button} onPress={TwApi.logout()}>
-              <Text style={loginStyles.buttonText}>LOG OUT - olvidar token</Text>
-            </TouchableOpacity>
+            <Text style={loginStyles.buttonText}>LOG OUT - olvidar token</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>

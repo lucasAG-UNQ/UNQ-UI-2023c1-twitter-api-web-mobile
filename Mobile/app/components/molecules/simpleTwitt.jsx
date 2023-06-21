@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
+import homeStyles from "../../styles/estilos_home";
 
 import TwApi from "../../services/services";
 
-const BasicTwitt = (twit) => {
+const BasicTwitt = ({twit}) => {
     const [user, setUser] = useState([]);
 
     useEffect(() => {
@@ -12,19 +13,18 @@ const BasicTwitt = (twit) => {
 
     return (
         <View key={twit.id} style={styles.twittContainer}>
-            <Text>{user.id}</Text>
+            <Text style={homeStyles.titleNomal}>{user.id}</Text>
             <Text>{user.image}</Text>
-            <Text>{twit.user.username}</Text>
-            <Text>{twit.date}</Text>
-            <Text>{twit.content}</Text>
-            <Text>{twit.type}</Text>
+            <Text style={homeStyles.titleNormal}>{twit.user.username}</Text>
+            <Text style={homeStyles.titleNormal}>{twit.date}</Text>
+            <Text style={homeStyles.titleNormal}>{twit.content}</Text>
+            
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     twittContainer: {
-        padding: 20,
         paddingBottom: 5,
         paddingTop: 5,
     },

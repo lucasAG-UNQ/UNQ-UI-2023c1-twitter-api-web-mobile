@@ -4,22 +4,26 @@ import * as SecureStore from 'expo-secure-store';
 //axios.defaults.baseURL = 'http://localhost:7070';
 axios.defaults.baseURL = 'http://192.168.0.91:7070';
 
+
 const twPost = (endpoint, data) => {
-  axios.defaults.headers.common['authorization'] = retrieveData('twitterAcessToken');
+  //axios.defaults.headers.common['authorization'] = retrieveData('twitterAcessToken');
+  axios.defaults.headers.common['authorization'] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0';
   return axios.post(endpoint, data)
     .then( ( response ) => response )
     .catch( (error) => handleError(error) );
 }
 
 const twGet = (endpoint) => {
-  axios.defaults.headers.common['authorization'] = retrieveData('twitterAcessToken');
+  //axios.defaults.headers.common['authorization'] = retrieveData('twitterAcessToken');
+  axios.defaults.headers.common['authorization'] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0';
   return axios.get(endpoint)
     .then( ( response ) => response )
     .catch( (error) => handleError(error) );
 }
 
 const twPut = (endpoint)=>{
-  axios.defaults.headers.common['authorization'] = retrieveData('twitterAcessToken');
+  //axios.defaults.headers.common['authorization'] = retrieveData('twitterAcessToken');
+  axios.defaults.headers.common['authorization'] = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0';
   return axios.put(endpoint)
     .then( ( response ) => response )
     .catch( (error) => handleError(error) );
@@ -54,7 +58,7 @@ const logout = () => {
   axios.defaults.headers.common['authorization'] = null;
 }
 
-const isUserLogged = () => !!retrieveData('twitterAcessToken');
+const isUserLogged = () => retrieveData('twitterAcessToken') == 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0';
 
 const trendingTopics = () => twGet('/trendingTopics')
 
@@ -79,26 +83,31 @@ const followUser = (id) => twPut(`/user/${id}/follow`)
 const reply = (id,content) => twPost(`/tweet/${id}/replay`,content)
 
 const saveData = async (key, value) => {
-  try {
-    await SecureStore.setItemAsync(key, value);
-  } catch (error) {
-    console.log('Error al guardar los datos:', error);
+  try{
+    SecureStore.setItemAsync(key, value);
   }
+  catch(error) {
+    throw new Error("Error al saveData: " + error)
+  };
 };
 
 const retrieveData = async (key) => {
-  try {
+  try{
     const value = await SecureStore.getItemAsync(key);
-  } catch (error) {
-    console.log('Error al recuperar los datos:', error);
+    return value
   }
+  catch (error) {
+    throw new Error("Error al retrieveData: " + error)
+  };
 };
+
 const deleteData = async (key) => {
-  try {
-    await SecureStore.deleteItemAsync(key);
-  } catch (error) {
-    console.log('Error al eliminar el ítem:', error);
+  try{
+    SecureStore.deleteItemAsync(key);
   }
+  catch (error) {
+    throw new Error("Error al deleteData: " + error)
+  };
 };
 
 const TwApi = {
