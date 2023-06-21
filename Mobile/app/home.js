@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import { View, RefreshControl, SafeAreaView } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
-import Tabs from "./components/molecules/tabs";
+import TopNavigationTabs from "./components/molecules/topNavigationTabs";
 import BottomNavigationBar from "./components/molecules/bottomNavigationBar";
 import Profile from "./components/screens/profile";
 import Following from "./components/screens/following";
@@ -49,7 +49,7 @@ const Home = () => {
                 }
             >
                 <View style={{ flex: 1 }}>
-                    <Tabs
+                    <TopNavigationTabs
                         currentTab={currentTab}
                         onChangeTab={handleTabChange}
                     />
