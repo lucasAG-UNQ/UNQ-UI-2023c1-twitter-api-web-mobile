@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import homeStyles from "./styles/estilos_home";
 import loginStyles from "./styles/estilos";
 import { ScrollView } from 'react-native-gesture-handler';
-import BarraInferior from './components/molecules/barraInferior';
+import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import {InputSearch} from "./components/atoms/atomos_basic";
 import TwApi from './services/services';
 
@@ -57,7 +57,7 @@ const Search = () => {
           <Text style={loginStyles.errorText}>{error}</Text>
         </View>
       </ScrollView>
-      <BarraInferior currentAction={currentAction} onChangeAction={ejecutarAccion}/>
+      <BottomNavigationBar currentAction={currentAction} onChangeAction={ejecutarAccion}/>
     </SafeAreaView>
   );
 };
