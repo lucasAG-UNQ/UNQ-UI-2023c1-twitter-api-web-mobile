@@ -1,28 +1,40 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-axios.defaults.baseURL = 'http://localhost:7070';
-//axios.defaults.baseURL = 'http://192.168.0.91:7070';
+//axios.defaults.baseURL = 'http://localhost:7070';
+axios.defaults.baseURL = 'http://192.168.0.10:7070';
 
-const twPost = (endpoint, data) => {
-  axios.defaults.headers.common['authorization'] = twitterAccessToken();
-  return axios.post(endpoint, data)
-    .then( ( response ) => response )
-    .catch( (error) => handleError(error) );
+const twPost = async (endpoint, data) => {
+  await retrieveDataFromStorage('twitterAccessToken')
+            .then(data=>axios.defaults.headers.common['authorization'] = data);
+  try {
+    const response = await axios.post(endpoint, data);
+    return response;
+  } catch (error) {
+    return await handleError(error);
+  }
 }
 
-const twGet = (endpoint) => {
-  axios.defaults.headers.common['authorization'] = twitterAccessToken();
-  return axios.get(endpoint)
-    .then( ( response ) => response )
-    .catch( (error) => handleError(error) );
+const twGet = async (endpoint) => {
+  await retrieveDataFromStorage('twitterAccessToken')
+            .then(data=>axios.defaults.headers.common['authorization'] = data);
+  try {
+    const response = await axios.get(endpoint);
+    return response;
+  } catch (error) {
+    return await handleError(error);
+  }
 }
 
-const twPut = (endpoint)=>{
-  axios.defaults.headers.common['authorization'] = twitterAccessToken();
-  return axios.put(endpoint)
-    .then( ( response ) => response )
-    .catch( (error) => handleError(error) );
+const twPut = async (endpoint)=>{
+  await retrieveDataFromStorage('twitterAccessToken')
+              .then(data=>axios.defaults.headers.common['authorization'] = data);
+  try {
+    const response = await axios.put(endpoint);
+    return response;
+  } catch (error) {
+    return await handleError(error);
+  }
 }
 
 // this helps the error handle return a common error for every case
@@ -54,20 +66,20 @@ const logout = () => {
   axios.defaults.headers.common['authorization'] = null;
 }
 
-const isUserLogged = () => !!twitterAccessToken();
+const isUserLogged = async () =>!!await twitterAccessToken()
 
-// const twitterAccessToken = () => {
-//   let token = null;
-//   retrieveDataFromStorage('twitterAccessToken')
-//     .then( (val) => token = val);
-//   console.log('t a token ', token);
-//   return token  
-// };
+const twitterAccessToken = async () => {
+    let token = null;
+    await retrieveDataFromStorage('twitterAccessToken')
+      .then( val => token = val);
+    console.log('t a token ', token);
+    return token;
+};
 
 // ToDo: cambiar esto
-const twitterAccessToken = () => {
-  return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0'
-};
+//const twitterAccessToken = () => {
+//  return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0'
+//};
 
 const trendingTopics = () => twGet('/trendingTopics');
 
@@ -102,7 +114,11 @@ const saveDataToStorage = async (key, data) => {
 
 const retrieveDataFromStorage =  async (key) => {
   try {
-    return await AsyncStorage.getItem(key)
+    const token = await AsyncStorage.getItem(key);
+
+    console.log("llamado a retrieve, res: " + token );
+
+    return token;
   } catch(error) {
     throw new Error(error);
   }

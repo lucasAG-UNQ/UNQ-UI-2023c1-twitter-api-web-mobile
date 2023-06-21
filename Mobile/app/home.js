@@ -7,6 +7,7 @@ import BarraInferior from './components/molecules/barraInferior';
 import Profile from './components/screens/profile';
 import Following from './components/screens/following';
 import homeStyles from "./styles/estilos_home";
+import TwittActions from './components/molecules/twittActions';
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -49,6 +50,7 @@ const Home = () => {
         {currentTab === 'following' && <Following />}
       </View>
       <BarraInferior currentAction={currentAction} onChangeAction={ejecutarAccion}/>
+      <TwittActions twit={{id:'t_1',user:{id:'u_3'},likes:[],reTweet:[1],replies:[]}}/>
     </View>
     </ScrollView>
     </SafeAreaView>

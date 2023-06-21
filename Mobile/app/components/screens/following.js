@@ -11,6 +11,7 @@ const Following = () => {
     useEffect(() => {
         TwApi.getFollowingTwitts()
             .then((response) => {
+                console.log(response);
                 setFollowingTwitts(response.data.results);
                 setError("");
             })
@@ -23,18 +24,19 @@ const Following = () => {
         // ToDo: darle estilos al error
         return (
             <View>
-                <Text>Ups... algo salió mal</Text>
-                <Text>{error}</Text>
+                <Text style={{color:'white'}}>Ups... algo salió mal</Text>
+                <Text style={{color:'white'}}>{error}</Text>
             </View>
         );
 
-    if (!followingTwitts) return <Text>Loading... </Text>;
+    if (!followingTwitts) return <Text style={{color:'white'}}>Loading... </Text>;
 
     return (
         <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-            <BasicTwitt twitt={followingTwitts[0]} />
+            {followingTwitts.map(t=><BasicTwitt twit={t} />)}
+            
             
         </View>
     );

@@ -62,7 +62,7 @@ const Login = () => {
               <Text style={loginStyles.registerLink}>REGISTRATE</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={loginStyles.button} onPress={TwApi.logout()}>
+          <TouchableOpacity style={loginStyles.button} onPress={TwApi.logout}>
               <Text style={loginStyles.buttonText}>LOG OUT - olvidar token</Text>
             </TouchableOpacity>
         </View>
