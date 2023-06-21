@@ -4,20 +4,21 @@ import homeStyles from "../../styles/estilos_home";
 
 import TwApi from "../../services/services";
 
-const BasicTwitt = ({twit}) => {
+const SimpleTwitt = ({twit}) => {
     const [user, setUser] = useState([]);
 
     useEffect(() => {
         TwApi.getUser(twit.user.id).then((response) => setUser(response.data));
     }, []);
 
+    console.log('twitt ', twit);
     return (
         <View key={twit.id} style={styles.twittContainer}>
-            <Text style={homeStyles.titleNomal}>{user.id}</Text>
-            <Text>{user.image}</Text>
-            <Text style={homeStyles.titleNormal}>{twit.user.username}</Text>
-            <Text style={homeStyles.titleNormal}>{twit.date}</Text>
-            <Text style={homeStyles.titleNormal}>{twit.content}</Text>
+            <Text style={styles.whiteText}>{twit.user.id}</Text>
+            
+            <Text style={styles.whiteText}>{twit.user.username}</Text>
+            <Text style={styles.whiteText}>{twit.date}</Text>
+            <Text style={styles.whiteText}>{twit.content}</Text>
             
         </View>
     );
@@ -28,6 +29,7 @@ const styles = StyleSheet.create({
         paddingBottom: 5,
         paddingTop: 5,
     },
+    whiteText:{color:'white'}
 });
 
-export default BasicTwitt;
+export default SimpleTwitt;

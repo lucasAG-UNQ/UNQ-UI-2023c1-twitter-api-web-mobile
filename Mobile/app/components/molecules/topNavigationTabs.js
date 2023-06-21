@@ -1,7 +1,7 @@
 import { View, TouchableOpacity, Text } from 'react-native';
 import homeStyles from "../../styles/estilos_home";
 
-const Tabs = ({ currentTab, onChangeTab }) => {
+const TopNavigationTabs = ({ currentTab, onChangeTab }) => {
     return (
       <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', height: 60, width: '100%' }}>
         <TouchableOpacity style={{alignItems: 'center', backgroundColor: currentTab === 'following' ? 'black' : 'gray', width: '50%', borderRadius: 15}}  onPress={() => onChangeTab('following')}>
@@ -14,4 +14,4 @@ const Tabs = ({ currentTab, onChangeTab }) => {
     );
   };
 
-export default Tabs
+export default TopNavigationTabs

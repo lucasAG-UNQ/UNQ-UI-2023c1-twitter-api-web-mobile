@@ -1,9 +1,9 @@
 import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const BarraInferior = ({ currentAction, onChangeAction }) => {
+const BottomNavigationBar = ({ currentAction, onChangeAction }) => {
     return (
-      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', height: 60,width: '100%' }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', height: 60, width: '100%' }}>
         <TouchableOpacity style={{ flex: 1 }} 
           onPress={currentAction != 'home' ? () => onChangeAction('home') : null} 
         >
@@ -29,4 +29,4 @@ const BarraInferior = ({ currentAction, onChangeAction }) => {
     );
   };
 
-  export default BarraInferior
+  export default BottomNavigationBar
