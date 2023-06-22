@@ -1,7 +1,6 @@
-import {React, useState, useCallback, useEffect} from 'react';
-import { View, RefreshControl, SafeAreaView , Text, TouchableOpacity} from 'react-native';
+import {React, useState, useEffect} from 'react';
+import { View, SafeAreaView , Text, TouchableOpacity} from 'react-native';
 import homeStyles from "./styles/estilos_home";
-import loginStyles from "./styles/estilos";
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import TwApi from './services/services';
@@ -12,22 +11,13 @@ import { Input } from './components/atoms/atomos_basic';
 const TwitPost = () => {
     const [loggedUser, setLoggedUser] = useState();
 
-    
     const [refreshing, setRefreshing] = useState(false);
     const [textPost, setTextPost] = useState("");
     const [imagePost, setImagePost] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
     const [tweetId, setTweetId] = useState("");
 
     const currentAction= 'tweet';
-
-    const onRefresh = useCallback(() => {
-      setRefreshing(true);
-      setTimeout(() => {
-        setRefreshing(false);
-      }, 500);
-    }, []);
-  
 
     useEffect(() => {
         TwApi.getLoggedUser().then((response) => {
@@ -60,7 +50,7 @@ const TwitPost = () => {
             TwApi.postNormalTwitt(twitToPost)
                 .then((response) => {
                     setTweetId(response.data.id);
-                    setError('');
+                    setError(null);
                 })
                 .catch((error) => setError(error.description));
         }
@@ -81,8 +71,6 @@ const TwitPost = () => {
 
     return (
         <SafeAreaView style={homeStyles.container}>
-            
-            <ScrollView contentContainerStyle={homeStyles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
               <View style={{flex:1}}>
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                   <Text style={homeStyles.titleBold}>Nuevo Twit</Text>
@@ -101,14 +89,9 @@ const TwitPost = () => {
                   </View>
                 </ScrollView>
               </View>
-            </ScrollView>
-            <View style={{width:'100%'}}>
-              <BottomNavigationBar currentAction={currentAction}/>
-            </View>
-            
+            <BottomNavigationBar currentAction={currentAction}/>
         </SafeAreaView>
     );
 };
 
-   
 export default TwitPost

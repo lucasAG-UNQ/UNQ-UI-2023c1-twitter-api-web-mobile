@@ -1,5 +1,5 @@
-import {React, useState, useCallback} from 'react';
-import { View, SafeAreaView , Text, TouchableOpacity} from 'react-native';
+import {React, useState } from 'react';
+import { View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import homeStyles from "./styles/estilos_home";
 import loginStyles from "./styles/estilos";
@@ -9,7 +9,7 @@ import TwApi from './services/services';
 import TwittLog from './components/organisms/twittLog';
 
 const Search = () => {
-  const [error, setError] = useState('')
+  const [error, setError] = useState(null)
   const [twitts,setTwitts] = useState([]);
   const [texto, setTexto] = useState('');
   const [buscando, setBuscando] = useState(false)
@@ -21,7 +21,7 @@ const Search = () => {
       .then(response => {
         setTwitts(response.data.results);
         twitts.length == 0 ? setBuscando(true): setBuscando(false);
-        setError('');
+        setError(null);
       })
       .catch((error) => setError(error.description))
     }

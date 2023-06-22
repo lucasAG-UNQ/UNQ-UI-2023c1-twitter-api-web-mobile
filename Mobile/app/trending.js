@@ -1,4 +1,4 @@
-import {React, useState, useCallback, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text} from 'react-native';
 import homeStyles from "./styles/estilos_home";
 import loginStyles from "./styles/estilos";
@@ -38,13 +38,4 @@ const Trending = () => {
   );
 };
 
-   
 export default Trending
-
-
-
-
-
-
-
-

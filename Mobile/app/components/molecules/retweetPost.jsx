@@ -9,7 +9,7 @@ import { Input } from "../atoms/atomos_basic";
 const RetwittPost = ({ id, onPost }) => {
     const [loggedUser, setLoggedUser] = useState();
     const [textPost, setTextPost] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
 
     const navigation = useNavigation();
     
@@ -18,7 +18,7 @@ const RetwittPost = ({ id, onPost }) => {
         const twitToPost = { content: textPost };
         TwApi.retwitt(id, twitToPost)
             .then((_) => {
-                setError("");
+                setError(null);
                 onPost();
             })
             .catch((error) => {console.log(error);setError(error.status)});

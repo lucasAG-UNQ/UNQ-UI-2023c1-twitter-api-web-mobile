@@ -11,7 +11,7 @@ const Profile = ({user}) => {
   const [loggedUser, setLoggedUser] = useState();
   const [isLoggedUser, setIsLoggedUser] = useState(false);
   const [isFollowingUser, setIsFollowingUser] = useState(false);
-  const [error, setError] = useState('')
+  const [error, setError] = useState(null)
   const navigation = useNavigation();
 
   const buttonFollowText = isFollowingUser ? 'Dejar de seguir' : 'Seguir';
@@ -30,7 +30,7 @@ const Profile = ({user}) => {
       TwApi.followUser(user.id)
               .then( response => {
                   setIsFollowingUser(!isFollowingUser);
-                  setError('');
+                  setError(null);
               })
               .catch((err) => {
                   setError(err.description) })
@@ -47,7 +47,6 @@ const Profile = ({user}) => {
       <Text style={loginStyles.errorText}>{error}</Text>
     </View>
   )
-      
 
   if (!loggedUser) return (
     <View>
@@ -96,41 +95,40 @@ const Profile = ({user}) => {
   };
   
 
-  const styles = {
-    container: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      marginLeft:20,
-    },
-    image: {
-      width: '20%',
-      aspectRatio: 1,
-    },
-    textContainer: {
-      marginLeft: 10,
-    },
-    statsContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      gap: 4,
-    },
-    button: {
-      width: '80%',
-      alignItems: 'center',
-      padding: 10,
-      borderRadius: 5,
-    },
+const styles = {
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft:20,
+  },
+  image: {
+    width: '20%',
+    aspectRatio: 1,
+  },
+  textContainer: {
+    marginLeft: 10,
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 4,
+  },
+  button: {
+    width: '80%',
+    alignItems: 'center',
+    padding: 10,
+    borderRadius: 5,
+  },
 
-    statsNumber: {
-      fontWeight: 'bold',
-      fontSize: 24,
-      textAlign: 'center',
-    },
-    statsLabel: {
-      fontSize: 18,
-      textAlign: 'center',
-    },
-  };
-
+  statsNumber: {
+    fontWeight: 'bold',
+    fontSize: 24,
+    textAlign: 'center',
+  },
+  statsLabel: {
+    fontSize: 18,
+    textAlign: 'center',
+  },
+};
 
 export default Profile

@@ -10,7 +10,7 @@ const ReplyPost = ({ id, onPost }) => {
     const [loggedUser, setLoggedUser] = useState();
     const [textPost, setTextPost] = useState("");
     const [imagePost, setImagePost] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
 
     const navigation = useNavigation();
     
@@ -19,7 +19,7 @@ const ReplyPost = ({ id, onPost }) => {
         const twitToPost = { content: textPost, image: imagePost };
         TwApi.reply(id, twitToPost)
             .then((_) => {
-                setError("");
+                setError(null);
                 onPost();
             })
             .catch((error) => {console.log(error);setError(error.status)});
