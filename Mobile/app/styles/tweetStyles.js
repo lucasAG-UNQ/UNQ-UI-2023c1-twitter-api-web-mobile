@@ -4,7 +4,7 @@ const TweetStyles = StyleSheet.create({
     tweetWithActionsContainer: {
         padding: 2,
         margin: 2,
-        backgroundColor: 'grey',
+        backgroundColor: '#111111',
         borderColor: "#DDDDDD",
         borderWidth: 1,
         borderTopLeftRadius: 15,

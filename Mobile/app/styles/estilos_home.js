@@ -7,7 +7,7 @@ const homeStyles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 33,
     paddingTop: 3,
-    backgroundColor: '#747',
+    backgroundColor: '#000',
   },
   logoContainer: {
     justifyContent: 'center',
