@@ -5,7 +5,7 @@ import loginStyles from "./styles/estilos";
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import TwApi from './services/services';
-import { TwitLog } from './components/molecules/simpleTwitt';
+import TwittLog from './components/molecules/twittLog';
 
 const Trending = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -34,12 +34,12 @@ const Trending = () => {
     <SafeAreaView style={homeStyles.container}>
       <ScrollView contentContainerStyle={homeStyles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>   
         <Text style={homeStyles.titleBold}>Trending topics</Text>
-        <ScrollView contentContainerStyle={{ alignItems: 'flex-start', justifyContent: 'flex-start' }}>
-          <View>
-          {(twitts.length > 0) ? <TwitLog twits={twitts} /> : <Text style={homeStyles.titleNormal}>Loading...</Text>}
+        <View>
+          {(twitts.length > 0) ? 
+            <TwittLog tweets={twitts} /> : 
+            <Text style={homeStyles.titleNormal}>Loading...</Text>}
           <Text style={loginStyles.errorText}>{error}</Text>
-          </View>
-        </ScrollView>
+        </View>
       </ScrollView>
       <BottomNavigationBar currentAction={currentAction} />
     </SafeAreaView>

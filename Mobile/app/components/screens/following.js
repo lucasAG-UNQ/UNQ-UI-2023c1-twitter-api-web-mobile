@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, RefreshControl } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { TwitLog } from "../molecules/simpleTwitt";
+import TwittLog from '../molecules/twittLog';
 import homeStyles from "../../styles/estilos_home";
 import loginStyles from "../../styles/estilos";
 
@@ -20,7 +20,6 @@ const Following = () => {
     useEffect(() => {
         TwApi.getFollowingTwitts()
             .then((response) => {
-                console.log(response);
                 setFollowingTwitts(response.data.results);
                 setError("");
             })
@@ -50,9 +49,11 @@ const Following = () => {
             />
         }
     >
-        <View style={{ backgroundColor: 'green', flex: 1, justifyContent: "center", alignItems: "center" }}>
-        {(followingTwitts.length > 0) ? <TwitLog twits={followingTwitts} /> : <Text style={homeStyles.titleNormal}>Loading...</Text>}
-        <Text style={loginStyles.errorText}>{error}</Text>
+        <View>
+            {(followingTwitts.length > 0) ? 
+                <TwittLog tweets={followingTwitts} /> : 
+                <Text style={homeStyles.titleNormal}>Loading...</Text>}
+            <Text style={loginStyles.errorText}>{error}</Text>
         </View>
         </ScrollView>
     );

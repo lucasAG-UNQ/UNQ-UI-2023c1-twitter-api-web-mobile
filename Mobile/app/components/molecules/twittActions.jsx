@@ -9,7 +9,7 @@ import OverlayStyles from "../../styles/estilos_overlay";
 import ReplyPost from "./replyPost";
 import RetwittPost from "./retweetPost";
 
-const TwittActions= ({twit})=>{
+const TwittActions= ({tweet})=>{
     
     const [loggedUser, setLoggedUser] = useState({id:'u_3'})
 
@@ -21,15 +21,15 @@ const TwittActions= ({twit})=>{
         TwApi.getLoggedUser()
             .then((response) => {
                 setLoggedUser(response.data)
-                setLike(twit.likes.some( like => like.id === response.data.id));
+                setLike(tweet.likes.some( like => like.id === response.data.id));
             })
             .catch(error=>console.log(error))
-    }, [twit.likes])
+    }, [tweet.likes])
 
     const handleLike=()=>{
-        TwApi.toggleLike(twit.id)
-                .then(response=>{twit.likes=response.data.likes
-                    setLike(twit.likes.some( like => like.id === loggedUser.id))})
+        TwApi.toggleLike(tweet.id)
+                .then(response=>{tweet.likes=response.data.likes
+                    setLike(tweet.likes.some( like => like.id === loggedUser.id))})
         TwApi.retrieveDataFromStorage('twitterAccessToken').then(data=>console.log(data))
     }
 
@@ -47,11 +47,11 @@ const TwittActions= ({twit})=>{
         toggleOverlay()
     }
 
-    const overlayToOpen = () =>  openReply ? <ReplyPost id={twit.id} onPost={toggleOverlay} />:<RetwittPost id={twit.id} onPost={toggleOverlay} />;
+    const overlayToOpen = () =>  openReply ? <ReplyPost id={tweet.id} onPost={toggleOverlay} />:<RetwittPost id={tweet.id} onPost={toggleOverlay} />;
 
     const liked = () => like ? <Icon color={'white'} name="heart" size={20}/> : <Icon color={'white'} name="heart-o" size={20}/>;
 
-    const canRetweet = () => { return twit.user.id !== loggedUser.id ? handleRetweet : (_=>_) };
+    const canRetweet = () => { return tweet.user.id !== loggedUser.id ? handleRetweet : (_=>_) };
     
     if (!loggedUser) return <Text style={{color:'white'}} >Loading... </Text>;
 
@@ -67,13 +67,13 @@ const TwittActions= ({twit})=>{
             
 
             <View style={IconButtonStatStyle.iconsContainer}>
-                <IconButtonStat stat={ twit.replies?.length||twit.repliesAmount||0} action={handleReply} title="Responder"> 
+                <IconButtonStat stat={ tweet.replies?.length||tweet.repliesAmount||0} action={handleReply} title="Responder"> 
                     <Icon name="comments" color={"white"} size={20}/> 
                 </IconButtonStat>
-                <IconButtonStat stat={twit.reTweet?.length||twit.reTweetAmount||0} action={canRetweet()} title="Retwitear"> 
+                <IconButtonStat stat={tweet.reTweet?.length||tweet.reTweetAmount||0} action={canRetweet()} title="Retwitear"> 
                     <Icon name="refresh" color={"white"} size={20}/>
                 </IconButtonStat> 
-                <IconButtonStat stat={twit.likes.length} action={handleLike}>
+                <IconButtonStat stat={tweet.likes.length} action={handleLike}>
                     {liked()} 
                 </IconButtonStat>
             </View>

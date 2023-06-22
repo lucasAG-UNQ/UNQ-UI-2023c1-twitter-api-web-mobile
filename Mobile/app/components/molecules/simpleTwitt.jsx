@@ -1,38 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
-
+import TwitProfilePic from "../atoms/twitProfilePic";
 import TwApi from "../../services/services";
-import FullTwittWithActions from "./fullTwittWithActions";
 
-const SimpleTwitt = ({twit}) => {
-    const [user, setUser] = useState([]);
+const SimpleTwitt = ({ tweet }) => {
+    const [twittAuthor, setTwittAuthor] = useState([]);
 
     useEffect(() => {
-        TwApi.getUser(twit.user.id).then((response) => setUser(response.data));
+        TwApi.getUser(tweet.user.id).then((response) => setTwittAuthor(response.data));
     }, []);
 
-    console.log('twitt ', twit);
     return (
-        <View key={twit.id} style={styles.twittContainer}>            
-            <Text style={styles.whiteText}>{twit.user.username}: en {twit.date.replace("T", " a ").slice(0,18)}</Text>
-            <Text style={styles.grayText}>{twit.content}</Text>
+        <View style={twittStyles.twittContainer}>
+            <TwitProfilePic image={twittAuthor.image} id={twittAuthor.id} />
+            <Text style={twittStyles.whiteText}>
+                {tweet.user.username}: en{" "}
+                {tweet.date.replace("T", " a ").slice(0, 18)}
+            </Text>
+            <Text style={twittStyles.grayText}>{tweet.content}</Text>
         </View>
     );
 };
-const TwitLog = ({twits}) => {
-    return twits.map((twit) => <FullTwittWithActions key={twit.id} twit={twit}/>);
-}
 
-const styles = StyleSheet.create({
+const twittStyles = StyleSheet.create({
     twittContainer: {
         padding: 10,
         borderWidth: 1,
-        marginTop:10,
-        borderColor: '#DDDDDD',
+        marginTop: 10,
+        borderColor: "#DDDDDD",
     },
-    whiteText:{color:'white'},
-    grayText:{color:'#999999'},
+    whiteText: { color: "white" },
+    grayText: { color: "#999999" },
 });
 
-
-export {SimpleTwitt, TwitLog};
+export default SimpleTwitt;
