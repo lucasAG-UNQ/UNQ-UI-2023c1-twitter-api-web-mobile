@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import {InputSearch, TwitterLogo} from "./components/atoms/atomos_basic";
 import TwApi from './services/services';
-import { TwitLog } from './components/molecules/simpleTwitt';
+import TwittLog from './components/molecules/twittLog';
 
 const Search = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -44,28 +44,20 @@ const Search = () => {
             <Icon name="search" size={30} color='white' />
           </TouchableOpacity>
         </View>
-        <ScrollView contentContainerStyle={{ alignItems: 'flex-start', justifyContent: 'flex-start' }}>
-          <View>
-          {(twitts.length > 0) ? <TwitLog twits={twitts} /> : buscando ? <Text style={homeStyles.titleBold}>No se encontró nada para: '{texto}'</Text>: 
-            <View style={{flex:1}}>
-              <TwitterLogo />
-            </View>}
+        <View>
+          {(twitts.length > 0) ? 
+            <TwittLog tweets={twitts} /> : 
+            buscando ? 
+              <Text style={homeStyles.titleBold}>No se encontró nada para: '{texto}'</Text> : 
+              <View style={{flex:1}}>
+                <TwitterLogo />
+              </View>}
           <Text style={loginStyles.errorText}>{error}</Text>
-          </View>
-        </ScrollView>
+        </View>
       </ScrollView>
       <BottomNavigationBar currentAction={currentAction} />
     </SafeAreaView>
   );
 };
 
-   
 export default Search
-
-
-
-
-
-
-
-

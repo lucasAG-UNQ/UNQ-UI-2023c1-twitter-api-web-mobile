@@ -59,7 +59,7 @@ const Login = () => {
                         <Input seccion={"Usuario"} setFuncion={setUsername} />
                         <InputPass seccion={"Contraseña"} setFuncion={setPassword} />
                         <TouchableOpacity style={loginStyles.button} onPress={handleLoginSubmit}>
-                            <Text style={loginStyles.buttonText}>Login</Text>
+                            <Text style={loginStyles.buttonText}>Iniciar Sesión</Text>
                         </TouchableOpacity>
                         <Text style={loginStyles.errorText}>{error}</Text>
                     </View>

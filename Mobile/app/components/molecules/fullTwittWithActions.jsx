@@ -1,13 +1,13 @@
 import { View } from "react-native-animatable";
-import { SimpleTwitt } from "./simpleTwitt";
+import SimpleTwitt from "./simpleTwitt";
 import TwittActions from "./twittActions";
 
-const FullTwittWithActions=({twit})=>{
+const FullTwittWithActions=({tweet})=>{
 
     return(
         <View>
-            <SimpleTwitt twit={twit} />
-            <TwittActions twit={twit} />
+            <SimpleTwitt tweet={tweet} />
+            <TwittActions tweet={tweet} />
         </View>
     )
 }
