@@ -9,7 +9,7 @@ const TwitProfilePic = ({ image, id }) => {
     return (
         <View style={{ margin: 10 }}>
             <TouchableOpacity
-                style={{backgroundColor: "white", height: 50, width: 50, borderRadius: 20, }}
+                style={{backgroundColor: "white", height: 50, width: 50, borderRadius: 20, alignItems:'center', justifyContent:'center' }}
                 onPress={handleTouch}
             >
                 <Image
