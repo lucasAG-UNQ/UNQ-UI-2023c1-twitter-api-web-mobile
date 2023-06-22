@@ -14,6 +14,9 @@ const TwittActions= ({tweet})=>{
     const [loggedUser, setLoggedUser] = useState({id:'u_3'})
 
     const [like, setLike] = useState(false);
+    const [replyCount,setReplyCount] = useState(tweet.replies?.length||tweet.repliesAmount||0);
+    const [retweetCount,setRetweetCount] = useState(tweet.reTweet?.length||tweet.reTweetAmount||0)
+    
     const [isOpen, setIsOpen] = useState(false);
     const [openReply, setOpenReply]= useState();
 
@@ -26,16 +29,15 @@ const TwittActions= ({tweet})=>{
             .catch(error=>console.log(error))
     }, [tweet.likes])
 
+    const toggleOverlay = () => {
+        setIsOpen(!isOpen);
+    };
+
     const handleLike=()=>{
         TwApi.toggleLike(tweet.id)
                 .then(response=>{tweet.likes=response.data.likes
                     setLike(tweet.likes.some( like => like.id === loggedUser.id))})
-        TwApi.retrieveDataFromStorage('twitterAccessToken').then(data=>console.log(data))
     }
-
-    const toggleOverlay = () => {
-        setIsOpen(!isOpen);
-    };
 
     const handleRetweet=()=>{
         setOpenReply(false)
@@ -47,7 +49,17 @@ const TwittActions= ({tweet})=>{
         toggleOverlay()
     }
 
-    const overlayToOpen = () =>  openReply ? <ReplyPost id={tweet.id} onPost={toggleOverlay} />:<RetwittPost id={tweet.id} onPost={toggleOverlay} />;
+    const onReplyPost=()=>{
+        toggleOverlay()
+        setReplyCount(replyCount+1)
+    }
+
+    const onRetweetPost=()=>{
+        toggleOverlay()
+        setRetweetCount(retweetCount+1)
+    }
+
+    const overlayToOpen = () =>  openReply ? <ReplyPost id={tweet.id} onPost={onReplyPost} />:<RetwittPost id={tweet.id} onPost={onRetweetPost} />;
 
     const liked = () => like ? <Icon color={'white'} name="heart" size={20}/> : <Icon color={'white'} name="heart-o" size={20}/>;
 
@@ -67,10 +79,10 @@ const TwittActions= ({tweet})=>{
             
 
             <View style={IconButtonStatStyle.iconsContainer}>
-                <IconButtonStat stat={ tweet.replies?.length||tweet.repliesAmount||0} action={handleReply} title="Responder"> 
+                <IconButtonStat stat={replyCount} action={handleReply} title="Responder"> 
                     <Icon name="comments" color={"white"} size={20}/> 
                 </IconButtonStat>
-                <IconButtonStat stat={tweet.reTweet?.length||tweet.reTweetAmount||0} action={canRetweet()} title="Retwitear"> 
+                <IconButtonStat stat={retweetCount} action={canRetweet()} title="Retwitear"> 
                     <Icon name="refresh" color={"white"} size={20}/>
                 </IconButtonStat> 
                 <IconButtonStat stat={tweet.likes.length} action={handleLike}>

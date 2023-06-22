@@ -48,7 +48,7 @@ const ReplyPost = ({ id, onPost }) => {
                             <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTwitPost}>
                                 <Text style={{color:'white'}}>Twitear</Text>
                             </TouchableOpacity>
-                            <Text style={{color:'white'}}>{error}</Text>
+                            <Text style={{color:'red'}}>{error}</Text>
                         </View>
                 </View>
             </View>

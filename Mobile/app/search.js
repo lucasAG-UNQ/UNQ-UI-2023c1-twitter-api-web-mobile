@@ -55,7 +55,9 @@ const Search = () => {
           <Text style={loginStyles.errorText}>{error}</Text>
         </View>
       </ScrollView>
-      <BottomNavigationBar currentAction={currentAction} />
+      <View style={{width:'100%'}}>
+        <BottomNavigationBar currentAction={currentAction}/>
+      </View>
     </SafeAreaView>
   );
 };

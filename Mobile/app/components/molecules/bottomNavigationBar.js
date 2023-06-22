@@ -16,11 +16,14 @@ const BottomNavigationBar = ({ currentAction }) => {
       case 'trending':
         navigation.navigate("trending");
         break;
+      case 'tweet':
+        navigation.navigate("tweet");
+        break;
     }
   }
 
     return (
-      <View style={{ backgroundColor: 'blue', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', height: 60, width: '100%' }}>
+      <View style={{ backgroundColor: '#000', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', height: 60, width: '100%' }}>
         <TouchableOpacity onPress={currentAction != 'home' ? () => goToScreen('home') : null}>
           <Icon name="home" size={30} color={currentAction === 'home' ? 'white' : 'gray'} />
         </TouchableOpacity>
