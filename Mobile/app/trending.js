@@ -12,7 +12,6 @@ const Trending = () => {
   const [error, setError] = useState('')
   const [twitts,setTwitts] = useState([]);
 
-
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     setTimeout(() => {
@@ -34,13 +33,11 @@ const Trending = () => {
   return (
     <SafeAreaView style={homeStyles.container}>
       <ScrollView contentContainerStyle={homeStyles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>   
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Text style={homeStyles.titleBold}>Trending topics</Text>
-        </View>
+        <Text style={homeStyles.titleBold}>Trending topics</Text>
         <ScrollView contentContainerStyle={{ alignItems: 'flex-start', justifyContent: 'flex-start' }}>
           <View>
-          {(twitts.length > 0) ? twitLog(twitts) : <Text style={homeStyles.titleNormal}>Cossultando tendencias...</Text>}
-          <Text style={loginStyles.errorText}>{error}</Text>
+            {(twitts.length > 0) ? twitLog(twitts) : <Text style={homeStyles.titleNormal}>Consultando tendencias...</Text>}
+            <Text style={loginStyles.errorText}>{error}</Text>
           </View>
         </ScrollView>
       </ScrollView>
@@ -52,7 +49,6 @@ const Trending = () => {
 const twitLog = (twits)=> {
   return twits.map((twit) => <SimpleTwitt key={twit.id} twit={twit}/>);
 }
-
    
 export default Trending
 

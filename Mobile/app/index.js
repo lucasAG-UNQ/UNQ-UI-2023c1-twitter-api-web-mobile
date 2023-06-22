@@ -16,7 +16,7 @@ export default function App() {
 
     return (
         <>
-            <StatusBar style="light" />
+            <StatusBar backgroundColor="#666" style="light" />
             {isLoggedUser ? <Home /> : <Login />}
         </>
     );
