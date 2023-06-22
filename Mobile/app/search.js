@@ -5,9 +5,9 @@ import homeStyles from "./styles/estilos_home";
 import loginStyles from "./styles/estilos";
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
-import {InputSearch} from "./components/atoms/atomos_basic";
+import {InputSearch, TwitterLogo} from "./components/atoms/atomos_basic";
 import TwApi from './services/services';
-import SimpleTwitt from './components/molecules/simpleTwitt';
+import { TwitLog } from './components/molecules/simpleTwitt';
 
 const Search = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -38,7 +38,7 @@ const Search = () => {
   return (
     <SafeAreaView style={homeStyles.container}>
       <ScrollView contentContainerStyle={homeStyles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>   
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom:10}}>
           <InputSearch seccion={"Texto a buscar"} setFuncion={setTexto} />
           <TouchableOpacity onPress={texto != '' ? buscar: null} >
             <Icon name="search" size={30} color='white' />
@@ -46,7 +46,10 @@ const Search = () => {
         </View>
         <ScrollView contentContainerStyle={{ alignItems: 'flex-start', justifyContent: 'flex-start' }}>
           <View>
-          {(twitts.length > 0) ? twitLog(twitts) : buscando ? <Text style={homeStyles.titleBold}>No se encontró nada para: '{texto}'</Text>: null}
+          {(twitts.length > 0) ? <TwitLog twits={twitts} /> : buscando ? <Text style={homeStyles.titleBold}>No se encontró nada para: '{texto}'</Text>: 
+            <View style={{flex:1}}>
+              <TwitterLogo />
+            </View>}
           <Text style={loginStyles.errorText}>{error}</Text>
           </View>
         </ScrollView>
@@ -55,10 +58,6 @@ const Search = () => {
     </SafeAreaView>
   );
 };
-
-const twitLog = (twits)=> {
-  return twits.map((twit) => <SimpleTwitt key={twit.id} twit={twit}/>);
-}
 
    
 export default Search

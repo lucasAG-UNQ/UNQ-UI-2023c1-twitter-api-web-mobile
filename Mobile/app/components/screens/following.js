@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, RefreshControl } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { TwitLog } from "../molecules/simpleTwitt";
 import homeStyles from "../../styles/estilos_home";
-import SimpleTwitt from "../molecules/simpleTwitt";
 
 import TwApi from "../../services/services";
 
@@ -50,10 +50,14 @@ const Following = () => {
         }
     >
         <View style={{ backgroundColor: 'green', flex: 1, justifyContent: "center", alignItems: "center" }}>
-            {followingTwitts.map(t=><SimpleTwitt twit={t} />)}
+        {(followingTwitts.length > 0) ? <TwitLog twits={followingTwitts} /> : <Text style={homeStyles.titleNormal}>Loading...</Text>}
+        <Text style={loginStyles.errorText}>{error}</Text>
         </View>
         </ScrollView>
     );
 };
+
+
+  
 
 export default Following;

@@ -5,7 +5,7 @@ import loginStyles from "./styles/estilos";
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import TwApi from './services/services';
-import SimpleTwitt from './components/molecules/simpleTwitt';
+import { TwitLog } from './components/molecules/simpleTwitt';
 
 const Trending = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -36,8 +36,8 @@ const Trending = () => {
         <Text style={homeStyles.titleBold}>Trending topics</Text>
         <ScrollView contentContainerStyle={{ alignItems: 'flex-start', justifyContent: 'flex-start' }}>
           <View>
-            {(twitts.length > 0) ? twitLog(twitts) : <Text style={homeStyles.titleNormal}>Consultando tendencias...</Text>}
-            <Text style={loginStyles.errorText}>{error}</Text>
+          {(twitts.length > 0) ? <TwitLog twits={twitts} /> : <Text style={homeStyles.titleNormal}>Loading...</Text>}
+          <Text style={loginStyles.errorText}>{error}</Text>
           </View>
         </ScrollView>
       </ScrollView>
@@ -46,9 +46,6 @@ const Trending = () => {
   );
 };
 
-const twitLog = (twits)=> {
-  return twits.map((twit) => <SimpleTwitt key={twit.id} twit={twit}/>);
-}
    
 export default Trending
 

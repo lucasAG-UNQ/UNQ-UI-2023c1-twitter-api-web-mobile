@@ -1,15 +1,20 @@
-import React, { useState } from "react";
-import { View, SafeAreaView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useState, useCallback, useEffect} from "react";
 import TopNavigationTabs from "./components/molecules/topNavigationTabs";
 import BottomNavigationBar from "./components/molecules/bottomNavigationBar";
 import Profile from "./components/screens/profile";
 import Following from "./components/screens/following";
 import homeStyles from "./styles/estilos_home";
+import TwApi from "./services/services";
 
 const Home = () => {
-    const navigation = useNavigation();
+    const [loggedUser, setLoggedUser] = useState();
 
+    useEffect(() => {
+      TwApi.getLoggedUser()
+          .then((response) => {
+              setLoggedUser(response.data);
+          })    
+    }, []);
     const [currentTab, setCurrentTab] = useState("following");
     const [currentAction, setCurrentAction] = useState("home");
 
@@ -22,7 +27,7 @@ const Home = () => {
             <TopNavigationTabs currentTab={currentTab} onChangeTab={handleTabChange} />
 
                     <View style={{ flex: 1 }}>
-                        {currentTab === "profile" && <Profile />}
+                        {currentTab === "profile" && <Profile user={loggedUser} />}
                         {currentTab === "following" && <Following />}
                     </View>
 
