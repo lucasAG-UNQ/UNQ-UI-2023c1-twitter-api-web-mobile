@@ -1,69 +1,58 @@
-import React, {useState, useCallback } from 'react';
-import { View, RefreshControl, SafeAreaView } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-import Tabs from './components/molecules/tabs';
-import BarraInferior from './components/molecules/barraInferior';
-import Profile from './components/screens/profile';
-import Following from './components/screens/following';
+import React, { useState, useCallback, useEffect} from "react";
+import { View, RefreshControl, SafeAreaView } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+import TopNavigationTabs from "./components/molecules/topNavigationTabs";
+import BottomNavigationBar from "./components/molecules/bottomNavigationBar";
+import Profile from "./components/screens/profile";
+import Following from "./components/screens/following";
 import homeStyles from "./styles/estilos_home";
-import TwittActions from './components/molecules/twittActions';
+import TwApi from "./services/services";
 
 const Home = () => {
-  const [refreshing, setRefreshing] = useState(false);
-  const navigation = useNavigation()
+    const [refreshing, setRefreshing] = useState(false);
+    const [loggedUser, setLoggedUser] = useState();
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 500);
-  }, []);
+    useEffect(() => {
+      TwApi.getLoggedUser()
+          .then((response) => {
+              setLoggedUser(response.data);
+          })    
+    }, []);
 
-  const [currentTab, setCurrentTab] = useState('following');
-  const [currentAction, setCurrentAction] = useState('home');
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => { setRefreshing(false) }, 500);
+    }, []);
 
-  const handleTabChange = (tab) => {
-    setCurrentTab(tab);
-  };
+    const [currentTab, setCurrentTab] = useState("following");
+    const [currentAction, setCurrentAction] = useState("home");
 
-  const ejecutarAccion = (boton) => {
-    switch (boton) {
-      case 'search':
-        navigation.navigate("search", {text:''});
-        break;
-      case 'home':
-        navigation.navigate("home");
-        break;
-    }
-  }
+    const handleTabChange = (tab) => {
+        setCurrentTab(tab);
+    };
 
-
-  return (
-    <SafeAreaView style={homeStyles.container}>
-      <ScrollView contentContainerStyle={homeStyles.container}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
-    <View style={{ flex: 1 }}>
-      <Tabs currentTab={currentTab} onChangeTab={handleTabChange} />
-      <View style={{ flex: 1 }}>
-        {currentTab === 'profile' && <Profile />}
-        {currentTab === 'following' && <Following />}
-      </View>
-      <BarraInferior currentAction={currentAction} onChangeAction={ejecutarAccion}/>
-      <TwittActions twit={{id:'t_1',user:{id:'u_3'},likes:[],reTweet:[1],replies:[]}}/>
-    </View>
-    </ScrollView>
-    </SafeAreaView>
-  );
+    return (
+        <SafeAreaView style={homeStyles.container}>
+            <ScrollView
+                contentContainerStyle={homeStyles.container}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={refreshing}
+                        onRefresh={onRefresh}
+                    />
+                }
+            >
+                <View style={{ flex: 1 }}>
+                    <TopNavigationTabs currentTab={currentTab} onChangeTab={handleTabChange} />
+                    <View style={{ flex: 1 }}>
+                        {currentTab === "profile" && <Profile user={loggedUser} />}
+                        {currentTab === "following" && <Following />}
+                    </View>
+                    <BottomNavigationBar currentAction={currentAction} />
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+    );
 };
 
-   
-export default Home
-
-
-
-
-
-
-
-
+export default Home;

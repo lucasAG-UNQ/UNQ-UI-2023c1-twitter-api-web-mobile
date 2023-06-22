@@ -3,7 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 
 import TwApi from "../../services/services";
 
-const BasicTwitt = ({twit}) => {
+const SimpleTwitt = ({twit}) => {
     const [user, setUser] = useState([]);
 
     useEffect(() => {
@@ -12,24 +12,26 @@ const BasicTwitt = ({twit}) => {
 
     console.log('twitt ', twit);
     return (
-        <View key={twit.id} style={styles.twittContainer}>
-            <Text style={styles.whiteText}>{twit.user.id}</Text>
-            
-            <Text style={styles.whiteText}>{twit.user.username}</Text>
-            <Text style={styles.whiteText}>{twit.date}</Text>
-            <Text style={styles.whiteText}>{twit.content}</Text>
-            
+        <View key={twit.id} style={styles.twittContainer}>            
+            <Text style={styles.whiteText}>{twit.user.username}: en {twit.date.replace("T", " a ").slice(0,18)}</Text>
+            <Text style={styles.grayText}>{twit.content}</Text>
         </View>
     );
 };
+const TwitLog = ({twits}) => {
+    return twits.map((twit) => <SimpleTwitt key={twit.id} twit={twit}/>);
+}
 
 const styles = StyleSheet.create({
     twittContainer: {
-        padding: 20,
-        paddingBottom: 5,
-        paddingTop: 5,
+        padding: 10,
+        borderWidth: 1,
+        marginTop:10,
+        borderColor: '#DDDDDD',
     },
-    whiteText:{color:'white'}
+    whiteText:{color:'white'},
+    grayText:{color:'#999999'},
 });
 
-export default BasicTwitt;
+
+export {SimpleTwitt, TwitLog};
