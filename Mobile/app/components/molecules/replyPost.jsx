@@ -30,7 +30,6 @@ const ReplyPost = ({ id, onPost }) => {
     useEffect(() => {
         TwApi.getLoggedUser().then((response) => {
             setLoggedUser(response.data);
-            console.log(response.data)
         });
     }, []);
 

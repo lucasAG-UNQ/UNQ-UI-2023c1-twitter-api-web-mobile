@@ -67,7 +67,7 @@ const Profile = ({user}) => {
           </View>
           <View style={styles.container}>
             <View style={styles.textContainer}>
-              <Text style={homeStyles.titleNormal}>Seguidosres</Text>
+              <Text style={homeStyles.titleNormal}>Seguidores</Text>
               <Text style={homeStyles.titleBold}>{user.followers.length}</Text>
             </View>
             <View style={styles.textContainer}>

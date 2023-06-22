@@ -23,7 +23,7 @@ const BottomNavigationBar = ({ currentAction }) => {
   }
 
     return (
-      <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', height: 60 }}>
+      <View style={{ backgroundColor: 'blue', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', height: 60, width: '100%' }}>
         <TouchableOpacity onPress={currentAction != 'home' ? () => goToScreen('home') : null}>
           <Icon name="home" size={30} color={currentAction === 'home' ? 'white' : 'gray'} />
         </TouchableOpacity>
@@ -31,7 +31,7 @@ const BottomNavigationBar = ({ currentAction }) => {
           <Icon name="search" size={30} color={currentAction === 'search' ? 'white' : 'gray'} />
         </TouchableOpacity>
         <TouchableOpacity onPress={currentAction != 'trending' ? () => goToScreen('trending') : null}>
-          <Icon name="rss" size={30} color={currentAction === 'trending' ? 'white' : 'gray'} />
+          <Icon name="hashtag" size={30} color={currentAction === 'trending' ? 'white' : 'gray'} />
         </TouchableOpacity>
         <TouchableOpacity onPress={currentAction != 'tweet' ? () => goToScreen('tweet') : null}>
           <Icon name="pencil-square-o" size={30} color={currentAction === 'tweet' ? 'white' : 'gray'} />
