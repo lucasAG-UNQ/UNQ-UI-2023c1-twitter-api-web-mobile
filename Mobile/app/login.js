@@ -57,14 +57,8 @@ const Login = () => {
                             Por favor ingrese su usuario y contraseña
                         </Text>
                         <Input seccion={"Usuario"} setFuncion={setUsername} />
-                        <InputPass
-                            seccion={"Contraseña"}
-                            setFuncion={setPassword}
-                        />
-                        <TouchableOpacity
-                            style={loginStyles.button}
-                            onPress={handleLoginSubmit}
-                        >
+                        <InputPass seccion={"Contraseña"} setFuncion={setPassword} />
+                        <TouchableOpacity style={loginStyles.button} onPress={handleLoginSubmit}>
                             <Text style={loginStyles.buttonText}>Login</Text>
                         </TouchableOpacity>
                         <Text style={loginStyles.errorText}>{error}</Text>
@@ -73,22 +67,13 @@ const Login = () => {
                         <Text style={loginStyles.registerText}>
                             ¿No tienes cuenta?{" "}
                         </Text>
-                        <TouchableOpacity
-                            onPress={() => navigation.navigate("register")}
-                        >
+                        <TouchableOpacity onPress={() => navigation.navigate("register")}>
                             <Text style={loginStyles.registerLink}>
                                 REGISTRATE
                             </Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity
-                        style={loginStyles.button}
-                        onPress={TwApi.logout}
-                    >
-                        <Text style={loginStyles.buttonText}>
-                            LOG OUT - olvidar token
-                        </Text>
-                    </TouchableOpacity>
+                    
                 </View>
             </View>
         </View>

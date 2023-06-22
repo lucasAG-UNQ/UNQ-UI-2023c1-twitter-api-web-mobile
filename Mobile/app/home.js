@@ -14,9 +14,7 @@ const Home = () => {
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
-        setTimeout(() => {
-            setRefreshing(false);
-        }, 500);
+        setTimeout(() => { setRefreshing(false) }, 500);
     }, []);
 
     const [currentTab, setCurrentTab] = useState("following");
@@ -38,10 +36,7 @@ const Home = () => {
                 }
             >
                 <View style={{ flex: 1 }}>
-                    <TopNavigationTabs
-                        currentTab={currentTab}
-                        onChangeTab={handleTabChange}
-                    />
+                    <TopNavigationTabs currentTab={currentTab} onChangeTab={handleTabChange} />
                     <View style={{ flex: 1 }}>
                         {currentTab === "profile" && <Profile />}
                         {currentTab === "following" && <Following />}
