@@ -37,7 +37,7 @@ const Profile = ({user}) => {
   };
 
   const salir = () => {
-    TwApi.logout;
+    TwApi.logout();
     navigation.navigate("login")
   }
 
