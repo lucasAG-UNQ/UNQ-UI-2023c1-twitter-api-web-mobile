@@ -33,15 +33,19 @@ const Trending = () => {
   return (
     <SafeAreaView style={homeStyles.container}>
       <ScrollView contentContainerStyle={homeStyles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>   
-        <Text style={homeStyles.titleBold}>Trending topics</Text>
-        <View>
-          {(twitts.length > 0) ? 
-            <TwittLog tweets={twitts} /> : 
-            <Text style={homeStyles.titleNormal}>Loading...</Text>}
-          <Text style={loginStyles.errorText}>{error}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <Text style={homeStyles.titleBold}>Trending topics</Text>
         </View>
+        <ScrollView contentContainerStyle={{ alignItems: 'flex-start', justifyContent: 'flex-start' }}>
+          <View>
+          {(twitts.length > 0) ? <TwittLog tweets={twitts} /> : <Text style={homeStyles.titleNormal}>Loading...</Text>}
+          <Text style={loginStyles.errorText}>{error}</Text>
+          </View>
+        </ScrollView>
       </ScrollView>
-      <BottomNavigationBar currentAction={currentAction} />
+      <View style={{width:'100%'}}>
+        <BottomNavigationBar currentAction={currentAction}/>
+      </View>
     </SafeAreaView>
   );
 };
