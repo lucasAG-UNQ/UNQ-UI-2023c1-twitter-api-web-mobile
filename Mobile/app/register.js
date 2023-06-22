@@ -13,7 +13,7 @@ const Register = () => {
   const [imagen, setImagen] = useState('')
   const [backImg, setBackImg] = useState('')
 
-  const [token, setToken] = useState(TwApi.isUserLogged())
+  const [token, setToken] = useState(false)
   const [error, setError] = useState('')
 
   const regData = {
