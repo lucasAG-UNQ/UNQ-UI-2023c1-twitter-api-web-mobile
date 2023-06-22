@@ -7,7 +7,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import {InputSearch, TwitterLogo} from "./components/atoms/atomos_basic";
 import TwApi from './services/services';
-import TwittLog from './components/molecules/twittLog';
+import TwittLog from './components/organisms/twittLog';
 
 const Search = () => {
   const [refreshing, setRefreshing] = useState(false);

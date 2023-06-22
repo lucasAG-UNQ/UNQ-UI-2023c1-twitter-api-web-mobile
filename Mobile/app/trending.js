@@ -5,7 +5,7 @@ import loginStyles from "./styles/estilos";
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import TwApi from './services/services';
-import TwittLog from './components/molecules/twittLog';
+import TwittLog from './components/organisms/twittLog';
 
 const Trending = () => {
   const [refreshing, setRefreshing] = useState(false);
