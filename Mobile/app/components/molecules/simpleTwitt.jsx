@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
 import TwApi from "../../services/services";
+import FullTwittWithActions from "./fullTwittWithActions";
 
 const SimpleTwitt = ({twit}) => {
     const [user, setUser] = useState([]);
@@ -19,7 +20,7 @@ const SimpleTwitt = ({twit}) => {
     );
 };
 const TwitLog = ({twits}) => {
-    return twits.map((twit) => <SimpleTwitt key={twit.id} twit={twit}/>);
+    return twits.map((twit) => <FullTwittWithActions key={twit.id} twit={twit}/>);
 }
 
 const styles = StyleSheet.create({
