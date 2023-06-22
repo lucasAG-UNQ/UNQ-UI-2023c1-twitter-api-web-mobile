@@ -17,6 +17,14 @@ const homeStyles = StyleSheet.create({
     paddingTop: 1,
     backgroundColor: '#353',
   },
+  tweetsListContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 1,
+    paddingTop: 1,
+    backgroundColor: '#353',
+  },
   logoContainer: {
     justifyContent: 'center',
     alignItems: 'center',
