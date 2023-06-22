@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect} from "react";
+import { View, SafeAreaView } from "react-native";
 import TopNavigationTabs from "./components/molecules/topNavigationTabs";
 import BottomNavigationBar from "./components/molecules/bottomNavigationBar";
 import Profile from "./components/screens/profile";

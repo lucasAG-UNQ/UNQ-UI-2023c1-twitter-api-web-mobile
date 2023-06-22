@@ -3,6 +3,7 @@ import { View, Text, RefreshControl } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { TwitLog } from "../molecules/simpleTwitt";
 import homeStyles from "../../styles/estilos_home";
+import loginStyles from "../../styles/estilos";
 
 import TwApi from "../../services/services";
 
