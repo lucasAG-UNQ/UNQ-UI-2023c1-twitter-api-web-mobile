@@ -13,12 +13,12 @@ const IconButtonStatStyle= StyleSheet.create({
         color: '#fff',
     },
     iconsContainer:{
+        marginRight:20,
+        marginLeft:20,
         flexDirection:'row',
-        paddingRight: '10%',
-        paddingLeft: '10%',
         justifyContent: 'space-between',
         alignItems: 'center', 
-        height: 60,
+        height: 30,
     }
 });
 

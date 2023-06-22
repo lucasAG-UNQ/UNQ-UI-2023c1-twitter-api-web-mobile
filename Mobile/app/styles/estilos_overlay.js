@@ -2,10 +2,13 @@ import { StyleSheet } from "react-native";
 
 const OverlayStyles = StyleSheet.create({
     container: {
-      flex: 1,
-      height:10,
-      borderRadius: 25,
-      backgroundColor: '#ddd',
+      margin:0,
+      padding:0,
+      alignItems:'flex-start',
+      justifyContent:'center',
+      borderRadius:25,
+      backgroundColor: '#000',
+      height:300,
     }
 });
 

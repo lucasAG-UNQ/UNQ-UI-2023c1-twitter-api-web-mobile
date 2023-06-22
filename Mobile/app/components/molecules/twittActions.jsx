@@ -7,7 +7,7 @@ import IconButtonStatStyle from "../../styles/estilos_iconButtonStat"
 import Overlay from 'react-native-modal-overlay';
 import OverlayStyles from "../../styles/estilos_overlay";
 import ReplyPost from "./replyPost";
-//import RetweetPost from "./retweetPost";
+import RetwittPost from "./retweetPost";
 
 const TwittActions= ({twit})=>{
     
@@ -47,7 +47,7 @@ const TwittActions= ({twit})=>{
         toggleOverlay()
     }
 
-    const overlayToOpen = () =>  openReply ? <ReplyPost id={twit.id} onPost={toggleOverlay} />:<Text style={{color:'gray'}}>test retwit</Text>/*<ReplyPost id={twit.id} onPost={toggleOverlay} /> : <RetweetPost id={twit.id} onPost={toggleOverlay} />*/;
+    const overlayToOpen = () =>  openReply ? <ReplyPost id={twit.id} onPost={toggleOverlay} />:<RetwittPost id={twit.id} onPost={toggleOverlay} />;
 
     const liked = () => like ? <Icon color={'white'} name="heart" size={20}/> : <Icon color={'white'} name="heart-o" size={20}/>;
 
@@ -64,12 +64,13 @@ const TwittActions= ({twit})=>{
                         closeOnTouchOutside>
                 {overlayToOpen()}
             </Overlay>
+            
 
             <View style={IconButtonStatStyle.iconsContainer}>
-                <IconButtonStat stat={twit.repliesAmount || twit.replies?.length} action={handleReply} title="Responder"> 
+                <IconButtonStat stat={ twit.replies?.length||twit.repliesAmount||0} action={handleReply} title="Responder"> 
                     <Icon name="comments" color={"white"} size={20}/> 
                 </IconButtonStat>
-                <IconButtonStat stat={twit.reTweetAmount || twit.reTweet?.length} action={canRetweet()} title="Retwitear"> 
+                <IconButtonStat stat={twit.reTweet?.length||twit.reTweetAmount||0} action={canRetweet()} title="Retwitear"> 
                     <Icon name="refresh" color={"white"} size={20}/>
                 </IconButtonStat> 
                 <IconButtonStat stat={twit.likes.length} action={handleLike}>
