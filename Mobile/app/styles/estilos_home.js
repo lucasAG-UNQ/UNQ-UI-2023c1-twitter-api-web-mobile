@@ -28,6 +28,13 @@ const homeStyles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
   },
+  titleInactive: {
+    fontWeight: 'normal',
+    fontSize: 24,
+    marginBottom: 8,
+    textAlign: 'center',
+    color: '#666',
+  },
   subtitle: {
     fontSize: 14,
     marginBottom: 16,
