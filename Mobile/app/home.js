@@ -1,16 +1,23 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect} from "react";
 import { View, RefreshControl, SafeAreaView } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
 import TopNavigationTabs from "./components/molecules/topNavigationTabs";
 import BottomNavigationBar from "./components/molecules/bottomNavigationBar";
 import Profile from "./components/screens/profile";
 import Following from "./components/screens/following";
 import homeStyles from "./styles/estilos_home";
+import TwApi from "./services/services";
 
 const Home = () => {
     const [refreshing, setRefreshing] = useState(false);
-    const navigation = useNavigation();
+    const [loggedUser, setLoggedUser] = useState();
+
+    useEffect(() => {
+      TwApi.getLoggedUser()
+          .then((response) => {
+              setLoggedUser(response.data);
+          })    
+    }, []);
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
@@ -38,7 +45,7 @@ const Home = () => {
                 <View style={{ flex: 1 }}>
                     <TopNavigationTabs currentTab={currentTab} onChangeTab={handleTabChange} />
                     <View style={{ flex: 1 }}>
-                        {currentTab === "profile" && <Profile />}
+                        {currentTab === "profile" && <Profile user={loggedUser} />}
                         {currentTab === "following" && <Following />}
                     </View>
                     <BottomNavigationBar currentAction={currentAction} />
