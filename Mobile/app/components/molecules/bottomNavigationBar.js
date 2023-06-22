@@ -16,6 +16,9 @@ const BottomNavigationBar = ({ currentAction }) => {
       case 'trending':
         navigation.navigate("trending");
         break;
+      case 'tweet':
+        navigation.navigate("tweet");
+        break;
     }
   }
 

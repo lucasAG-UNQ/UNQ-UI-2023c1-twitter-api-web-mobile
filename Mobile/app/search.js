@@ -54,7 +54,9 @@ const Search = () => {
           </View>
         </ScrollView>
       </ScrollView>
-      <BottomNavigationBar currentAction={currentAction} />
+      <View style={{width:'100%'}}>
+        <BottomNavigationBar currentAction={currentAction}/>
+      </View>
     </SafeAreaView>
   );
 };
