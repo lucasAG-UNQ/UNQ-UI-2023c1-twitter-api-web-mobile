@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, RefreshControl } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import TwittLog from '../molecules/twittLog';
+import TwittLog from '../organisms/twittLog';
 import homeStyles from "../../styles/estilos_home";
 import loginStyles from "../../styles/estilos";
 

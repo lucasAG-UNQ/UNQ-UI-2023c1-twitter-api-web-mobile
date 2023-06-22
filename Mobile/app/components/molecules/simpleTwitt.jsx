@@ -1,36 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
 import TwitProfilePic from "../atoms/twitProfilePic";
 import TwApi from "../../services/services";
+import TweetStyles from "../../styles/tweetStyles";
 
 const SimpleTwitt = ({ tweet }) => {
-    const [twittAuthor, setTwittAuthor] = useState([]);
+    const [tweetAuthor, setTweetAuthor] = useState([]);
+    const navigation = useNavigation();
 
     useEffect(() => {
-        TwApi.getUser(tweet.user.id).then((response) => setTwittAuthor(response.data));
+        TwApi.getUser(tweet.user.id).then((response) => setTweetAuthor(response.data));
     }, []);
 
+    const handleUsernameTouch = () => {
+        navigation.navigate("profile", { user: tweetAuthor });
+    };
+
+    const handleImage = () => tweet.type.image
+                ? <Image source={{ uri: tweet.type.image }} style={{ height: 320, width: 320 }} />
+                : <View></View>
+
     return (
-        <View style={twittStyles.twittContainer}>
-            <TwitProfilePic image={twittAuthor.image} id={twittAuthor.id} />
-            <Text style={twittStyles.whiteText}>
-                {tweet.user.username}: en{" "}
-                {tweet.date.replace("T", " a ").slice(0, 18)}
-            </Text>
-            <Text style={twittStyles.grayText}>{tweet.content}</Text>
+        <View style={TweetStyles.tweetContainer}>
+            <View style={{ flexDirection: 'row', alignItems: 'flex-end', padingBottom: 2 }}>
+                <TwitProfilePic image={tweetAuthor.image} id={tweetAuthor.id} />
+                <View>
+                    <TouchableOpacity onPress={handleUsernameTouch}>
+                        <Text style={TweetStyles.username}>{tweet.user.username}</Text>
+                    </TouchableOpacity>
+                    <Text style={TweetStyles.whiteText}>Publicado el {tweet.date.replace("T", " a las ").slice(0, 18)} hs</Text>
+                </View>
+            </View>
+            <Text style={TweetStyles.tweetContent}>{tweet.content}</Text>
+            <View style={{ marginTop: 5, alignItems: 'center'}}>
+                { handleImage() }
+            </View>
         </View>
     );
 };
-
-const twittStyles = StyleSheet.create({
-    twittContainer: {
-        padding: 10,
-        borderWidth: 1,
-        marginTop: 10,
-        borderColor: "#DDDDDD",
-    },
-    whiteText: { color: "white" },
-    grayText: { color: "#999999" },
-});
 
 export default SimpleTwitt;

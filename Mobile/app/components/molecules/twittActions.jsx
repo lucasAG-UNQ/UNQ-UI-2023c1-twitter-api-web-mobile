@@ -56,7 +56,7 @@ const TwittActions= ({tweet})=>{
     if (!loggedUser) return <Text style={{color:'white'}} >Loading... </Text>;
 
     return(
-        <View>
+        <View style= { {padding: 5} }>
             <Overlay    containerStyle={{backgroundColor:'rgba(255,255,255,0.3)'}}
                         childrenWrapperStyle={OverlayStyles.container}
                         visible={isOpen} 
