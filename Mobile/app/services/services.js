@@ -1,8 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-//axios.defaults.baseURL = 'http://localhost:7070';
-axios.defaults.baseURL = 'http://192.168.0.10:7070';
+axios.defaults.baseURL = 'http://localhost:7070';
 
 const twPost = async (endpoint, data) => {
   await retrieveDataFromStorage('twitterAccessToken')
@@ -72,14 +71,8 @@ const twitterAccessToken = async () => {
     let token = null;
     await retrieveDataFromStorage('twitterAccessToken')
       .then( val => token = val);
-    console.log('t a token ', token);
     return token;
 };
-
-// ToDo: cambiar esto
-//const twitterAccessToken = () => {
-//  return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6InVfMjgifQ.L8cTlW6Q8Obe-v6qeDrxOkR-lLAJDLq1ysRdo4nTwH0'
-//};
 
 const trendingTopics = () => twGet('/trendingTopics');
 
@@ -115,8 +108,6 @@ const saveDataToStorage = async (key, data) => {
 const retrieveDataFromStorage =  async (key) => {
   try {
     const token = await AsyncStorage.getItem(key);
-
-    console.log("llamado a retrieve, res: " + token );
 
     return token;
   } catch(error) {

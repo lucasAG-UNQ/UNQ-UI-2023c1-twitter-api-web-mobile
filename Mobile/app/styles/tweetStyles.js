@@ -2,7 +2,7 @@ import { StyleSheet} from 'react-native';
 
 const TweetStyles = StyleSheet.create({
     tweetWithActionsContainer: {
-        padding: 2,
+        padding: 3,
         margin: 2,
         backgroundColor: '#111111',
         borderColor: "#DDDDDD",
@@ -11,7 +11,7 @@ const TweetStyles = StyleSheet.create({
         borderTopRightRadius: 15,
     },
     tweetContainer: {
-        padding: 2,
+        padding: 5,
         marginTop: 2
     },
     retweetContainer: {

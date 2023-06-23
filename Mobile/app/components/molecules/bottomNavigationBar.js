@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
@@ -19,7 +20,10 @@ const BottomNavigationBar = ({ currentAction }) => {
       case 'tweet':
         navigation.navigate("tweet");
         break;
-    }
+      case 'profile':
+        navigation.navigate("profile");
+        break;
+      }
   }
 
     return (
@@ -35,6 +39,9 @@ const BottomNavigationBar = ({ currentAction }) => {
         </TouchableOpacity>
         <TouchableOpacity onPress={currentAction != 'tweet' ? () => goToScreen('tweet') : null}>
           <Icon name="pencil-square-o" size={30} color={currentAction === 'tweet' ? 'white' : 'gray'} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={currentAction != 'profile' ? () => goToScreen('profile') : null}>
+          <Icon name="user" size={30} color={currentAction === 'profile' ? 'white' : 'gray'} />
         </TouchableOpacity>
       </View>
     );
