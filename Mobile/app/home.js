@@ -1,39 +1,51 @@
-import React, { useState, useCallback, useEffect} from "react";
-import { View, SafeAreaView } from "react-native";
-import TopNavigationTabs from "./components/molecules/topNavigationTabs";
+import React, { useState, useEffect} from "react";
+import { View, Text } from "react-native";
 import BottomNavigationBar from "./components/molecules/bottomNavigationBar";
-import Profile from "./components/screens/profile";
-import Following from "./components/screens/following";
+import TwittLog from './components/organisms/twittLog';
 import homeStyles from "./styles/estilos_home";
-import TwApi from "./services/services";
+import loginStyles from "./styles/estilos";
+import TwApi from './services/services';
 
 const Home = () => {
-    const [loggedUser, setLoggedUser] = useState();
+    const [followingTwitts, setFollowingTwitts] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-      TwApi.getLoggedUser()
-          .then((response) => {
-              setLoggedUser(response.data);
-          })    
+        TwApi.getFollowingTwitts()
+            .then((response) => {
+                setFollowingTwitts(response.data.results);
+                setError(null);
+            })
+            .catch((err) => {
+                setError(err.description);
+            });
     }, []);
-    const [currentTab, setCurrentTab] = useState("following");
-    const [currentAction, setCurrentAction] = useState("home");
 
-    const handleTabChange = (tab) => {
-        setCurrentTab(tab);
-    };
+    if (error)
+        // ToDo: darle estilos al error
+        return (
+            <View>
+                <Text style={{ color: "white" }}>Ups... algo salió mal</Text>
+                <Text style={{ color: "white" }}>{error}</Text>
+            </View>
+        );
+
+    if (!followingTwitts)
+        return <Text style={{ color: "white" }}>Loading... </Text>;
 
     return (
-        <SafeAreaView style={homeStyles.container}>
-            <TopNavigationTabs currentTab={currentTab} onChangeTab={handleTabChange} />
-
-                    <View style={{ flex: 1 }}>
-                        {currentTab === "profile" && <Profile user={loggedUser} />}
-                        {currentTab === "following" && <Following />}
-                    </View>
-
-            <BottomNavigationBar currentAction={currentAction} />
-        </SafeAreaView>
+        <View style={homeStyles.container}>
+            <Text style={homeStyles.titleBold}>Inicio</Text>
+            <View style={homeStyles.tweetsListContainer}>
+                {followingTwitts.length > 0 
+                    ? (<TwittLog tweets={followingTwitts} />)
+                    : (<Text style={homeStyles.titleNormal}>Loading...</Text>)}
+                {error 
+                    ? <Text style={loginStyles.errorText}>{error}</Text> 
+                    : <></>}
+            </View>
+            <BottomNavigationBar currentAction='home' />
+        </View>
     );
 };
 

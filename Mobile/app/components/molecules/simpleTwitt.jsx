@@ -11,11 +11,12 @@ const SimpleTwitt = ({ tweet }) => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        TwApi.getUser(tweet.user.id).then((response) => setTweetAuthor(response.data));
+        TwApi.getUser(tweet.user.id)
+            .then((response) => setTweetAuthor(response.data));
     }, []);
 
     const handleUsernameTouch = () => {
-        navigation.navigate("profile", { user: tweetAuthor });
+        navigation.navigate("user", { user: tweetAuthor });
     };
 
     const handleImage = () => tweet.type.image
@@ -27,7 +28,7 @@ const SimpleTwitt = ({ tweet }) => {
     return (
         <TouchableOpacity style={TweetStyles.tweetContainer} onPress={handleNavigateTweet}>
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', padingBottom: 2 }}>
-                <TwitProfilePic image={tweetAuthor.image} id={tweetAuthor.id} />
+                <TwitProfilePic image={tweetAuthor.image} user={tweetAuthor} />
                 <View>
                     <TouchableOpacity onPress={handleUsernameTouch}>
                         <Text style={TweetStyles.username}>{tweet.user.username}</Text>

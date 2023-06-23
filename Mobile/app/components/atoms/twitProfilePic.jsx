@@ -1,16 +1,19 @@
 import React from "react";
 import { View, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-const TwitProfilePic = ({ image, id }) => {
-    const handleTouch = () => {
-        // ToDo: usar id aca con el navigate
+const TwitProfilePic = ({ image, user }) => {
+    const navigation = useNavigation();
+
+    const handleAvatarTouch = () => {
+        navigation.navigate("user", { user: user });
     };
 
     return (
         <View style={{ margin: 10 }}>
             <TouchableOpacity
                 style={{backgroundColor: "white", height: 50, width: 50, borderRadius: 20, alignItems:'center', justifyContent:'center' }}
-                onPress={handleTouch}
+                onPress={handleAvatarTouch}
             >
                 <Image
                     source={{ uri: image }}
