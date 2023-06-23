@@ -48,12 +48,5 @@ const TwitterLogo = (props) => {
     />
   )
 }
-/*
-const Boton = ({funciondeboton, loguear}) => {
-    return(
-    <button type="button" className="btn btn-outline-light btn-lg px-5" onClick={loguear}>{funciondeboton}</button>
-  );
-}
-*/
 
 export {Input, InputPass, TwitterLogo, InputSearch }

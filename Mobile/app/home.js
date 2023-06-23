@@ -22,7 +22,6 @@ const Home = () => {
     }, []);
 
     if (error)
-        // ToDo: darle estilos al error
         return (
             <View>
                 <Text style={{ color: "white" }}>Ups... algo salió mal</Text>

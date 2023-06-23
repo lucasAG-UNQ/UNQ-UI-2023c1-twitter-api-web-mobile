@@ -26,7 +26,7 @@ const TwittActions= ({tweet})=>{
                 setLoggedUser(response.data)
                 setLike(tweet.likes.some( like => like.id === response.data.id));
             })
-            .catch(error=>console.log(error))
+            .catch(error=>error)
     }, [tweet.likes])
 
     const toggleOverlay = () => {

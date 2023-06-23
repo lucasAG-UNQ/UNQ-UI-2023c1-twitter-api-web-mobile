@@ -20,6 +20,7 @@ const RetwittPost = ({ id, onPost }) => {
             .then((_) => {
                 setError(null);
                 onPost();
+                navigation.navigate('tweetScreen',{tweetId:id})
             })
             .catch((error) => {console.log(error);setError(error.status)});
     };
