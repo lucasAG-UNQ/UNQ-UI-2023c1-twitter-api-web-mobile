@@ -22,8 +22,10 @@ const SimpleTwitt = ({ tweet }) => {
                 ? <Image source={{ uri: tweet.type.image }} style={{ height: 320, width: 320 }} />
                 : <View></View>
 
+    const handleNavigateTweet=()=>navigation.navigate('tweetScreen',{ tweetId: (tweet.id) })
+
     return (
-        <View style={TweetStyles.tweetContainer}>
+        <TouchableOpacity style={TweetStyles.tweetContainer} onPress={handleNavigateTweet}>
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', padingBottom: 2 }}>
                 <TwitProfilePic image={tweetAuthor.image} id={tweetAuthor.id} />
                 <View>
@@ -37,7 +39,7 @@ const SimpleTwitt = ({ tweet }) => {
             <View style={{ marginTop: 5, alignItems: 'center'}}>
                 { handleImage() }
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 
