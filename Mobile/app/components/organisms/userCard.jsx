@@ -51,7 +51,7 @@ const UserCard = ( user ) => {
         return (<View><Text style={homeStyles.titleBold}>Loading...</Text></View>);
 
     return (
-        <View style={{ backgroundColor: '#789789' }}>
+        <View>
             <Image
                 source={{ uri: user.backgroundImage }}
                 style={{ width: "100%", aspectRatio: 1 }}
