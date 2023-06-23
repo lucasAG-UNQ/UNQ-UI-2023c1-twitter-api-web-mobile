@@ -28,8 +28,7 @@ const RetwittPost = ({ id, onPost }) => {
 
     useEffect(() => {
         TwApi.getLoggedUser().then((response) => {
-            setLoggedUser(response.data);
-            console.log(response.data)
+            setLoggedUser(response.data)
         });
     }, []);
 

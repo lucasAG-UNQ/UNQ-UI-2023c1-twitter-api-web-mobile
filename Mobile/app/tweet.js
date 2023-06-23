@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react';
-import { View, SafeAreaView , Text, TouchableOpacity} from 'react-native';
+import { View, Text, TouchableOpacity} from 'react-native';
 import homeStyles from "./styles/estilos_home";
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
@@ -11,7 +11,6 @@ import { Input } from './components/atoms/atomos_basic';
 const TwitPost = () => {
     const [loggedUser, setLoggedUser] = useState();
 
-    const [refreshing, setRefreshing] = useState(false);
     const [textPost, setTextPost] = useState("");
     const [imagePost, setImagePost] = useState("");
     const [error, setError] = useState(null);
@@ -70,7 +69,7 @@ const TwitPost = () => {
     if (!loggedUser) return <Text style={{color:'white'}}>Loading... </Text>;
 
     return (
-        <SafeAreaView style={homeStyles.container}>
+        <View style={homeStyles.container}>
               <View style={{flex:1}}>
                 <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                   <Text style={homeStyles.titleBold}>Nuevo Twit</Text>
@@ -90,7 +89,7 @@ const TwitPost = () => {
                 </ScrollView>
               </View>
             <BottomNavigationBar currentAction={currentAction}/>
-        </SafeAreaView>
+        </View>
     );
 };
 

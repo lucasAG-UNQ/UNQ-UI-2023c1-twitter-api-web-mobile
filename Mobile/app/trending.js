@@ -10,8 +10,6 @@ const Trending = () => {
   const [error, setError] = useState(null)
   const [twitts,setTwitts] = useState([]);
 
-  const currentAction = 'trending';
-  
   useEffect(() => {
     TwApi.trendingTopics()
       .then(response => {
@@ -23,17 +21,17 @@ const Trending = () => {
 
   return (
     <View style={homeStyles.container}>
-        <Text style={homeStyles.titleBold}>Trending topics</Text>
-        <View style={homeStyles.tweetsListContainer}>
-          {(twitts.length > 0) ? 
-            <TwittLog tweets={twitts} /> : 
-            <Text style={homeStyles.titleNormal}>Loading...</Text>}
-          {error
-            ? <Text style={loginStyles.errorText}>{error}</Text>
-            : <></>
-          }
-        </View>
-      <BottomNavigationBar currentAction={currentAction} />
+      <Text style={homeStyles.titleBold}>Trending topics</Text>
+      <View style={homeStyles.tweetsListContainer}>
+        {(twitts.length > 0) ? 
+          <TwittLog tweets={twitts} /> : 
+          <Text style={homeStyles.titleNormal}>Loading...</Text>}
+        {error
+          ? <Text style={loginStyles.errorText}>{error}</Text>
+          : <></>
+        }
+      </View>
+      <BottomNavigationBar currentAction='trending' />
     </View>
   );
 };
