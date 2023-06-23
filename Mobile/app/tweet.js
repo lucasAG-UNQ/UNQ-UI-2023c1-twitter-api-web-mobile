@@ -7,8 +7,11 @@ import TwApi from './services/services';
 import TwitProfilePic from './components/atoms/twitProfilePic';
 import ReplyRetweetPostStyles from './styles/estilos_reply-retweet';
 import { Input } from './components/atoms/atomos_basic';
+import { useNavigation } from '@react-navigation/native';
 
 const TwitPost = () => {
+    const navigation=useNavigation()
+
     const [loggedUser, setLoggedUser] = useState();
 
     const [textPost, setTextPost] = useState("");
@@ -61,7 +64,7 @@ const TwitPost = () => {
             setTextPost("");
             setImagePost("");
             setTimeout(() => {
-                navigate(`/twitt/${tweetId}`);
+                navigation.navigate('tweetScreen',{tweetId:tweetId});
             }, 2000);
         }
     }, [tweetId]);

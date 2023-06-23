@@ -22,7 +22,7 @@ const ReplyPost = ({ id, onPost }) => {
                 setError(null);
                 onPost();
             })
-            .catch((error) => {console.log(error);setError(error.status)});
+            .catch((error) => setError(error.status));
     };
 
     const handleError = () => error ? <Text style={{color:'white'}}>Ups... algo salió mal</Text> : <></>;

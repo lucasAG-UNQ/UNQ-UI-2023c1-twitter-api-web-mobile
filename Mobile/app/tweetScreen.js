@@ -11,7 +11,6 @@ const TweetScreen = () => {
     
     const route= useRoute();
     const tweetId=route.params.tweetId;
-    console.log(tweetId)
 
     const [refreshing, setRefreshing] = useState(false);
     const [error, setError] = useState('');
@@ -19,12 +18,11 @@ const TweetScreen = () => {
 
     useEffect(()=>{
         TwApi.getTwitt(tweetId).then(response=>{
-            console.log('FFFFFFFFFFFFFFFF'+response.data)
             setTweet(response.data)
             setError('')
         })
         .catch(error=>setError(error.description))
-    },[])
+    },[tweet])
 
     const currentAction = 'tweetScreen';
     
@@ -36,7 +34,6 @@ const TweetScreen = () => {
     }, []);
 
     const decideTweet=(tweet)=>{
-        console.log('undefined testing:'+JSON.stringify(tweet))
         if(tweet.type.tweet==null){
             return <FullTwittWithActions tweet={tweet} key={tweet.id} />
         }else if(tweet.type.image==null){

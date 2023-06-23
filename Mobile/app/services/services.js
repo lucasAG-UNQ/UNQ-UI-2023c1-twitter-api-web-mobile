@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-axios.defaults.baseURL = 'http://localhost:7070';
+axios.defaults.baseURL = 'http://192.168.0.10:7070';
 
 const twPost = async (endpoint, data) => {
   await retrieveDataFromStorage('twitterAccessToken')
