@@ -7,15 +7,14 @@ const homeStyles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 35,
     paddingTop: 3,
-    backgroundColor: '#747',
+    backgroundColor: '#000',
   },
   tweetsListContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 1,
-    paddingTop: 1,
-    backgroundColor: '#353',
+    paddingTop: 1
   },
   logoContainer: {
     justifyContent: 'center',
