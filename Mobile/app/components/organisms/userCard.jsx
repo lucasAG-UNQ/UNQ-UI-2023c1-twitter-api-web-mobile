@@ -54,7 +54,7 @@ const UserCard = ( user ) => {
         <View>
             <Image
                 source={{ uri: user.backgroundImage }}
-                style={{ width: "100%", aspectRatio: 1 }}
+                style={{ width: "100%", aspectRatio: 2 }}
             />
             <View style={styles.headerContainer}>
                 <Image
@@ -94,7 +94,7 @@ const UserCard = ( user ) => {
 
 const styles = {
     headerContainer: {
-        marginTop: -50,
+        marginTop: -75,
         padding: 2,
         flexDirection: "row",
         alignItems: "center",
@@ -108,13 +108,15 @@ const styles = {
     image: {
         width: "20%",
         aspectRatio: 1,
+        borderRadius: 10,
+        marginRight: 10
     },
     statsContainer: {
         padding: 2,
         marginTop: 10,
         flexDirection: "row",
         justifyContent: "center",
-        gap: 5
+        gap: 20
     },
     button: {
         width: "80%",
