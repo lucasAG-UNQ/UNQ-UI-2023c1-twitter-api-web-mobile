@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text} from 'react-native';
+import BottomNavigationBar from './components/molecules/bottomNavigationBar';
+import TwittLog from './components/organisms/twittLog';
 import homeStyles from "./styles/estilos_home";
 import loginStyles from "./styles/estilos";
-import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import TwApi from './services/services';
-import TwittLog from './components/organisms/twittLog';
 
 const Trending = () => {
   const [error, setError] = useState(null)
