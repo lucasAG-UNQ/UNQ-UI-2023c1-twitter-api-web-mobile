@@ -1,14 +1,13 @@
-# Expo Router Example
+# UNQ - UI
+# TP3 - Mobile
+## Twitter
 
-Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
+Enunciado: <https://github.com/unq-ui/material/blob/master/TPs/2023s1/TP3-Mobile.md>
 
-## 🚀 How to use
+### Configuración
 
-```sh
-npx create-expo-app -e with-router
+Establecer la baseURL para Axios en `./app/services/services.js`
+
 ```
-
-## 📝 Notes
-
-- [Expo Router: Docs](https://expo.github.io/router)
-- [Expo Router: Repo](https://github.com/expo/router)
+axios.defaults.baseURL = 'http://localhost:7070';
+```
