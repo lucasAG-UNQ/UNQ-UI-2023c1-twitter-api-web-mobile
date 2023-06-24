@@ -1,9 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-const TwitProfilePic= ({image, id})=>{
+const TweetProfilePic= ({image, id})=>{
     return(
-        <div className="twit_profile_pic_container">
+        <div>
             <Link to={`/user/${id}`}>
                 <img height={48} className={"rounded-circle"} src={image} alt={"ProfilePic"}/>
             </Link>
@@ -11,4 +11,4 @@ const TwitProfilePic= ({image, id})=>{
     )
 }
 
-export default TwitProfilePic
+export default TweetProfilePic

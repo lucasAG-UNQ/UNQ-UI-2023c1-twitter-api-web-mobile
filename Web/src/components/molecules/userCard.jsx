@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TwApi from "../services";
-import "./userCard.css";
+import "../../styles/molecules/userCard.css";
 
 const UserCard = (user) => {
     const [loggedUser, setLoggedUser] = useState();
@@ -82,7 +82,7 @@ const UserCard = (user) => {
                                     {user.tweets.length}
                                 </span>
                                 <span className="d-block text-center f-18">
-                                    Twitts
+                                    Tweets
                                 </span>
                             </div>
                         </div>

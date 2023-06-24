@@ -1,12 +1,12 @@
 import { React, useState, useEffect } from 'react';
-import './sidebar.css';
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom';
 import { BsHouseFill, BsHash, BsPersonFill, BsPersonPlusFill, BsDoorOpenFill } from "react-icons/bs";
 import { BiLogIn } from "react-icons/bi";
 import LoggedUserCard from '../molecules/loggedusercard';
 import SearchBox from '../molecules/searchbox';
 import TwitterLogo from '../atoms/twitterlogo';
 import TwApi from '../services.js';
+import '../../styles/organisms/sidebar.css';
 
 const userMenuItems = () => {
   return [

@@ -16,4 +16,4 @@ axios.defaults.baseURL = 'http://localhost:7070';
 
 - Se habilitó CORS para cualquier host, y se exponen los headers.
 - Se cambiaron algunos mensajes de error para hacerlos más descriptivos.
-- Se devuelven ordenadas por fecha los twitts del usuario.
+- Se devuelven ordenadas por fecha los tweets del usuario.

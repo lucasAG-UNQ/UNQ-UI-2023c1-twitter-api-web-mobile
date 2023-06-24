@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import TwApi from "../services";
-import "./userCard.css";
+import "../../styles/molecules/userCard.css";
 
 const LoggedUserCard = () => {
     const [loggedUser, setLoggedUser] = useState();

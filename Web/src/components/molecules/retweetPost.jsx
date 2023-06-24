@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TwApi from "../services";
-import TwitProfilePic from "../atoms/twitProfilePic";
+import TweetProfilePic from "../atoms/tweetProfilePic";
 import { useNavigate } from "react-router-dom";
 
 const RetweetPost = ({ id, onPost }) => {
@@ -11,18 +11,18 @@ const RetweetPost = ({ id, onPost }) => {
     const [textPost, setTextPost] = useState("");
     const [error, setError] = useState("");
 
-    const handleTwitPost = (event) => {
+    const handleTweetPost = (event) => {
         event.preventDefault();
-        const twitToPost = { content: textPost };
-        TwApi.retwitt(id, twitToPost)
+        const tweetToPost = { content: textPost };
+        TwApi.retweet(id, tweetToPost)
             .then((response) => {
                 setError("");
-                const retwit = response.data.reTweet
-                    .filter((retwit) => retwit.user.id === loggedUser.id)
+                const retweet = response.data.reTweet
+                    .filter((retweet) => retweet.user.id === loggedUser.id)
                     .sort(
                         (ra, rb) => Date.parse(rb.date) - Date.parse(ra.date)
                     )[0];
-                navigate(`/twitt/${retwit.id}`);
+                navigate(`/tweet/${retweet.id}`);
                 onPost();
             })
             .catch((error) => {
@@ -43,17 +43,17 @@ const RetweetPost = ({ id, onPost }) => {
     return (
         <div>
             {handleError()}
-            <div className="twitPostContainer bg-dark container-fluid mb-3">
-                <TwitProfilePic {...loggedUser} />
+            <div className="tweetPostContainer bg-dark container-fluid mb-3">
+                <TweetProfilePic {...loggedUser} />
                 <div className="container">
                     <form
                         className="form-inline mx-sm-3"
-                        onSubmit={handleTwitPost}
+                        onSubmit={handleTweetPost}
                     >
                         <div className="form-group mb-2 mt-2">
                             <input
                                 className="form-control mb-2"
-                                id="inputTwitText"
+                                id="inputTweetText"
                                 placeholder="Añadir un comentario"
                                 value={textPost}
                                 onChange={(event) =>
@@ -61,7 +61,7 @@ const RetweetPost = ({ id, onPost }) => {
                                 }
                             />
                             <button type="submit" className="btn btn-primary">
-                                ReTwittear
+                                Retweetear
                             </button>
                         </div>
                     </form>

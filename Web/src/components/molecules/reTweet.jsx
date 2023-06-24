@@ -1,21 +1,19 @@
 import React from "react";
-import SimpleTwitt from "./simpleTwitt";
-import TwittActions from "./twittActions";
-import "./reTweet.css"
-import "./fullTwittWithActions.css"
+import SimpleTweet from "./simpleTweet";
+import TweetActions from "./tweetActions";
+import "../../styles/molecules/reTweet.css";
+import "../../styles/molecules/fullTweetWithActions.css";
 
-const Retweet=({twit})=>{
-
-    const handleReTweeted=()=><SimpleTwitt twit={twit.type.tweet}/>
+const Retweet=({tweet})=>{
 
     return(
-        <article className="FullTwittWithActions bg-dark container-fluid mb-3">
+        <article className="FullTweetWithActions bg-dark container-fluid mb-3">
             <span className="RetweetText text-muted">Retweeted</span>
-            <SimpleTwitt twit={twit} />
-            <div className="RetwitedTweet">
-                {handleReTweeted()}
+            <SimpleTweet tweet={tweet} />
+            <div className="RetweetedTweet">
+                <SimpleTweet tweet={tweet.type.tweet}/>
             </div>
-            <TwittActions twit={twit}/>
+            <TweetActions tweet={tweet}/>
         </article>
     )
 }

@@ -1,17 +1,17 @@
 import React, { useState,useEffect } from "react";
-import TwitPost from "../molecules/twitPost";
+import TweetPost from "../molecules/tweetPost";
 import TwApi from "../services";
-import TwitLog from "../organisms/twitLog";
+import TweetLog from "../organisms/tweetLog";
 
 const Home = () => {
 
 
-  const [followingTwitts,setFollowingTwitts] = useState([]);
+  const [followingTweets,setFollowingTweets] = useState([]);
   const [error,setError] = useState('')
 
-  useEffect(()=>{TwApi.getFollowingTwitts()
+  useEffect(()=>{TwApi.getFollowingTweets()
                       .then(response => {
-                        setFollowingTwitts(response.data.results);
+                        setFollowingTweets(response.data.results);
                         setError('');
                       })
                       .catch(err=>{
@@ -24,16 +24,16 @@ const Home = () => {
       <p className="etiquetaRoja">{error}</p></>
     )
 
-  if (!followingTwitts) return <div>Loading... </div>
+  if (!followingTweets) return <div>Loading... </div>
 
   return (
     <>
     <div className="vh-100 overflow-hidden">
       <div>
-        <TwitPost />
+        <TweetPost />
       </div>
       <div className="vh-100 overflow-auto">
-        <TwitLog twits={followingTwitts} />
+        <TweetLog tweets={followingTweets} />
       </div>
     </div>
     </>

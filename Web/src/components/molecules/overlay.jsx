@@ -1,7 +1,7 @@
-import "./overlay.css";
+import React from 'react';
+import "../../styles/molecules/overlay.css";
 
 export function Overlay({isOpen,onClose,children }) {
-
 
     return (
         <>

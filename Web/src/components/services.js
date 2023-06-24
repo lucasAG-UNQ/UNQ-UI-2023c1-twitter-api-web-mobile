@@ -35,7 +35,8 @@ const handleError = (error) => {
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     // http.ClientRequest in node.js
-    return Promise.reject(apiError('REQUEST_ERROR', error.code, error.code, `Error consultando al servidor: [${error.code}] ${error.message}`));
+    // return Promise.reject(apiError('REQUEST_ERROR', error.code, error.code, `Error consultando al servidor: [${error.code}] ${error.message}`));
+    return Promise.reject(apiError('REQUEST_ERROR', error.code, error.code, 'Error consultando al servidor. Intente nuevamente más tarde.'));
   } else {
     // Something happened in setting up the request that triggered an Error
     return Promise.reject(apiError('UNEXPECTED_ERROR', error.code, error.code, error.message));
@@ -58,19 +59,19 @@ const trendingTopics = () => twGet('/trendingTopics')
 
 const getUser = (id) => twGet(`/user/${id}`);
 
-const getTwitt = (id) => twGet(`/tweet/${id}`);
+const getTweet = (id) => twGet(`/tweet/${id}`);
 
 const search = (text) => twGet(`/search/?text=${text}`);
 
-const getFollowingTwitts = () => twGet("/user/followingTweets");
+const getFollowingTweets = () => twGet("/user/followingTweets");
 
-const postNormalTwitt = (data) => twPost("/tweet", data);
+const postNormalTweet = (data) => twPost("/tweet", data);
 
 const getLoggedUser = () => twGet("/user")
 
 const toggleLike = (id) => twPut(`/tweet/${id}/like`)
 
-const retwitt = (id,content) => twPost(`/tweet/${id}/retweet`,content)
+const retweet = (id,content) => twPost(`/tweet/${id}/retweet`,content)
 
 const followUser = (id) => twPut(`/user/${id}/follow`)
 
@@ -83,12 +84,12 @@ const TwApi = {
     isUserLogged,
     trendingTopics,
     getUser,
-    getTwitt,
-    getFollowingTwitts,
-    postNormalTwitt,
+    getTweet,
+    getFollowingTweets,
+    postNormalTweet,
     getLoggedUser,
     toggleLike,
-    retwitt,
+    retweet,
     search,
     followUser,
     reply
