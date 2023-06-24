@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import TwitLog from "../organisms/twitLog";
+import TweetLog from "../organisms/tweetLog";
 import UserCard from "../molecules/userCard";
 import TwApi from "../services";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ const User = () => {
     const { id } = useParams();
 
     const [user, setUser] = useState();
-    const [twitts, setTwitts] = useState([]);
+    const [tweets, setTweets] = useState([]);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -17,7 +17,7 @@ const User = () => {
             .then((response) => {
                 setError('');
                 setUser(response.data);
-                setTwitts(response.data.tweets);
+                setTweets(response.data.tweets);
             })
             .catch((err) => {
                 setError(err.description);
@@ -31,7 +31,7 @@ const User = () => {
                 <p className="etiquetaRoja">{error}</p>
             </>
         );
-    if (!twitts || !user) return <div>Loading... </div>;
+    if (!tweets || !user) return <div>Loading... </div>;
 
     return (
         <div className="vh-100 overflow-auto">
@@ -39,7 +39,7 @@ const User = () => {
                 <UserCard {...user} />
             </section>
             <section>
-                <TwitLog twits={twitts} />
+                <TweetLog tweets={tweets} />
             </section>
         </div>
     );

@@ -6,7 +6,7 @@ import { Overlay } from "./overlay";
 import RetweetPost from "./retweetPost";
 import ReplyPost from "./replyPost";
 
-const TwittActions= ({twit})=>{
+const TweetActions= ({tweet})=>{
     
     const [loggedUser, setLoggedUser] = useState()
 
@@ -18,14 +18,14 @@ const TwittActions= ({twit})=>{
         TwApi.getLoggedUser()
             .then((response) => {
                 setLoggedUser(response.data);
-                setLike(twit.likes.some( like => like.id === response.data.id));
+                setLike(tweet.likes.some( like => like.id === response.data.id));
             })
-    }, [twit.likes])
+    }, [tweet.likes])
 
     const handleLike=()=>{
-        TwApi.toggleLike(twit.id)
-                .then(response=>{twit.likes=response.data.likes
-                    setLike(twit.likes.some( like => like.id === loggedUser.id))})
+        TwApi.toggleLike(tweet.id)
+                .then(response=>{tweet.likes=response.data.likes
+                    setLike(tweet.likes.some( like => like.id === loggedUser.id))})
     }
 
     const toggleOverlay = () => {
@@ -42,11 +42,11 @@ const TwittActions= ({twit})=>{
         toggleOverlay()
     }
 
-    const overlayToOpen = () =>  openReply ? <ReplyPost id={twit.id} onPost={toggleOverlay} /> : <RetweetPost id={twit.id} onPost={toggleOverlay} />;
+    const overlayToOpen = () =>  openReply ? <ReplyPost id={tweet.id} onPost={toggleOverlay} /> : <RetweetPost id={tweet.id} onPost={toggleOverlay} />;
 
     const liked = () => like ? <BsHeartFill className="tw-like"/> : <BsHeart className="tw-like"/>;
 
-    const canRetweet = () => { return twit.user.id !== loggedUser.id ? handleRetweet : (_=>_) };
+    const canRetweet = () => { return tweet.user.id !== loggedUser.id ? handleRetweet : (_=>_) };
     
     if (!loggedUser) return <div>Loading... </div>;
 
@@ -54,12 +54,12 @@ const TwittActions= ({twit})=>{
         <div>
             <Overlay isOpen={isOpen} onClose={toggleOverlay}>{overlayToOpen()}</Overlay>
             <div className="iconsContainer">
-                <IconButtonStat stat={twit.repliesAmount || twit.replies?.length} action={handleReply} title="Responder"> <BsChatDotsFill className="tw-coment"/> </IconButtonStat>
-                <IconButtonStat stat={twit.reTweetAmount || twit.reTweet?.length} action={canRetweet()} title="Retwitear"> <BsArrowRepeat className="tw-retweet"/> </IconButtonStat> 
-                <IconButtonStat stat={twit.likes.length} action={handleLike}> {liked()} </IconButtonStat>
+                <IconButtonStat stat={tweet.repliesAmount || tweet.replies?.length} action={handleReply} title="Responder"> <BsChatDotsFill className="tw-coment"/> </IconButtonStat>
+                <IconButtonStat stat={tweet.reTweetAmount || tweet.reTweet?.length} action={canRetweet()} title="Retweetear"> <BsArrowRepeat className="tw-retweet"/> </IconButtonStat> 
+                <IconButtonStat stat={tweet.likes.length} action={handleLike}> {liked()} </IconButtonStat>
             </div>
         </div>
     )
 }
 
-export default TwittActions
+export default TweetActions

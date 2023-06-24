@@ -82,7 +82,7 @@ const UserCard = (user) => {
                                     {user.tweets.length}
                                 </span>
                                 <span className="d-block text-center f-18">
-                                    Twitts
+                                    Tweets
                                 </span>
                             </div>
                         </div>

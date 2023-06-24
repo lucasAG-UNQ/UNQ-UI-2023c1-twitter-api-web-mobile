@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
-import TwitProfilePic from "../atoms/twitProfilePic";
+import TweetProfilePic from "../atoms/tweetProfilePic";
 import TwApi from "../services";
-import "./twitPost.css";
+import "./tweetPost.css";
 
-const TwitPost = () => {
+const TweetPost = () => {
     const [loggedUser, setLoggedUser] = useState();
 
     const [textPost, setTextPost] = useState("");
@@ -38,11 +38,11 @@ const TwitPost = () => {
         return valida;
     };
 
-    const handleTwitPost = (event) => {
+    const handleTweetPost = (event) => {
         event.preventDefault();
         if (validar()) {
-            const twitToPost = { content: textPost, image: imagePost };
-            TwApi.postNormalTwitt(twitToPost)
+            const tweetToPost = { content: textPost, image: imagePost };
+            TwApi.postNormalTweet(tweetToPost)
                 .then((response) => {
                     setTweetId(response.data.id);
                     setError('');
@@ -57,7 +57,7 @@ const TwitPost = () => {
             setTextPost("");
             setImagePost("");
             setTimeout(() => {
-                navigate(`/twitt/${tweetId}`);
+                navigate(`/tweet/${tweetId}`);
             }, 2000);
         }
     }, [tweetId]);
@@ -66,17 +66,17 @@ const TwitPost = () => {
 
     return (
         <div>
-            <div className="twitPostContainer bg-dark container-fluid mb-3">
-                <TwitProfilePic {...loggedUser} />
+            <div className="tweetPostContainer bg-dark container-fluid mb-3">
+                <TweetProfilePic {...loggedUser} />
                 <div className="container">
                     <form
                         className="form-inline mx-sm-3"
-                        onSubmit={handleTwitPost}
+                        onSubmit={handleTweetPost}
                     >
                         <div className="form-group mb-2 mt-2">
                             <input
                                 className="form-control mb-2"
-                                id="inputTwitText"
+                                id="inputTweetText"
                                 placeholder="¿Qué está pasando?"
                                 value={textPost}
                                 onChange={(event) =>
@@ -85,7 +85,7 @@ const TwitPost = () => {
                             />
                             <input
                                 className="form-control mb-2"
-                                id="inputTwitImageSrc"
+                                id="inputTweetImageSrc"
                                 placeholder="Link a Imagen"
                                 value={imagePost}
                                 onChange={(event) =>
@@ -111,4 +111,4 @@ const TwitPost = () => {
     );
 };
 
-export default TwitPost;
+export default TweetPost;

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import TwitPost from "../molecules/twitPost";
-import TwitLog from "../organisms/twitLog";
+import TweetPost from "../molecules/tweetPost";
+import TweetLog from "../organisms/tweetLog";
 import UserCard from "../molecules/userCard";
 import TwApi from "../services";
 
 const Profile = () => {
     const [loggedUser, setLoggedUser] = useState();
-    const [twitts, setTwitts] = useState([]);
+    const [tweets, setTweets] = useState([]);
     const [error, setError] = useState('');
 
     useEffect(() => {
@@ -14,7 +14,7 @@ const Profile = () => {
             .then((response) => {
                 setError('');
                 setLoggedUser(response.data);
-                setTwitts(response.data.tweets);
+                setTweets(response.data.tweets);
             })
             .catch((err) => {
                 setError(err.description);
@@ -28,7 +28,7 @@ const Profile = () => {
                 <p className="etiquetaRoja">{error}</p>
             </>
         );
-    if (!twitts || !loggedUser) return <div>Loading... </div>;
+    if (!tweets || !loggedUser) return <div>Loading... </div>;
 
     return (
         <div className="vh-100 overflow-auto">
@@ -36,10 +36,10 @@ const Profile = () => {
                 <UserCard {...loggedUser} />
             </section>
             <section>
-                <TwitPost {...loggedUser} />
+                <TweetPost {...loggedUser} />
             </section>
             <section>
-                <TwitLog twits={twitts} />
+                <TweetLog tweets={tweets} />
             </section>
         </div>
     );

@@ -16,7 +16,7 @@ import Logout from './components/pages/logout';
 import User from './components/pages/user';
 import Login from './components/pages/login';
 import Register from './components/pages/register';
-import Twitt from './components/pages/twitt';
+import Tweet from './components/pages/tweet';
 import Search from './components/pages/search';
 import NotFound from './components/pages/notfound';
 
@@ -34,7 +34,7 @@ root.render(
           <Route path="/trending" element={<PrivateRoute><Trending /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/user/:id" element={<PrivateRoute><User /></PrivateRoute>} />
-          <Route path="/twitt/:id" element={<PrivateRoute><Twitt /></PrivateRoute>} />
+          <Route path="/tweet/:id" element={<PrivateRoute><Tweet /></PrivateRoute>} />
           <Route path="/search" element={<PrivateRoute><Search /></PrivateRoute>} />
           <Route path="/logout" element={<PrivateRoute><Logout /></PrivateRoute>} />
           <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />

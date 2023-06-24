@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import TwApi from "../services";
-import TwitProfilePic from "../atoms/twitProfilePic";
+import TweetProfilePic from "../atoms/tweetProfilePic";
 
 const ReplyPost = ({ id, onPost }) => {
     const [loggedUser, setLoggedUser] = useState();
@@ -11,13 +11,13 @@ const ReplyPost = ({ id, onPost }) => {
 
     const navigate = useNavigate();
     
-    const handleTwitPost = (event) => {
+    const handleTweetPost = (event) => {
         event.preventDefault();
-        const twitToPost = { content: textPost, image: imagePost };
-        TwApi.reply(id, twitToPost)
+        const tweetToPost = { content: textPost, image: imagePost };
+        TwApi.reply(id, tweetToPost)
             .then((_) => {
                 setError("");
-                navigate(`/twitt/${id}`);
+                navigate(`/tweet/${id}`);
                 onPost();
             })
             .catch((error) => setError(error.status));
@@ -36,17 +36,17 @@ const ReplyPost = ({ id, onPost }) => {
     return (
         <div>
             {handleError()}
-            <div className="twitPostContainer bg-dark container-fluid mb-3">
-                <TwitProfilePic {...loggedUser} />
+            <div className="tweetPostContainer bg-dark container-fluid mb-3">
+                <TweetProfilePic {...loggedUser} />
                 <div className="container">
                     <form
                         className="form-inline mx-sm-3"
-                        onSubmit={handleTwitPost}
+                        onSubmit={handleTweetPost}
                     >
                         <div className="form-group mb-2 mt-2">
                             <input
                                 className="form-control mb-2"
-                                id="inputTwitText"
+                                id="inputTweetText"
                                 placeholder="Añadir un comentario"
                                 value={textPost}
                                 onChange={(event) =>
@@ -55,7 +55,7 @@ const ReplyPost = ({ id, onPost }) => {
                             />
                             <input
                                 className="form-control mb-2"
-                                id="inputTwitImageSrc"
+                                id="inputTweetImageSrc"
                                 placeholder="Link a Imagen"
                                 value={imagePost}
                                 onChange={(event) =>
