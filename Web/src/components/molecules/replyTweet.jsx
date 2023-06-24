@@ -1,7 +1,7 @@
 import React from "react";
 import SimpleTweet from "./simpleTweet";
 import TweetActions from "./tweetActions";
-import "./replyTweet.css"
+import "../../styles/molecules/replyTweet.css";
 
 const ReplyTweet=({tweet})=>{
 

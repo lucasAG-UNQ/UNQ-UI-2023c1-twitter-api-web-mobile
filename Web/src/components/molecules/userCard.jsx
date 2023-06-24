@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import TwApi from "../services";
-import "./userCard.css";
+import "../../styles/molecules/userCard.css";
 
 const UserCard = (user) => {
     const [loggedUser, setLoggedUser] = useState();

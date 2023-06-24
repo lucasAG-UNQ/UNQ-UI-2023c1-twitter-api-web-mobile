@@ -9,13 +9,18 @@ import ReplyTweet from '../molecules/replyTweet';
 const Tweet = () => {
   const  { id } = useParams();
 
-  const [tweet,setTweet] = useState('');
-  const [error,setError] = useState('');
+  const [tweet,setTweet] = useState(null);
+  const [error,setError] = useState(null);
 
   useEffect(()=>{TwApi.getTweet(id)
                       .then(response => {
-                        setTweet(response.data);
-                        setError('');
+                        if (!!response.data) {
+                          setTweet(response.data);
+                          setError(null);
+                        }
+                        else {
+                          setError('No se encontró el tweet.');
+                        }
                       })
                       .catch((error) => setError(error.description))
                 },[id])
@@ -30,11 +35,18 @@ const Tweet = () => {
         }
   }
 
+  if (error) return (
+    <>
+      <h2>Ups... algo salió mal</h2>
+      <p className="etiquetaRoja">{error}</p></>
+    )
+
   if (!tweet && !error) return <div className="fw-bold mb-2">Loading... </div>
+
   return (
     <div className="vh-100 overflow-auto">
       <h1 className="fw-bold mb-4 p-4">Tweet</h1>
-        {(tweet)?decideTweet(tweet):<p>{error}</p> }
+        { decideTweet(tweet) }
         <div className='replies'>{tweet.replies.map(reply=><FullTweetWithActions tweet={reply} key={reply.id} />)}</div>
     </div>
   )

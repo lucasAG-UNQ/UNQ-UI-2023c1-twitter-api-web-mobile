@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router";
 import TweetProfilePic from "../atoms/tweetProfilePic";
 import TwApi from "../services";
-import "./tweetPost.css";
+import "../../styles/molecules/tweetPost.css";
 
 const TweetPost = () => {
     const [loggedUser, setLoggedUser] = useState();

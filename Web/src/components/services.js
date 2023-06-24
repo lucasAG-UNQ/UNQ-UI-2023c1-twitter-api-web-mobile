@@ -35,7 +35,8 @@ const handleError = (error) => {
     // The request was made but no response was received
     // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
     // http.ClientRequest in node.js
-    return Promise.reject(apiError('REQUEST_ERROR', error.code, error.code, `Error consultando al servidor: [${error.code}] ${error.message}`));
+    // return Promise.reject(apiError('REQUEST_ERROR', error.code, error.code, `Error consultando al servidor: [${error.code}] ${error.message}`));
+    return Promise.reject(apiError('REQUEST_ERROR', error.code, error.code, 'Error consultando al servidor. Intente nuevamente más tarde.'));
   } else {
     // Something happened in setting up the request that triggered an Error
     return Promise.reject(apiError('UNEXPECTED_ERROR', error.code, error.code, error.message));

@@ -1,6 +1,7 @@
-import "./fullTweetWithActions.css"
+import React from 'react';
 import SimpleTweet from "./simpleTweet";
 import TweetActions from "./tweetActions";
+import "../../styles/molecules/fullTweetWithActions.css";
 
 const FullTweetWithActions= ({tweet})=>{
 

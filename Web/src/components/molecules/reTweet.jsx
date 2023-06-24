@@ -1,8 +1,8 @@
 import React from "react";
 import SimpleTweet from "./simpleTweet";
 import TweetActions from "./tweetActions";
-import "./reTweet.css"
-import "./fullTweetWithActions.css"
+import "../../styles/molecules/reTweet.css";
+import "../../styles/molecules/fullTweetWithActions.css";
 
 const Retweet=({tweet})=>{
 
