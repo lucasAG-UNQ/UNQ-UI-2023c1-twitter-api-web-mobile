@@ -1,19 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text} from 'react-native';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
-import TwittLog from './components/organisms/twittLog';
+import TweetLog from './components/organisms/tweetLog';
 import homeStyles from "./styles/estilos_home";
 import loginStyles from "./styles/estilos";
 import TwApi from './services/services';
 
 const Trending = () => {
   const [error, setError] = useState(null)
-  const [twitts,setTwitts] = useState([]);
+  const [tweets,setTweets] = useState([]);
 
   useEffect(() => {
     TwApi.trendingTopics()
       .then(response => {
-        setTwitts(response.data.results);
+        setTweets(response.data.results);
         setError(null);
       })
       .catch((error) => setError(error.description))
@@ -23,8 +23,8 @@ const Trending = () => {
     <View style={homeStyles.container}>
       <Text style={homeStyles.titleBold}>Trending topics</Text>
       <View style={homeStyles.tweetsListContainer}>
-        {(twitts.length > 0) ? 
-          <TwittLog tweets={twitts} /> : 
+        {(tweets.length > 0) ? 
+          <TweetLog tweets={tweets} /> : 
           <Text style={homeStyles.titleNormal}>Loading...</Text>}
         {error
           ? <Text style={loginStyles.errorText}>{error}</Text>

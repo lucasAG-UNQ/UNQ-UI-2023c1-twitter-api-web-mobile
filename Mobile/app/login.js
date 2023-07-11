@@ -9,7 +9,7 @@ import loginStyles from "./styles/estilos";
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
 
     const navigation = useNavigation();
 
@@ -31,7 +31,7 @@ const Login = () => {
         if (validar()) {
             TwApi.login({ username: username, password: password })
                 .then((response) => {
-                    setError("");
+                    setError(null);
                     TwApi.saveDataToStorage(
                         "twitterAccessToken",
                         response.headers.authorization

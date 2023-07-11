@@ -4,7 +4,7 @@ import homeStyles from "./styles/estilos_home";
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import TwApi from './services/services';
-import TwitProfilePic from './components/atoms/twitProfilePic';
+import TweetProfilePic from './components/atoms/tweetProfilePic';
 import ReplyRetweetPostStyles from './styles/estilos_reply-retweet';
 import { Input } from './components/atoms/atomos_basic';
 import { useNavigation } from '@react-navigation/native';
@@ -17,9 +17,7 @@ const TwitPost = () => {
     const [textPost, setTextPost] = useState("");
     const [imagePost, setImagePost] = useState("");
     const [error, setError] = useState(null);
-    const [tweetId, setTweetId] = useState("");
-
-    const currentAction= 'tweet';
+    const [tweetId, setTweetId] = useState(null);
 
     useEffect(() => {
         TwApi.getLoggedUser().then((response) => {
@@ -48,8 +46,8 @@ const TwitPost = () => {
     const handleTwitPost = (event) => {
         event.preventDefault();
         if (validar()) {
-            const twitToPost = { content: textPost, image: imagePost };
-            TwApi.postNormalTwitt(twitToPost)
+            const tweetToPost = { content: textPost, image: imagePost };
+            TwApi.postNormalTwitt(tweetToPost)
                 .then((response) => {
                     setTweetId(response.data.id);
                     setError(null);
@@ -60,12 +58,11 @@ const TwitPost = () => {
 
     useEffect(() => {
         if (tweetId) {
-            setError("HAS GENERADO UN NUEVO TWEET");
             setTextPost("");
             setImagePost("");
             setTimeout(() => {
                 navigation.navigate('tweetScreen',{tweetId:tweetId});
-            }, 2000);
+            }, 1500);
         }
     }, [tweetId]);
 
@@ -78,7 +75,7 @@ const TwitPost = () => {
                   <Text style={homeStyles.titleBold}>Nuevo Twit</Text>
                 </View>
                 <ScrollView contentContainerStyle={[{flex:1,paddingTop:30},ReplyRetweetPostStyles.container]}>
-                  <TwitProfilePic image={loggedUser.image} id={loggedUser.id} />
+                  <TweetProfilePic image={loggedUser.image} id={loggedUser.id} />
                   <View style={ReplyRetweetPostStyles.inputsContainer}>
                           <View>
                               <Input seccion={"¿Que estas pensando?"} setFuncion={setTextPost} />
@@ -91,7 +88,7 @@ const TwitPost = () => {
                   </View>
                 </ScrollView>
               </View>
-            <BottomNavigationBar currentAction={currentAction}/>
+            <BottomNavigationBar currentAction='tweet'/>
         </View>
     );
 };

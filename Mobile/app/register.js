@@ -14,7 +14,7 @@ const Register = () => {
   const [backImg, setBackImg] = useState('')
 
   const [token, setToken] = useState(false)
-  const [error, setError] = useState('')
+  const [error, setError] = useState(null)
 
   const regData = {
     username: user,
@@ -57,7 +57,7 @@ const Register = () => {
       TwApi.register(regData)
         .then( () => {
           setToken(true);
-          setError('');
+          setError(null);
         } )
         .catch( (error) => setError(error.description));
     }
@@ -65,8 +65,7 @@ const Register = () => {
   
   useEffect(() => {
     if (token) { 
-      setError("USUARIO REGISTRADO EXITOSAMENTE")
-      setTimeout(() => { navigation.navigate("login") }, 3000);
+      setTimeout(() => { navigation.navigate("login") }, 1500);
     }
   }, [token]);
   
@@ -89,7 +88,7 @@ const Register = () => {
             <TouchableOpacity style={loginStyles.button} onPress={handleRegisterSubmit}>
               <Text style={loginStyles.buttonText}>Registrarse</Text>
             </TouchableOpacity>
-            <Text style={loginStyles.errorText}>{error}</Text>
+            { error ? <Text style={loginStyles.errorText}>{error}</Text> : <></> }
           </View>
         </View>
       </View>

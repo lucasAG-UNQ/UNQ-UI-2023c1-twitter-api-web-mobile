@@ -1,19 +1,19 @@
 import React, { useState, useEffect} from "react";
 import { View, Text } from "react-native";
 import BottomNavigationBar from "./components/molecules/bottomNavigationBar";
-import TwittLog from './components/organisms/twittLog';
+import TweetLog from './components/organisms/tweetLog';
 import homeStyles from "./styles/estilos_home";
 import loginStyles from "./styles/estilos";
 import TwApi from './services/services';
 
 const Home = () => {
-    const [followingTwitts, setFollowingTwitts] = useState([]);
+    const [followingTweets, setFollowingTweets] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        TwApi.getFollowingTwitts()
+        TwApi.getFollowingTweets()
             .then((response) => {
-                setFollowingTwitts(response.data.results);
+                setFollowingTweets(response.data.results);
                 setError(null);
             })
             .catch((err) => {
@@ -29,15 +29,15 @@ const Home = () => {
             </View>
         );
 
-    if (!followingTwitts)
+    if (!followingTweets)
         return <Text style={{ color: "white" }}>Loading... </Text>;
 
     return (
         <View style={homeStyles.container}>
             <Text style={homeStyles.titleBold}>Inicio</Text>
             <View style={homeStyles.tweetsListContainer}>
-                {followingTwitts.length > 0 
-                    ? (<TwittLog tweets={followingTwitts} />)
+                {followingTweets.length > 0 
+                    ? (<TweetLog tweets={followingTweets} />)
                     : (<Text style={homeStyles.titleNormal}>Loading...</Text>)}
                 {error 
                     ? <Text style={loginStyles.errorText}>{error}</Text> 

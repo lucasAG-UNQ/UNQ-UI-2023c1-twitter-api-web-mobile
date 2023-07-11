@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import TwitProfilePic from "../atoms/twitProfilePic";
+import TweetProfilePic from "../atoms/tweetProfilePic";
 import TwApi from "../../services/services";
 import TweetStyles from "../../styles/tweetStyles";
 
-const SimpleTwitt = ({ tweet }) => {
+const SimpleTweet = ({ tweet }) => {
     const [tweetAuthor, setTweetAuthor] = useState([]);
     const navigation = useNavigation();
 
@@ -28,7 +28,7 @@ const SimpleTwitt = ({ tweet }) => {
     return (
         <TouchableOpacity style={TweetStyles.tweetContainer} onPress={handleNavigateTweet}>
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', padingBottom: 2 }}>
-                <TwitProfilePic image={tweetAuthor.image} user={tweetAuthor} />
+                <TweetProfilePic image={tweetAuthor.image} user={tweetAuthor} />
                 <View>
                     <TouchableOpacity onPress={handleUsernameTouch}>
                         <Text style={TweetStyles.username}>{tweet.user.username}</Text>
@@ -44,4 +44,4 @@ const SimpleTwitt = ({ tweet }) => {
     );
 };
 
-export default SimpleTwitt;
+export default SimpleTweet;
