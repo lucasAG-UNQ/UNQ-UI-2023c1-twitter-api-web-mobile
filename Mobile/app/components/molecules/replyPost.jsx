@@ -14,7 +14,7 @@ const ReplyPost = ({ id, onPost }) => {
 
     const navigation = useNavigation();
     
-    const handleTwitPost = (event) => {
+    const handleTweetPost = (event) => {
         event.preventDefault();
         const tweetToPost = { content: textPost, image: imagePost };
         TwApi.reply(id, tweetToPost)
@@ -45,7 +45,7 @@ const ReplyPost = ({ id, onPost }) => {
                             <Text style={{color:'white'}}>Respondiendo</Text>
                             <Input seccion={"Texto"} setFuncion={setTextPost} />
                             <Input seccion={"Link a Imagen"} setFuncion={setImagePost} />
-                            <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTwitPost}>
+                            <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTweetPost}>
                                 <Text style={{color:'white'}}>Twitear</Text>
                             </TouchableOpacity>
                             <Text style={{color:'red'}}>{error}</Text>

@@ -9,7 +9,7 @@ import ReplyRetweetPostStyles from './styles/estilos_reply-retweet';
 import { Input } from './components/atoms/atomos_basic';
 import { useNavigation } from '@react-navigation/native';
 
-const TwitPost = () => {
+const TweetPost = () => {
     const navigation=useNavigation()
 
     const [loggedUser, setLoggedUser] = useState();
@@ -43,7 +43,7 @@ const TwitPost = () => {
         return valida;
     };
 
-    const handleTwitPost = (event) => {
+    const handleTweetPost = (event) => {
         event.preventDefault();
         if (validar()) {
             const tweetToPost = { content: textPost, image: imagePost };
@@ -80,7 +80,7 @@ const TwitPost = () => {
                           <View>
                               <Input seccion={"¿Que estas pensando?"} setFuncion={setTextPost} />
                               <Input seccion={"Link a Imagen"} setFuncion={setImagePost} />
-                              <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTwitPost}>
+                              <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTweetPost}>
                                   <Text style={{color:'white'}}>Twitear</Text>
                               </TouchableOpacity>
                               <Text style={{color:'red'}}>{error}</Text>
@@ -93,4 +93,4 @@ const TwitPost = () => {
     );
 };
 
-export default TwitPost
+export default TweetPost
