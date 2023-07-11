@@ -13,13 +13,13 @@ const TweetScreen = () => {
     const tweetId=route.params.tweetId;
 
     const [refreshing, setRefreshing] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState(null);
     const [tweet,setTweet]=useState()
 
     useEffect(()=>{
         TwApi.getTwitt(tweetId).then(response=>{
             setTweet(response.data)
-            setError('')
+            setError(null)
         })
         .catch(error=>setError(error.description))
     },[tweet])

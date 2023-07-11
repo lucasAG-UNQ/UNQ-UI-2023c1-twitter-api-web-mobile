@@ -57,7 +57,7 @@ const Register = () => {
       TwApi.register(regData)
         .then( () => {
           setToken(true);
-          setError('');
+          setError(null);
         } )
         .catch( (error) => setError(error.description));
     }

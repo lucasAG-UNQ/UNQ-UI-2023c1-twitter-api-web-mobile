@@ -31,7 +31,7 @@ const Login = () => {
         if (validar()) {
             TwApi.login({ username: username, password: password })
                 .then((response) => {
-                    setError("");
+                    setError(null);
                     TwApi.saveDataToStorage(
                         "twitterAccessToken",
                         response.headers.authorization
