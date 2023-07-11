@@ -17,9 +17,7 @@ const TwitPost = () => {
     const [textPost, setTextPost] = useState("");
     const [imagePost, setImagePost] = useState("");
     const [error, setError] = useState(null);
-    const [tweetId, setTweetId] = useState("");
-
-    const currentAction= 'tweet';
+    const [tweetId, setTweetId] = useState(null);
 
     useEffect(() => {
         TwApi.getLoggedUser().then((response) => {
@@ -60,12 +58,11 @@ const TwitPost = () => {
 
     useEffect(() => {
         if (tweetId) {
-            setError("HAS GENERADO UN NUEVO TWEET");
             setTextPost("");
             setImagePost("");
             setTimeout(() => {
                 navigation.navigate('tweetScreen',{tweetId:tweetId});
-            }, 2000);
+            }, 1500);
         }
     }, [tweetId]);
 
@@ -91,7 +88,7 @@ const TwitPost = () => {
                   </View>
                 </ScrollView>
               </View>
-            <BottomNavigationBar currentAction={currentAction}/>
+            <BottomNavigationBar currentAction='tweet'/>
         </View>
     );
 };
