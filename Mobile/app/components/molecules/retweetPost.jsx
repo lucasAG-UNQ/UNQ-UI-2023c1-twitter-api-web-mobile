@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import TwApi from "../../services/services";
-import TwitProfilePic from "../atoms/twitProfilePic";
+import TweetProfilePic from "../atoms/tweetProfilePic";
 import { View,TouchableOpacity,Text } from "react-native";
 import ReplyRetweetPostStyles from "../../styles/estilos_reply-retweet";
 import { Input } from "../atoms/atomos_basic";
 
-const RetwittPost = ({ id, onPost }) => {
+const RetweetPost = ({ id, onPost }) => {
     const [loggedUser, setLoggedUser] = useState();
     const [textPost, setTextPost] = useState("");
     const [error, setError] = useState(null);
@@ -15,8 +15,8 @@ const RetwittPost = ({ id, onPost }) => {
     
     const handleTwitPost = (event) => {
         event.preventDefault();
-        const twitToPost = { content: textPost };
-        TwApi.retwitt(id, twitToPost)
+        const tweetToPost = { content: textPost };
+        TwApi.retweet(id, tweetToPost)
             .then((_) => {
                 setError(null);
                 onPost();
@@ -39,10 +39,10 @@ const RetwittPost = ({ id, onPost }) => {
         <View>
             {handleError()}
             <View style={ReplyRetweetPostStyles.container}>
-                <TwitProfilePic image={loggedUser.image} id={loggedUser.id} />
+                <TweetProfilePic image={loggedUser.image} id={loggedUser.id} />
                 <View style={ReplyRetweetPostStyles.inputsContainer}>
                         <View style={{}}>
-                            <Text style={{color:'white'}}>Retwiteando</Text>
+                            <Text style={{color:'white'}}>Retweeteando</Text>
                             <Input seccion={"Texto"} setFuncion={setTextPost} />
                             <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTwitPost}>
                                 <Text style={{color:'white'}}>Twitear</Text>
@@ -55,4 +55,4 @@ const RetwittPost = ({ id, onPost }) => {
     );
 };
 
-export default RetwittPost;
+export default RetweetPost;

@@ -82,7 +82,7 @@ const getTwitt = (id) => twGet(`/tweet/${id}`);
 
 const search = (text) => twGet(`/search/?text=${text}`);
 
-const getFollowingTwitts = () => twGet("/user/followingTweets");
+const getFollowingTweets = () => twGet("/user/followingTweets");
 
 const postNormalTwitt = (data) => twPost("/tweet", data);
 
@@ -90,7 +90,7 @@ const getLoggedUser = () => twGet("/user")
 
 const toggleLike = (id) => twPut(`/tweet/${id}/like`)
 
-const retwitt = (id,content) => twPost(`/tweet/${id}/retweet`,content)
+const retweet = (id,content) => twPost(`/tweet/${id}/retweet`,content)
 
 const followUser = (id) => twPut(`/user/${id}/follow`)
 
@@ -131,11 +131,11 @@ const TwApi = {
     trendingTopics,
     getUser,
     getTwitt,
-    getFollowingTwitts,
+    getFollowingTweets,
     postNormalTwitt,
     getLoggedUser,
     toggleLike,
-    retwitt,
+    retweet,
     search,
     followUser,
     reply,

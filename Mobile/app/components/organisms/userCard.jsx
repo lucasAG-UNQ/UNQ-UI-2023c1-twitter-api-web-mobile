@@ -73,7 +73,7 @@ const UserCard = ( user ) => {
                     <Text style={styles.statsNumber}>{user.following.length}</Text>
                 </View>
                 <View>
-                    <Text style={styles.statsLabel}>Twitts</Text>
+                    <Text style={styles.statsLabel}>Tweets</Text>
                     <Text style={styles.statsNumber}>{user.tweets.length}</Text>
                 </View>
             </View>

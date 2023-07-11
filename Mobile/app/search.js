@@ -6,11 +6,11 @@ import loginStyles from "./styles/estilos";
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import {InputSearch, TwitterLogo} from "./components/atoms/atomos_basic";
 import TwApi from './services/services';
-import TwittLog from './components/organisms/twittLog';
+import TweetLog from './components/organisms/tweetLog';
 
 const Search = () => {
   const [error, setError] = useState(null)
-  const [twitts,setTwitts] = useState([]);
+  const [tweets,setTweets] = useState([]);
   const [texto, setTexto] = useState('');
   const [buscando, setBuscando] = useState(false)
 
@@ -19,8 +19,8 @@ const Search = () => {
   const buscar = ()=>{
     TwApi.search(texto)
       .then(response => {
-        setTwitts(response.data.results);
-        twitts.length == 0 ? setBuscando(true): setBuscando(false);
+        setTweets(response.data.results);
+        tweets.length == 0 ? setBuscando(true): setBuscando(false);
         setError(null);
       })
       .catch((error) => setError(error.description))
@@ -35,8 +35,8 @@ const Search = () => {
           </TouchableOpacity>
         </View>
         <View style={homeStyles.tweetsListContainer}>
-          {(twitts.length > 0) ? 
-            <TwittLog tweets={twitts} /> : 
+          {(tweets.length > 0) ? 
+            <TweetLog tweets={tweets} /> : 
             buscando ? 
               <Text style={homeStyles.titleBold}>No se encontró nada para: '{texto}'</Text> : 
               <View style={{flex:1}}>

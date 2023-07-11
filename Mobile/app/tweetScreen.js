@@ -4,7 +4,7 @@ import homeStyles from "./styles/estilos_home";
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import TwApi from './services/services';
-import { FullTwittWithActions, ReplyTwitt, Retweet } from './components/organisms/tweetWithActions';
+import { TweetWithActions, ReplyTweet, Retweet } from './components/organisms/tweetWithActions';
 import {useRoute} from "@react-navigation/native"
 
 const TweetScreen = () => {
@@ -35,11 +35,11 @@ const TweetScreen = () => {
 
     const decideTweet=(tweet)=>{
         if(tweet.type.tweet==null){
-            return <FullTwittWithActions tweet={tweet} key={tweet.id} />
+            return <TweetWithActions tweet={tweet} key={tweet.id} />
         }else if(tweet.type.image==null){
             return <Retweet tweet={tweet} key={tweet.id} />
         }else{
-            return <ReplyTwitt tweet={tweet} key={tweet.id}/>
+            return <ReplyTweet tweet={tweet} key={tweet.id}/>
         }
     }
 
@@ -60,7 +60,7 @@ const TweetScreen = () => {
                 {decideTweet(tweet)}
             </View>
             <View>
-                {tweet.replies.map(reply=><FullTwittWithActions tweet={reply} key={reply.id} />)}
+                {tweet.replies.map(reply=><TweetWithActions tweet={reply} key={reply.id} />)}
             </View>
         </ScrollView>
       </ScrollView>

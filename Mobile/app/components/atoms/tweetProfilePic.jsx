@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const TwitProfilePic = ({ image, user }) => {
+const TweetProfilePic = ({ image, user }) => {
     const navigation = useNavigation();
 
     const handleAvatarTouch = () => {
@@ -24,4 +24,4 @@ const TwitProfilePic = ({ image, user }) => {
     );
 };
 
-export default TwitProfilePic;
+export default TweetProfilePic;

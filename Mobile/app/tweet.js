@@ -4,7 +4,7 @@ import homeStyles from "./styles/estilos_home";
 import { ScrollView } from 'react-native-gesture-handler';
 import BottomNavigationBar from './components/molecules/bottomNavigationBar';
 import TwApi from './services/services';
-import TwitProfilePic from './components/atoms/twitProfilePic';
+import TweetProfilePic from './components/atoms/tweetProfilePic';
 import ReplyRetweetPostStyles from './styles/estilos_reply-retweet';
 import { Input } from './components/atoms/atomos_basic';
 import { useNavigation } from '@react-navigation/native';
@@ -48,8 +48,8 @@ const TwitPost = () => {
     const handleTwitPost = (event) => {
         event.preventDefault();
         if (validar()) {
-            const twitToPost = { content: textPost, image: imagePost };
-            TwApi.postNormalTwitt(twitToPost)
+            const tweetToPost = { content: textPost, image: imagePost };
+            TwApi.postNormalTwitt(tweetToPost)
                 .then((response) => {
                     setTweetId(response.data.id);
                     setError(null);
@@ -78,7 +78,7 @@ const TwitPost = () => {
                   <Text style={homeStyles.titleBold}>Nuevo Twit</Text>
                 </View>
                 <ScrollView contentContainerStyle={[{flex:1,paddingTop:30},ReplyRetweetPostStyles.container]}>
-                  <TwitProfilePic image={loggedUser.image} id={loggedUser.id} />
+                  <TweetProfilePic image={loggedUser.image} id={loggedUser.id} />
                   <View style={ReplyRetweetPostStyles.inputsContainer}>
                           <View>
                               <Input seccion={"¿Que estas pensando?"} setFuncion={setTextPost} />
