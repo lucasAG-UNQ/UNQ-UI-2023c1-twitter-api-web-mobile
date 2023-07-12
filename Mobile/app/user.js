@@ -12,15 +12,11 @@ const User = () => {
     const user = route.params.user;
     const tweets = user.tweets;
 
-    if (!tweets || !user)
-        return (<View><Text style={homeStyles.titleBold}>Loading...</Text></View>);
-
     return (
         <View style={homeStyles.container}>
-            <UserCard {...user} />
-            <View style={homeStyles.tweetsListContainer}>
-                <TweetLog tweets={tweets} />
-            </View>
+            {(!tweets || !user)
+                ? <View><Text style={homeStyles.titleBold}>Loading...</Text></View>
+                : <><UserCard {...user} /><View style={homeStyles.tweetsListContainer}><TweetLog tweets={tweets} /></View></>}
             <BottomNavigationBar currentAction="user" />
         </View>
     );

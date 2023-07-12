@@ -8,7 +8,7 @@ import loginStyles from "./styles/estilos";
 import TwApi from "./services/services";
 
 const Profile = () => {
-    const [loggedUser, setLoggedUser] = useState();
+    const [loggedUser, setLoggedUser] = useState(null);
     const [tweets, setTweets] = useState([]);
     const [error, setError] = useState(null);
 
@@ -20,26 +20,21 @@ const Profile = () => {
                 setError(null);
             })
             .catch((err) => {
-                setError(err.description);
+                setLoggedUser(null)
+                setTweets([])
+                setError(err.description)
             });
       }, []);
 
-    if (error)
-        return (
-            <View>
-                <Text style={homeStyles.titleBold}>Ups... algo salió mal</Text>
-                <Text style={loginStyles.errorText}>{error}</Text>
-            </View>
-        );
-
-    if (!tweets || !loggedUser)
-        return (<View><Text style={homeStyles.titleBold}>Loading...</Text></View>);
-
     return (
         <View style={homeStyles.container}>
-            <UserCard {...loggedUser} />
+            { !!loggedUser ? <UserCard {...loggedUser} /> : <></>}
             <View style={homeStyles.tweetsListContainer}>
-                <TweetLog tweets={tweets} />
+            {error 
+                ? <View><Text style={loginStyles.errorText}>Ups... algo salió mal</Text><Text style={loginStyles.errorText}>{error}</Text></View>
+                : (!tweets || !loggedUser)
+                    ? <Text style={homeStyles.titleBold}>Loading...</Text>
+                    : <TweetLog tweets={tweets} />}
             </View>
             <BottomNavigationBar currentAction="profile" />
         </View>

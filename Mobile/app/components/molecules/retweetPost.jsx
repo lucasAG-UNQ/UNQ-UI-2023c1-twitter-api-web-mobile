@@ -13,7 +13,7 @@ const RetweetPost = ({ id, onPost }) => {
 
     const navigation = useNavigation();
     
-    const handleTwitPost = (event) => {
+    const handleTweetPost = (event) => {
         event.preventDefault();
         const tweetToPost = { content: textPost };
         TwApi.retweet(id, tweetToPost)
@@ -22,7 +22,7 @@ const RetweetPost = ({ id, onPost }) => {
                 onPost();
                 navigation.navigate('tweetScreen',{tweetId:id})
             })
-            .catch((error) => {console.log(error);setError(error.status)});
+            .catch((error) => {setError(error.status)});
     };
 
     const handleError = () => error ? <Text style={{color:'white'}}>Ups... algo salió mal</Text> : <></>;
@@ -44,7 +44,7 @@ const RetweetPost = ({ id, onPost }) => {
                         <View style={{}}>
                             <Text style={{color:'white'}}>Retweeteando</Text>
                             <Input seccion={"Texto"} setFuncion={setTextPost} />
-                            <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTwitPost}>
+                            <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTweetPost}>
                                 <Text style={{color:'white'}}>Twitear</Text>
                             </TouchableOpacity>
                             <Text style={{color:'white'}}>{error}</Text>
