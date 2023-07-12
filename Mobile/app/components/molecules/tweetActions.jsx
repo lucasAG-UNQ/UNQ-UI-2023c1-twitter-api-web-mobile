@@ -11,7 +11,7 @@ import RetweetPost from "./retweetPost";
 
 const TweetActions= ({tweet})=>{
     
-    const [loggedUser, setLoggedUser] = useState({id:'u_3'})
+    const [loggedUser, setLoggedUser] = useState()
 
     const [like, setLike] = useState(false);
     const [replyCount,setReplyCount] = useState(tweet.replies?.length||tweet.repliesAmount||0);
@@ -65,8 +65,9 @@ const TweetActions= ({tweet})=>{
     }
 
     const handleOverlay = () => {
-        
-        if (overlayToOpen===1){
+        if(overlayToOpen===0){
+            return <></>
+        }else if (overlayToOpen===1){
             return <RetweetPost id={tweet.id} onPost={onRetweetPost} />
         }else if(overlayToOpen===2){
             return <ReplyPost id={tweet.id} onPost={onReplyPost} />
