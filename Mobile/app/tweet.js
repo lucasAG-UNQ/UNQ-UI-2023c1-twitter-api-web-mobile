@@ -8,6 +8,7 @@ import TweetProfilePic from './components/atoms/tweetProfilePic';
 import ReplyRetweetPostStyles from './styles/estilos_reply-retweet';
 import { Input } from './components/atoms/atomos_basic';
 import { useNavigation } from '@react-navigation/native';
+import loginStyles from "./styles/estilos";
 
 const TweetPost = () => {
     const navigation=useNavigation()
@@ -20,9 +21,12 @@ const TweetPost = () => {
     const [tweetId, setTweetId] = useState(null);
 
     useEffect(() => {
-        TwApi.getLoggedUser().then((response) => {
-            setLoggedUser(response.data);
-        });
+        TwApi.getLoggedUser()
+            .then((response) => {
+                setLoggedUser(response.data);
+                setError(null);
+            })
+            .catch((error) => setError(error.description));
     }, []);
 
     const validar = () => {
@@ -66,8 +70,6 @@ const TweetPost = () => {
         }
     }, [tweetId]);
 
-    if (!loggedUser) return <Text style={{color:'white'}}>Loading... </Text>;
-
     return (
         <View style={homeStyles.container}>
               <View style={{flex:1}}>
@@ -75,14 +77,14 @@ const TweetPost = () => {
                   <Text style={homeStyles.titleBold}>Nuevo Twit</Text>
                 </View>
                 <ScrollView contentContainerStyle={[{flex:1,paddingTop:30},ReplyRetweetPostStyles.container]}>
-                  <TweetProfilePic image={loggedUser.image} id={loggedUser.id} />
+                  { !!loggedUser ? <TweetProfilePic image={loggedUser.image} id={loggedUser.id} /> : <></>}
                   <View style={ReplyRetweetPostStyles.inputsContainer}>
                           <View>
                               <Input seccion={"¿Que estas pensando?"} setFuncion={setTextPost} />
                               <Input seccion={"Link a Imagen"} setFuncion={setImagePost} />
-                              <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTweetPost}>
-                                  <Text style={{color:'white'}}>Twitear</Text>
-                              </TouchableOpacity>
+                              {error 
+                                ? <View><Text style={loginStyles.errorText}>Ups... algo salió mal</Text></View>
+                                : <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTweetPost}><Text style={{color:'white'}}>Twitear</Text></TouchableOpacity> }
                               <Text style={{color:'red'}}>{error}</Text>
                           </View>
                   </View>

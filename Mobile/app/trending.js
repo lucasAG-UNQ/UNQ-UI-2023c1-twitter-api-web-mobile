@@ -8,7 +8,7 @@ import TwApi from './services/services';
 
 const Trending = () => {
   const [error, setError] = useState(null)
-  const [tweets,setTweets] = useState([]);
+  const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
     TwApi.trendingTopics()
