@@ -18,7 +18,7 @@ const TweetActions= ({tweet})=>{
     const [retweetCount,setRetweetCount] = useState(tweet.reTweet?.length||tweet.reTweetAmount||0)
     
     const [isOpen, setIsOpen] = useState(false);
-    const [openReply, setOpenReply]= useState();
+    const [overlayToOpen, setOverlayToOpen]= useState();
 
     useEffect(() => {
         TwApi.getLoggedUser()
@@ -40,12 +40,17 @@ const TweetActions= ({tweet})=>{
     }
 
     const handleRetweet=()=>{
-        setOpenReply(false)
+        setOverlayToOpen(1)
         toggleOverlay()
     }
 
     const handleReply=()=>{
-        setOpenReply(true)
+        setOverlayToOpen(2)
+        toggleOverlay()
+    }
+
+    const handleSelfRetweet=()=>{
+        setOverlayToOpen(3)
         toggleOverlay()
     }
 
@@ -59,11 +64,20 @@ const TweetActions= ({tweet})=>{
         setRetweetCount(retweetCount+1)
     }
 
-    const overlayToOpen = () =>  openReply ? <ReplyPost id={tweet.id} onPost={onReplyPost} />:<RetweetPost id={tweet.id} onPost={onRetweetPost} />;
+    const handleOverlay = () => {
+        
+        if (overlayToOpen===1){
+            return <RetweetPost id={tweet.id} onPost={onRetweetPost} />
+        }else if(overlayToOpen===2){
+            return <ReplyPost id={tweet.id} onPost={onReplyPost} />
+        }else if(overlayToOpen===3){
+            return <Text style={{color:'white', alignSelf:'center'}}>No puedes retwitear tu propio Twit!!</Text>
+        }
+    };
 
     const liked = () => like ? <Icon color={'white'} name="heart" size={20}/> : <Icon color={'white'} name="heart-o" size={20}/>;
 
-    const canRetweet = () => { return tweet.user.id !== loggedUser.id ? handleRetweet : (_=>_) };
+    const canRetweet = () => { return tweet.user.id !== loggedUser.id ? handleRetweet : handleSelfRetweet };
     
     if (!loggedUser) return <Text style={{color:'white'}} >Loading... </Text>;
 
@@ -74,7 +88,7 @@ const TweetActions= ({tweet})=>{
                         visible={isOpen} 
                         onClose={toggleOverlay} 
                         closeOnTouchOutside>
-                {overlayToOpen()}
+                {handleOverlay()}
             </Overlay>
             
 
