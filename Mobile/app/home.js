@@ -38,7 +38,7 @@ const Home = () => {
             <View style={homeStyles.tweetsListContainer}>
                 {followingTweets.length > 0 
                     ? (<TweetLog tweets={followingTweets} />)
-                    : (<Text style={homeStyles.titleNormal}>Loading...</Text>)}
+                    : (<Text style={homeStyles.titleNormal}>Aún no sigues a nadie!</Text>)}
                 {error 
                     ? <Text style={loginStyles.errorText}>{error}</Text> 
                     : <></>}

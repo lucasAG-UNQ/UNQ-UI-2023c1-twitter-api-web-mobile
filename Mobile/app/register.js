@@ -63,9 +63,19 @@ const Register = () => {
     }
   }
   
+  const handleLoginSubmit = () => {
+    TwApi.login({ username: regData.username, password: regData.password })
+      .then((response) => {
+        setError(null);
+        TwApi.saveDataToStorage( "twitterAccessToken", response.headers.authorization);
+        navigation.navigate("home", { state: { isLoggedUser: true }, });
+      })
+      .catch((error) => setError(error.description));
+  };
+
   useEffect(() => {
     if (token) { 
-      setTimeout(() => { navigation.navigate("login") }, 1500);
+      setTimeout( handleLoginSubmit , 1500);
     }
   }, [token]);
   
@@ -85,9 +95,9 @@ const Register = () => {
             <InputPass seccion={'Password'} setFuncion={setpass}/>
             <Input seccion={'Imgen de perfil'} setFuncion={setImagen}/>
             <Input seccion={'Imagen de fondo'} setFuncion={setBackImg}/>
-            <TouchableOpacity style={loginStyles.button} onPress={handleRegisterSubmit}>
-              <Text style={loginStyles.buttonText}>Registrarse</Text>
-            </TouchableOpacity>
+            { !token 
+              ? <TouchableOpacity style={loginStyles.button} onPress={handleRegisterSubmit}><Text style={loginStyles.buttonText}>Registrarse</Text></TouchableOpacity>
+              : <Text style={loginStyles.subtitle}>Registro OK! Ingresando...</Text> }
             { error ? <Text style={loginStyles.errorText}>{error}</Text> : <></> }
           </View>
         </View>
