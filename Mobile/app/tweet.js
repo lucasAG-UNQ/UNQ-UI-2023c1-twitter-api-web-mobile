@@ -70,6 +70,22 @@ const TweetPost = () => {
         }
     }, [tweetId]);
 
+    const postView=()=>{
+        return(
+            <View style={{width:'100%',alignItems:'center'}}>
+            <TweetProfilePic image={loggedUser.image} id={loggedUser.id} />
+            <View style={ReplyRetweetPostStyles.inputsContainer}>
+                    <View>
+                        <Input seccion={"¿Que estas pensando?"} setFuncion={setTextPost} />
+                        <Input seccion={"Link a Imagen"} setFuncion={setImagePost} />
+                        <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTweetPost}><Text style={{color:'white'}}>Twitear</Text></TouchableOpacity>
+                        <Text style={{color:'red'}}>{error}</Text>
+                    </View>
+            </View>
+            </View>
+        )
+    }
+
     return (
         <View style={homeStyles.container}>
               <View style={{flex:1}}>
@@ -77,17 +93,7 @@ const TweetPost = () => {
                   <Text style={homeStyles.titleBold}>Nuevo Twit</Text>
                 </View>
                 <ScrollView contentContainerStyle={[{flex:1,paddingTop:30},ReplyRetweetPostStyles.container]}>
-                  { !!loggedUser ? <TweetProfilePic image={loggedUser.image} id={loggedUser.id} /> : <></>}
-                  <View style={ReplyRetweetPostStyles.inputsContainer}>
-                          <View>
-                              <Input seccion={"¿Que estas pensando?"} setFuncion={setTextPost} />
-                              <Input seccion={"Link a Imagen"} setFuncion={setImagePost} />
-                              {error 
-                                ? <View><Text style={loginStyles.errorText}>Ups... algo salió mal</Text></View>
-                                : <TouchableOpacity style={ReplyRetweetPostStyles.button} onPress={handleTweetPost}><Text style={{color:'white'}}>Twitear</Text></TouchableOpacity> }
-                              <Text style={{color:'red'}}>{error}</Text>
-                          </View>
-                  </View>
+                  { !!loggedUser ? postView() : <Text style={loginStyles.errorText}>{error}</Text>}
                 </ScrollView>
               </View>
             <BottomNavigationBar currentAction='tweet'/>

@@ -8,6 +8,7 @@ import Overlay from 'react-native-modal-overlay';
 import OverlayStyles from "../../styles/estilos_overlay";
 import ReplyPost from "./replyPost";
 import RetweetPost from "./retweetPost";
+import loginStyles from "../../styles/estilos";
 
 const TweetActions= ({tweet})=>{
     
@@ -16,6 +17,7 @@ const TweetActions= ({tweet})=>{
     const [like, setLike] = useState(false);
     const [replyCount,setReplyCount] = useState(tweet.replies?.length||tweet.repliesAmount||0);
     const [retweetCount,setRetweetCount] = useState(tweet.reTweet?.length||tweet.reTweetAmount||0)
+    const [error, setError] = useState(null);
     
     const [isOpen, setIsOpen] = useState(false);
     const [overlayToOpen, setOverlayToOpen]= useState();
@@ -26,7 +28,7 @@ const TweetActions= ({tweet})=>{
                 setLoggedUser(response.data)
                 setLike(tweet.likes.some( like => like.id === response.data.id));
             })
-            .catch(error=>error)
+            .catch(error=>setError(error.description))
     }, [tweet.likes])
 
     const toggleOverlay = () => {
@@ -37,6 +39,9 @@ const TweetActions= ({tweet})=>{
         TwApi.toggleLike(tweet.id)
                 .then(response=>{tweet.likes=response.data.likes
                     setLike(tweet.likes.some( like => like.id === loggedUser.id))})
+                .catch(error=>{
+                    setError(error.description)
+                    toggleOverlay()})
     }
 
     const handleRetweet=()=>{
@@ -89,7 +94,7 @@ const TweetActions= ({tweet})=>{
                         visible={isOpen} 
                         onClose={toggleOverlay} 
                         closeOnTouchOutside>
-                {handleOverlay()}
+                {!!error? <Text style={loginStyles.errorText}>{error}</Text>:handleOverlay()}
             </Overlay>
             
 
