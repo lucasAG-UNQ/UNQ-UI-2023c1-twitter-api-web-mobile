@@ -1,11 +1,11 @@
 # Grupo 05
 
 Integrantes
-| Nombre               | e-mail                   | Usuario Git |
-|----------------------|--------------------------|-------------|
-| Álvarez Garcia Lucas | lucasss162@gmail.com     | lucasag-unq |
-| Malsam Leandro       | leandro.malsam@gmail.com | leatex      |
-| Maugeri Gabriel      | g.r.maugeri@gmail.com    | gmauge      |
+| Nombre      | e-mail                   
+|-------------|--------------
+| Á. G. Lucas | lucas162@...
+| M. Leandro  | lea.mal@...
+| M. Gabriel  | g.r.mauge@...
 
 
 # Enunciado
