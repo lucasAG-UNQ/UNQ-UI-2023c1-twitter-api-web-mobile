@@ -1,9 +1,11 @@
+Forked from private repo: https://github.com/unq-ui/2023s1-Grupo05
+
 # Grupo 05
 
 Integrantes
 | Nombre      | e-mail                   
 |-------------|--------------
-| Á. G. Lucas | lucas162@...
+| A. G. Lucas | lucasss162@gmail.com
 | M. Leandro  | lea.mal@...
 | M. Gabriel  | g.r.mauge@...
 
